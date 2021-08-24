@@ -1,6 +1,34 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "server.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.8",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
+  },
+  "description": "Test server",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndang247/Adaptive-Testing-SES-2A.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ndang247/Adaptive-Testing-SES-2A/issues"
+  },
+  "homepage": "https://github.com/ndang247/Adaptive-Testing-SES-2A#readme"
 }
