@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    AppBar, Toolbar, Typography, CssBaseline,
-    useScrollTrigger
+    AppBar, Toolbar, CssBaseline, useScrollTrigger
 } from '@material-ui/core';
 import useStyles from './navbarStyles';
 import logo from 'src/images/logo.png';
