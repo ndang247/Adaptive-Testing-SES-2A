@@ -2,7 +2,7 @@ import React from 'react';
 import useStyles from './footerStyles';
 import Copyright from './Copyright';
 import { Typography } from '@material-ui/core';
-import footer from 'src/images/footer.png';
+import footer from 'src/assets/images/footer.png';
 
 const Footer = () => {
     const classes = useStyles();
@@ -16,7 +16,7 @@ const Footer = () => {
                 Something here to give the footer a purpose!
             </Typography> */}
             <Typography style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <img src={footer} alt="footer-illustration" />
+                <img src={footer} alt="footer-illustration" height={400} />
             </Typography>
             <Copyright />
         </footer>
