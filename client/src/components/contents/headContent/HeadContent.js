@@ -28,7 +28,7 @@ const HeadContent = () => {
         <Container maxWidth="md">
             <section>
                 <div className={classes.blobContent}>
-                    <Typography component="h2" variant="h2" align="center" color="textPrimary" gutterBottom>
+                    <Typography className={classes.title} component="h2" variant="h2" align="center" color="textPrimary" gutterBottom>
                         Welcome To Adapt Test
                     </Typography>
                 </div>
@@ -63,7 +63,7 @@ const HeadContent = () => {
                         <Grid item>
                             <Card elevation={6} className={classes.root}>
                                 <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    <Typography color="textSecondary" gutterBottom>
                                         Word of the Day
                                     </Typography>
                                     <Typography variant="h5" component="h2">
@@ -86,7 +86,7 @@ const HeadContent = () => {
                         <Grid item>
                             <Card elevation={6} className={classes.root}>
                                 <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                    <Typography color="textSecondary" gutterBottom>
                                         Word of the Day
                                     </Typography>
                                     <Typography variant="h5" component="h2">
