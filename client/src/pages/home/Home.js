@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 import useStyles from './homeStyles';
 import Navbar from 'src/components/navbar/Navbar';
 import Footer from 'src/components/footer/Footer';
@@ -21,6 +21,11 @@ const Home = () => {
                 <div className={headLayer}></div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     <BodyContent />
+                </Container>
+                <Container color="text.primary" clone>
+                    <Button href="./login" size="medium" color="primary">
+                        Login Page
+                    </Button>
                 </Container>
             </main>
             <div className={footerLayer}></div>
