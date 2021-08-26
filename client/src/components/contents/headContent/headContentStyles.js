@@ -9,7 +9,9 @@ export default makeStyles((theme) => ({
         minWidth: 350,
     },
     title: {
-        fontSize: 14,
+        fontSize: 90,
+        fontFamily: 'Pacifico, cursive',
+        color: 'white',
     },
     pos: {
         marginBottom: 12,

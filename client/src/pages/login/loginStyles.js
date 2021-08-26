@@ -15,6 +15,7 @@ export default makeStyles((theme) => ({
     },
     submitBtn: {
         margin: theme.spacing(2, 0, 2),
+        backgroundColor: 'green', // replace with any other preferred color
         // can someone please change the color to green? I can't figure it out
     }
 }));
