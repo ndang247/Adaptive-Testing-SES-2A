@@ -30,7 +30,7 @@ const Login = () => {
                                     isSignedUp && (
                                         <React.Fragment>
                                             <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus />
-                                            <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus />
+                                            <Input name="lastName" label="Last Name" handleChange={handleChange} autoFocus />
                                         </React.Fragment>
                                     )
                                 }
