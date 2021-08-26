@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
     },
     loginForm: {
         width: '100%',
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(2),
     },
     submitBtn: {
         margin: theme.spacing(2, 0, 2),
