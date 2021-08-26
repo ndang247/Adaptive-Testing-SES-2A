@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import useStyles from './navbarStyles';
 import logo from 'src/assets/images/logo.png';
+import { Link as RouterLink } from 'react-router-dom';
 
 function ElevationScroll(props) {
     const { children } = props;
@@ -30,7 +31,7 @@ const Navbar = (props) => {
             <CssBaseline />
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <img src={logo} alt="logo" height={45} />
+                    <RouterLink to="/"><img src={logo} alt="logo" height={100} /></RouterLink>
                 </Toolbar>
             </AppBar>
         </>
