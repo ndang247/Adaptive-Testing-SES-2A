@@ -3,18 +3,18 @@ import {
     Container, Button, Typography, Paper,
     Grid
 } from '@material-ui/core';
-import useStyles from './dashStyles';
-import Navbar from 'src/components/navbar/Navbar';
+import useStyles from './dashboardStyles';
+import NavBar from 'src/components/navbar/NavBar';
 
-const StudentDash = () => {
+const HostDashboard = () => {
     const classes = useStyles();
     return (
         <React.Fragment>
-            <Navbar />
+            <NavBar />
             <Container component="main" maxWidth="sm">
                 <Paper className={classes.paperHead} elevation={4}>
                     <Typography variant="h4" color='primary' >
-                        Select a Task
+                        Making an exam?
                     </Typography>
                 </Paper>
                 <Grid item xs={8} >
@@ -54,4 +54,4 @@ const StudentDash = () => {
     )
 }
 
-export default StudentDash
+export default HostDashboard;

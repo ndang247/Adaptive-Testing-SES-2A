@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import layeredWaves from 'src/assets/svg/layered-waves-haikei.svg';
 import footerLayeredWaves from 'src/assets/svg/layered-waves-haikei-footer.svg';
 

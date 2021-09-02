@@ -1,14 +1,32 @@
-const express = require('express');
-const connectDB = require('./config/db');
+import cors from 'cors';
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 const app = express();
+dotenv.config();
 
-connectDB(); //connect to mongo
+// Since this is deprecated, Express now has the function of body-parser built in since V4.16 version. 
+app.use(express.json({
+    limit: "30mb",
+    extended: true
+}));
 
-app.use(express.json({ extended: false }));
+app.use(express.urlencoded({
+    limit: "30mb",
+    extended: true
+}));
+// References:
+// https://stackoverflow.com/questions/62396498/tslint-marks-body-parser-as-deprecated.
 
-app.get('/', (req, res) => res.send('API Started'));
+app.use(cors());
 
-const PORT = 5000 //default port
+const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`)); // Start server on default port
+// Perform a promise when connection is successful and catch when not successful.
+mongoose.connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => app.listen(PORT, () => console.log(`The server is running on port: ${PORT}`)))
+    .catch((error) => console.log(error.message));
