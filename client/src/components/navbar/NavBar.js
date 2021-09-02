@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    AppBar, Toolbar, CssBaseline, useScrollTrigger,
-    Button, Link
-} from '@material-ui/core';
+import { AppBar, Toolbar, CssBaseline, useScrollTrigger } from '@material-ui/core';
 import useStyles from './navBarStyles';
 import logo from 'src/assets/images/logo.png';
 import { Link as RouterLink } from 'react-router-dom';
@@ -33,9 +30,9 @@ const NavBar = (props) => {
             <AppBar className={classes.appBar}>
                 <Toolbar>
                     <RouterLink className={classes.logo} to="/"><img src={logo} alt="logo" height={60} /></RouterLink>
-                    <Button className={classes.loginBtn} variant="contained" color="primary">
+                    {/* <Button className={classes.loginBtn} variant="contained" color="primary">
                         <Link color="inherit" component={RouterLink} underline="none" to="/user/login">Login</Link>
-                    </Button>
+                    </Button> */}
                 </Toolbar>
             </AppBar>
         </div>

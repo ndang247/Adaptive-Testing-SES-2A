@@ -25,4 +25,8 @@ export default makeStyles((theme) => ({
         zIndex: 1,
         position: 'relative'
     },
+    joinBtn: {
+        display: 'flex',
+        justifyContent: 'center'
+    }
 }));
