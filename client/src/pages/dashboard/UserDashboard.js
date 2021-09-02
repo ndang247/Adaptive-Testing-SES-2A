@@ -3,18 +3,18 @@ import {
     Container, Button, Typography, Paper,
     Grid
 } from '@material-ui/core';
-import useStyles from './dashStyles';
-import Navbar from 'src/components/navbar/Navbar';
+import useStyles from './dashboardStyles';
+import NavBar from 'src/components/navbar/NavBar';
 
-const MakerDash = () => {
+const UserDashboard = () => {
     const classes = useStyles();
     return (
         <React.Fragment>
-            <Navbar />
+            <NavBar />
             <Container component="main" maxWidth="sm">
                 <Paper className={classes.paperHead} elevation={4}>
                     <Typography variant="h4" color='primary' >
-                        Making an exam?
+                        Select a Task
                     </Typography>
                 </Paper>
                 <Grid item xs={8} >
@@ -54,4 +54,4 @@ const MakerDash = () => {
     )
 }
 
-export default MakerDash
+export default UserDashboard;

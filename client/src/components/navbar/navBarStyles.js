@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 export default makeStyles(() => ({
     root: {
@@ -12,6 +12,6 @@ export default makeStyles(() => ({
         boxShadow: 'none'
     },
     loginBtn: {
-        backgroundColor: '#1e364e',
+        backgroundColor: '#5664d2',
     },
 }));

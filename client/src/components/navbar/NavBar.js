@@ -4,7 +4,7 @@ import {
     AppBar, Toolbar, CssBaseline, useScrollTrigger,
     Button, Link
 } from '@material-ui/core';
-import useStyles from './navbarStyles';
+import useStyles from './navBarStyles';
 import logo from 'src/assets/images/logo.png';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ ElevationScroll.propTypes = {
     children: PropTypes.element.isRequired,
 };
 
-const Navbar = (props) => {
+const NavBar = (props) => {
     const classes = useStyles();
 
     return (
@@ -32,9 +32,9 @@ const Navbar = (props) => {
             <CssBaseline />
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <RouterLink className={classes.logo} to="/"><img src={logo} alt="logo" height={100} /></RouterLink>
+                    <RouterLink className={classes.logo} to="/"><img src={logo} alt="logo" height={60} /></RouterLink>
                     <Button className={classes.loginBtn} variant="contained" color="primary">
-                        <Link color="inherit" component={RouterLink} underline="none" to="/login">Login</Link>
+                        <Link color="inherit" component={RouterLink} underline="none" to="/user/login">Login</Link>
                     </Button>
                 </Toolbar>
             </AppBar>
@@ -42,4 +42,4 @@ const Navbar = (props) => {
     );
 };
 
-export default Navbar;
+export default NavBar;
