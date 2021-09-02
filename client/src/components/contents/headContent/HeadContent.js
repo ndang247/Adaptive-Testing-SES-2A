@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import {
     Container, Typography, Grid, Card,
-    CardContent, CardActions, Button, Grow
+    CardContent, CardActions, Button, Grow,
+    Link
 } from '@material-ui/core';
 import useStyles from './headContentStyles';
 import KUTE from 'kute.js';
 import { useMediaQuery } from 'react-responsive'
+import { Link as RouterLink } from 'react-router-dom';
 
 const HeadContent = () => {
     const classes = useStyles();
@@ -63,46 +65,60 @@ const HeadContent = () => {
                         <Grid item>
                             <Card elevation={6} className={classes.root}>
                                 <CardContent>
-                                    <Typography color="textSecondary" gutterBottom>
-                                        Word of the Day
+                                    <Typography textAlign="center" color="textSecondary" gutterBottom>
+                                        For Host
                                     </Typography>
                                     <Typography variant="h5" component="h2">
-                                        benevolent
+                                        Create hundreds of questions in your dashboard
                                     </Typography>
                                     <Typography className={classes.pos} color="textSecondary">
-                                        adjective
+                                        Assign questions to your students
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
+                                        Get a clear insight of your students' ability
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">Learn More</Button>
+                                <CardActions className={classes.joinBtn}>
+                                    <Button variant="contained" size="medium" color="primary">
+                                        <Link
+                                            color="inherit"
+                                            component={RouterLink}
+                                            underline="none"
+                                            to="/host/login"
+                                        >
+                                            Join Us
+                                        </Link>
+                                    </Button>
                                 </CardActions>
                             </Card>
                         </Grid>
                         <Grid item>
                             <Card elevation={6} className={classes.root}>
                                 <CardContent>
-                                    <Typography color="textSecondary" gutterBottom>
-                                        Word of the Day
+                                    <Typography textAlign="center" color="textSecondary" gutterBottom>
+                                        For Tester
                                     </Typography>
                                     <Typography variant="h5" component="h2">
-                                        benevolent
+                                        Test yourself
                                     </Typography>
                                     <Typography className={classes.pos} color="textSecondary">
-                                        adjective
+                                        Compare yourself with others around the world
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
+                                        Get clear insignt of your own ability
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">Learn More</Button>
+                                <CardActions className={classes.joinBtn}>
+                                    <Button variant="contained" size="medium" color="primary">
+                                        <Link
+                                            color="inherit"
+                                            component={RouterLink}
+                                            underline="none"
+                                            to="/user/login"
+                                        >
+                                            Get Started
+                                        </Link>
+                                    </Button>
                                 </CardActions>
                             </Card>
                         </Grid>

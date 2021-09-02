@@ -1,21 +1,30 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-// Pages
-import Home from 'src/pages/home/Home';
-import Login from 'src/pages/login/Login';
-import StudentDash from 'src/pages/dashboard/StudentDash';
-import MakerDash from "src/pages/dashboard/MakerDash";
+import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
+import Theme from 'src/theme';
+import {
+  Home, Login, Register, UserDashboard,
+  HostDashboard
+} from 'src/pages';
+import GlobalStyles from "src/components/GlobalStyles";
+import NavBar from "src/components/navbar/NavBar";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/student" exact component={StudentDash} />
-        <Route path="/maker" exact component={MakerDash} />
-      </Switch>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={Theme}>
+          <GlobalStyles />
+          <NavBar />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/user/login" exact component={Login} />
+            <Route path="/user/register" exact component={Register} />
+            <Route path="/user/dashboard" exact component={UserDashboard} />
+            <Route path="/host/dashboard" exact component={HostDashboard} />
+          </Switch>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </BrowserRouter>
   );
 }

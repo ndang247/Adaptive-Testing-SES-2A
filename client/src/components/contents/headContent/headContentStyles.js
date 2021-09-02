@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 export default makeStyles((theme) => ({
     heroButtons: {
@@ -25,4 +25,8 @@ export default makeStyles((theme) => ({
         zIndex: 1,
         position: 'relative'
     },
+    joinBtn: {
+        display: 'flex',
+        justifyContent: 'center'
+    }
 }));
