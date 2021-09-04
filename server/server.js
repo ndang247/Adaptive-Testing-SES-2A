@@ -2,10 +2,8 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
-import usersRouter from './routes/users.js';
-import hostsRouter from './routes/hosts.js';
-
+import userRouter from './routes/user.js';
+import hostRouter from './routes/host.js';
 
 const app = express();
 dotenv.config();
@@ -23,9 +21,9 @@ app.use(express.urlencoded({
 // References:
 // https://stackoverflow.com/questions/62396498/tslint-marks-body-parser-as-deprecated.
 
-//Define Routes
-app.use('/users', usersRouter);
-app.use('/hosts', hostsRouter);
+// Define Routes
+app.use('/users', userRouter);
+app.use('/hosts', hostRouter);
 
 app.use(cors());
 
