@@ -4,7 +4,7 @@ import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, UserDashboard,
-  HostDashboard
+  HostDashboard, Exam
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import NavBar from "src/components/navbar/NavBar";
@@ -22,6 +22,7 @@ const App = () => {
             <Route path="/user/register" exact component={Register} />
             <Route path="/user/dashboard" exact component={UserDashboard} />
             <Route path="/host/dashboard" exact component={HostDashboard} />
+            <Route path="/user/exam" exact component={Exam} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
