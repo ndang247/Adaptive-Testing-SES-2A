@@ -5,14 +5,13 @@ import {
     TextField, Typography, InputAdornment, IconButton
 } from '@material-ui/core';
 import * as Yup from 'yup';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 import { LoadingButton } from "@material-ui/lab";
 
 const RegisterForm = () => {
-    const history = useHistory();
     const [showPassword, setShowPassword] = useState(false);
 
     const RegisterSchema = Yup.object().shape({

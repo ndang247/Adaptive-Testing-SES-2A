@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import {
@@ -14,7 +14,6 @@ import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { LoadingButton } from '@material-ui/lab';
 
 const LoginForm = () => {
-    const history = useHistory();
     const [showPassword, setShowPassword] = useState(false);
 
     const LoginSchema = Yup.object().shape({
@@ -29,7 +28,7 @@ const LoginForm = () => {
             remember: true
         },
         validationSchema: LoginSchema,
-        onSubmit: () => history.push('/dashboard/restaurant')
+        onSubmit: () => { }
     });
 
     const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;

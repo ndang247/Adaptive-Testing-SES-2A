@@ -17,13 +17,13 @@ export default makeStyles((theme) => ({
         padding: 'normal',
         backgroundColor: "DD3A17",
     },
-    table:{
+    table: {
         maxWidth: 1000,
     },
     tableContainer: {
         borderRadius: 15,
         margin: '10px, 10px',
-        maxWidth : 1000,
+        maxWidth: 1000,
         marginBottom: theme.spacing(4),
     },
     tableHeaderCell: {
@@ -31,7 +31,7 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
     },
-    name:{
+    name: {
         fontWeight: 'bold',
     },
 }));

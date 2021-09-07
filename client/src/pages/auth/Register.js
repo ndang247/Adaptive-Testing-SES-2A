@@ -1,22 +1,25 @@
 import React from 'react';
 import { Box, Container, } from '@material-ui/core';
-import { RegisterForm } from 'src/components';
+import { RegisterForm, NavBar } from 'src/components';
 
 const Register = () => {
     return (
-        <Box
-            sx={{
-                backgroundColor: 'background.default',
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%',
-                justifyContent: 'center'
-            }}
-        >
-            <Container maxWidth="sm">
-                <RegisterForm />
-            </Container>
-        </Box>
+        <>
+            <NavBar />
+            <Box
+                sx={{
+                    backgroundColor: 'background.default',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    justifyContent: 'center'
+                }}
+            >
+                <Container maxWidth="sm">
+                    <RegisterForm />
+                </Container>
+            </Box>
+        </>
     );
 }
 
