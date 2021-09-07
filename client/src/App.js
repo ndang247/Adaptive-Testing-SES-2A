@@ -4,10 +4,11 @@ import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, UserDashboard,
-  HostDashboard, Exam
+  HostDashboard, ExamHistory, Exam
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import NavBar from "src/components/navbar/NavBar";
+
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/user/dashboard" exact component={UserDashboard} />
             <Route path="/host/dashboard" exact component={HostDashboard} />
             <Route path="/user/exam" exact component={Exam} />
+            <Route path="/user/history" exact component={ExamHistory} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
