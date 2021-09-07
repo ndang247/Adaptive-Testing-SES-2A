@@ -5,3 +5,7 @@ export { default as NavBar } from 'src/components/navbar/NavBar';
 export { default as Footer } from 'src/components/footer/Footer';
 export { default as LoginForm } from 'src/components/auth/LoginForm';
 export { default as RegisterForm } from 'src/components/auth/RegisterForm';
+export { default as DashboardLayout } from 'src/components/dashboard/DashboardLayout';
+export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
+export { default as DashboardSidebar } from 'src/components/dashboard/DashboardSidebar';
+export { default as NavItems } from 'src/components/dashboard/NavItems';

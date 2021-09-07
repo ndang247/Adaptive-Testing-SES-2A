@@ -1,34 +1,31 @@
 import { makeStyles } from '@material-ui/styles';
 
 export default makeStyles((theme) => ({
-    root:{
+    root: {
         flexGrow: 1,
     },
-
-    paper:{
+    paper: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
         '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(150),
-        height: theme.spacing(60),
-        borderRadius: 25,
+            margin: theme.spacing(1),
+            width: theme.spacing(150),
+            height: theme.spacing(60),
+            borderRadius: 25,
         },
     },
-
-    answer:{
+    answer: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
         alignItems: 'center',
         '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(150),
-        height: theme.spacing(40),
-        borderRadius: 25,
+            margin: theme.spacing(1),
+            width: theme.spacing(150),
+            height: theme.spacing(40),
+            borderRadius: 25,
         },
     },
-
 }));
