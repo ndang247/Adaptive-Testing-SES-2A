@@ -8,4 +8,7 @@ export { default as RegisterForm } from 'src/components/auth/RegisterForm';
 export { default as DashboardLayout } from 'src/components/dashboard/DashboardLayout';
 export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
 export { default as DashboardSidebar } from 'src/components/dashboard/DashboardSidebar';
+export { default as ProfileLayout } from 'src/components/profile/ProfileLayout';
+export { default as EditProfileLayout } from 'src/components/profile/EditProfileLayout';
+export { default as AccountDetails } from 'src/components/profile/AccountDetails';
 export { default as NavItems } from 'src/components/dashboard/NavItems';

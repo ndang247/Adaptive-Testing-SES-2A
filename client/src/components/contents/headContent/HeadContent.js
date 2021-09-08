@@ -31,7 +31,7 @@ const HeadContent = () => {
             <section>
                 <div className={classes.blobContent}>
                     <Typography className={classes.title} component="h2" variant="h2" align="center" color="textPrimary" gutterBottom>
-                        Welcome To Adapt Test
+                        Welcome To AdapTest
                     </Typography>
                 </div>
                 {isDesktopOrLaptop && (
