@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.js';
 import hostRouter from './routes/host.js';
 import testRouter from './routes/test.js';
+import questionRouter from './routes/question.js'
 
 const app = express();
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({
 app.use('/users', userRouter);
 app.use('/hosts', hostRouter);
 app.use('/tests', testRouter);
+app.use('/questions', questionRouter);
 
 app.use(cors());
 
