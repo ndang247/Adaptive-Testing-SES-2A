@@ -9,3 +9,5 @@ export { default as DashboardLayout } from 'src/components/dashboard/DashboardLa
 export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
 export { default as DashboardSidebar } from 'src/components/dashboard/DashboardSidebar';
 export { default as NavItems } from 'src/components/dashboard/NavItems';
+export { default as QuestionForm } from 'src/components/create/QuestionForm';
+export { default as TestForm } from 'src/components/create/TestForm';
