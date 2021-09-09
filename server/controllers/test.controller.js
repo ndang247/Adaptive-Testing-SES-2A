@@ -1,8 +1,8 @@
 import TestModel from '../models/test.js';
+import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import auth from '../middleware/auth.js';
+import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
-import test from '../models/test.js';
 
 dotenv.config();
 
@@ -14,54 +14,29 @@ export const createTest = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { firstName, lastName, email, password } = req.body;
+    const { title, expiryDate, testLength, contentType, pin } = req.body;
 
+    //Retrieve the current user id from the header for the creator field
+    const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
+
+    const userId = decoded?.user._id;
+    
     try {
-        // Check to see if a user exists
-        let user = await UserModel.findOne({ email });
-
-        // If a user was already found in the database by email throw error
-        if (user) return res.status(400).json({ errors: 'Account already exists' });
-
-        // Get user avatar
-        const avatar = gravatar.url(email, {
-            s: '200',
-            d: 'mm'
-        });
-
-        // Encrypt user password
-        const hashedPassword = await hashPassword(password);
-
-        // User instance with validated data
-        user = new UserModel({
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,
-            avatar,
-            role: User,
+        // Test instance with validated data
+        const test = new TestModel({
+            title,
+            creatorId: userId,
+            questionIds: [],
             dateCreated: DateTime.now(),
-            scoreIds: []
+            expiryDate,
+            testLength,
+            scoreIds: [],
+            contentType,
+            pin   
         });
 
-        await user.save();
-
-        // Return jsonwebtoken for authorization
-        const payload = { // Create payload from mongoDB id -> note mongoDB id is _id
-            user: {
-                _id: user._id,
-                email: user.email,
-                role: user.role
-            }
-        }
-
-        // TODO: Shorten expiry time post production -> set 1h
-        jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: 3600000 },
-            (err, token) => { // Either returns error or token
-                if (err) throw err;
-                res.status(201).json({ token });
-            });
-
+        await test.save();
+        res.json({ msg: 'Test created' });
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
