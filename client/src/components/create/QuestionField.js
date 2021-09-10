@@ -1,8 +1,7 @@
 import React from 'react'
 import { TextField, Grid } from '@material-ui/core';
 
-
-const InputField = ({ label, autoFocus, rowsMax }) => {
+const QuestionField = ({ label, autoFocus, rowsMax }) => {
     return (
         <Grid item xs={12}>
             <TextField
@@ -17,4 +16,4 @@ const InputField = ({ label, autoFocus, rowsMax }) => {
     )
 }
 
-export default InputField
+export default QuestionField

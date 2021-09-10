@@ -9,13 +9,11 @@ const CreateTest = () => {
             <Box
                 sx={{
                     backgroundColor: 'background.default',
-                    display: 'flex',
-                    flexDirection: 'column',
                     height: '100%',
                     justifyContent: 'center'
                 }}
             >
-                <Container maxWidth="sm"><TestForm /></Container>
+                <Container maxWidth="md"><TestForm /></Container>
             </Box>
         </>
     );
