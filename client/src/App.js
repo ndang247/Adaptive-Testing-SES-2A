@@ -4,7 +4,8 @@ import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
-  ExamHistory, Exam
+  ExamHistory, Exam,
+  CreateTest, CreateQuestion,
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 
@@ -21,6 +22,8 @@ const App = () => {
             <Route path="/host/dashboard" exact component={Dashboard} />
             <Route path="/user/exam" exact component={Exam} />
             <Route path="/user/history" exact component={ExamHistory} />
+            <Route path="/host/question" exact component={CreateQuestion} />
+            <Route path="/host/test" exact component={CreateTest} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
