@@ -11,3 +11,4 @@ export { default as DashboardSidebar } from 'src/components/dashboard/DashboardS
 export { default as NavItems } from 'src/components/dashboard/NavItems';
 export { default as QuestionForm } from 'src/components/create/QuestionForm';
 export { default as TestForm } from 'src/components/create/TestForm';
+export { default as JoinForm } from 'src/components/join/JoinForm';

@@ -5,7 +5,6 @@ export default makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: theme.spacing(30),
         padding: theme.spacing(5),
     },
     submitBtn: {
