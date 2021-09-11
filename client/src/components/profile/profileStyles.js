@@ -10,5 +10,11 @@ export default makeStyles((theme) => ({
     paper: {
         height: 140,
         width: 100,
+    },
+    textField: {
+        width: 300,
+    },
+    tableContainer: {
+        margin: '10px, 10px',
     }
 }));

@@ -1,9 +1,22 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { 
+    Table, Grid, Typography, TableContainer, 
+    TableBody, TableRow, TableCell, Paper } from '@material-ui/core';
 import useStyles from './profileStyles'
 
 const AccountDetails = () => {
     const classes = useStyles();
+
+    function createUserData(field, info) {
+        return {field, info};
+    }
+
+    const rows = [
+        createUserData('Name:', 'Katarina Smith'),
+        createUserData('Email Address', 'katarinasmith05@gmail.com'),
+        createUserData('Creation Date', 'September 9, 2021'),
+        createUserData('Account Role', 'Host'),
+    ];
 
     return(
         <div>
@@ -13,41 +26,23 @@ const AccountDetails = () => {
                 </Typography>
             </div>
             <div>
-                <Grid container direction="row" 
-                        justifyContent="center" 
-                        alignItems="center"
-                        spacing={10}
-                        className={classes.grid}>
-                    <Grid item xs={1}>
-                        Name:
-                    </Grid>
-                    <Grid item xs={1}>
-                        Katarina Smith
-                    </Grid>
-                </Grid>
-                <Grid container direction="row" 
-                        justifyContent="center" 
-                        alignItems="center"
-                        spacing={10}
-                        className={classes.grid}>
-                    <Grid item xs={1}>
-                        Email:
-                    </Grid>
-                    <Grid item xs={1}>
-                        katarinasmith09@gmail.com
-                    </Grid>
-                </Grid>
-                <Grid container direction="row" 
-                        justifyContent="center" 
-                        alignItems="center"
-                        spacing={10}
-                        className={classes.grid}>
-                    <Grid item xs={1}>
-                        Date Created:
-                    </Grid>
-                    <Grid item xs={1}>
-                        19:07:03 September 9, 2021
-                    </Grid>
+                <Grid container spacing={0} alignItems="center">
+                <TableContainer component={Paper} className={classes.tableContainer}>
+                    <Table className={classes.table}>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow>
+                                    <TableCell>
+                                        {row.field}
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.info}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 </Grid>
             </div>
         </div>

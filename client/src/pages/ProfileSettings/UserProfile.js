@@ -5,9 +5,9 @@ import { ProfileLayout } from 'src/components';
 const Profile = () => {
     return (
         <>
-            <ProfileLayout />
             <Box sx={{ backgroundColor: 'background.default', minHeight: '100%', py: 3 }} >
-                <Container maxWidth={false}>
+                <Container maxWidth={'lg'}>
+                    <ProfileLayout />
                 </Container>
             </Box>
         </>

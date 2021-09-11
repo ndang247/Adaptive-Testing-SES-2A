@@ -1,9 +1,22 @@
 import React from 'react';
-import { Grid, TextField, Typography } from '@material-ui/core';
+import { 
+    Grid, Table, TableContainer, TableBody, 
+    TableRow, TableCell, TextField, Typography, Paper } from '@material-ui/core';
 import useStyles from './profileStyles'
 
 const EditDetails = () => {
     const classes = useStyles();
+
+    function createUserData(id, field, info) {
+        return {id, field, info};
+    }
+
+    const rows = [
+        createUserData('name', 'Name:', 'Katarina Smith'),
+        createUserData('email', 'Email Address', 'katarinasmith05@gmail.com'),
+        createUserData('password', 'Password', 'temppassword'),
+        createUserData('password', 'Confirm Password', ''),
+    ];
 
     return(
         <div>
@@ -13,29 +26,23 @@ const EditDetails = () => {
                 </Typography>
             </div>
             <div>
-                <Grid container direction="row" 
-                        justifyContent="center" 
-                        alignItems="center"
-                        spacing={10}
-                        className={classes.grid}>
-                    <Grid item xs={3} align="right">
-                        Name:
-                    </Grid>
-                    <Grid item xs={3}>
-                        <TextField defaultValue="Katarina Smith" variant="filled"/>
-                    </Grid>
-                </Grid>
-                <Grid container direction="row" 
-                        justifyContent="center" 
-                        alignItems="center"
-                        spacing={10}
-                        className={classes.grid}>
-                    <Grid item xs={3} align="right">
-                        Email:
-                    </Grid>
-                    <Grid item xs={3}>
-                        <TextField defaultValue="katarinasmith09@gmail.com" variant="filled"/>
-                    </Grid>
+            <Grid container spacing={0} alignItems="center">
+                <TableContainer component={Paper} className={classes.tableContainer}>
+                    <Table className={classes.table}>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow>
+                                    <TableCell>
+                                        {row.field}
+                                    </TableCell>
+                                    <TableCell align="justify">
+                                        <TextField className={classes.textField} id={row.id} type={row.id==="password" ? "password" : ""} defaultValue={row.info} variant="outlined"/>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 </Grid>
             </div>
         </div>
