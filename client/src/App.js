@@ -5,7 +5,7 @@ import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
   ExamHistory, Exam,
-  CreateTest, CreateQuestion,
+  CreateTest, CreateQuestion, JoinExam, 
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 
@@ -24,6 +24,7 @@ const App = () => {
             <Route path="/user/history" exact component={ExamHistory} />
             <Route path="/host/question" exact component={CreateQuestion} />
             <Route path="/host/test" exact component={CreateTest} />
+            <Route path="/user/joinexam" exact component={JoinExam} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
