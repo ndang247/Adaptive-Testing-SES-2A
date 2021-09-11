@@ -8,13 +8,7 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(30),
         padding: theme.spacing(5),
     },
-    questionForm: {
-        marginTop: theme.spacing(1),
-    },
     submitBtn: {
-        margin: theme.spacing(2, 0, 2),
+        marginTop: theme.spacing(2),
     },
-    input: {
-        width: 38,
-    }
 }));

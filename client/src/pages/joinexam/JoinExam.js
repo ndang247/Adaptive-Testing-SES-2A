@@ -8,7 +8,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 const JoinExam = () => {
     const classes = useStyles();
 
-    const LoginSchema = Yup.object().shape({
+    const JoinRoomSchema = Yup.object().shape({
         roomID: Yup.string().required('Room ID is required'),
         password: Yup.string().required('Password is required')
     });
@@ -19,7 +19,7 @@ const JoinExam = () => {
             password: '',
             remember: true
         },
-        validationSchema: LoginSchema,
+        validationSchema: JoinRoomSchema,
         onSubmit: () => { }
     });
 
@@ -60,6 +60,7 @@ const JoinExam = () => {
                                 variant="outlined"
                             />
                             <LoadingButton
+                                className={classes.submitBtn}
                                 color="primary"
                                 loading={isSubmitting}
                                 fullWidth
