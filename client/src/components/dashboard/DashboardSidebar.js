@@ -19,7 +19,7 @@ const user = {
 
 const items = [
     {
-        href: '/host/dashboard/home',
+        href: '/host/dashboard/',
         icon: BarChartIcon,
         title: 'Dashboard'
     },
@@ -29,7 +29,7 @@ const items = [
         title: 'Account'
     },
     {
-        href: '/host/dashboard/setting',
+        href: '/host/dashboard/settings',
         icon: SettingsIcon,
         title: 'Settings'
     },
