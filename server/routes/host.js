@@ -4,7 +4,7 @@ import { register, login } from '../controllers/host.controller.js';
 
 const router = express.Router();
 
-// POST host/register
+// POST hosts/register
 // Route to register a new host
 router.post('/register',
     // Validate user fields
@@ -15,7 +15,7 @@ router.post('/register',
         .isLength({ min: 6, max: 128 }),
     register);
 
-// POST host/login
+// POST hosts/login
 // Route to login an existing host
 router.post('/login',
     // Validate inputs
