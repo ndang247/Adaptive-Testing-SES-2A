@@ -4,7 +4,7 @@ import { register, login } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
-// POST user/register
+// POST users/register
 // Route to register a new user
 router.post('/register',
     // Validate user fields
@@ -15,7 +15,7 @@ router.post('/register',
         .isLength({ min: 6, max: 128 }),
     register);
 
-// POST user/login
+// POST users/login
 // Route to login an existing user
 router.post('/login',
     // Validate inputs
