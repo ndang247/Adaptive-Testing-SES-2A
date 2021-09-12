@@ -12,3 +12,6 @@ export { default as ProfileLayout } from 'src/components/profile/ProfileLayout';
 export { default as EditProfileLayout } from 'src/components/profile/EditProfileLayout';
 export { default as AccountDetails } from 'src/components/profile/AccountDetails';
 export { default as NavItems } from 'src/components/dashboard/NavItems';
+export { default as QuestionForm } from 'src/components/create/QuestionForm';
+export { default as TestForm } from 'src/components/create/TestForm';
+export { default as JoinForm } from 'src/components/join/JoinForm';
