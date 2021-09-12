@@ -4,3 +4,6 @@ export { default as Register } from './auth/Register';
 export { default as Dashboard } from './dashboard/Dashboard';
 export { default as Exam } from './exam/Exam';
 export { default as ExamHistory } from './examHistory/ExamHistory';
+export { default as CreateTest } from './create/CreateTest';
+export { default as CreateQuestion } from './create/CreateQuestion';
+export { default as JoinExam } from './joinexam/JoinExam';
