@@ -80,9 +80,10 @@ export const updateQuestion = async (req, res) => {
                 "wrongAnswers": wrongAnswers
             }},
         )
-
+        
+        //Validate question ID
         if(!found){
-            res.json({ msg: 'Question not found' });
+            res.json({ msg: 'Question not found' }); 
         }
         else{
             res.json({ msg: 'Question updated' });
@@ -94,5 +95,62 @@ export const updateQuestion = async (req, res) => {
         return res.status(500).send('Server Error');
     }
 }
+
+export const getQuestion = async (req, res) => {
+    try {
+        // Find one question based on ID in req parameters
+        const question = await QuestionModel.findOne({ test: req.params.question_id })  
+        
+        if(!question){
+            return res.status(400).json({ msg: 'Question not found' });
+        }
+
+        res.json(question); 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
+export const getRandomAnswers = async (req, res) => {
+    try {
+        // Find one question based on ID in req parameters
+        const question = await QuestionModel.findOne({ test: req.params.question_id })  
+        
+        if(!question){
+            return res.status(400).json({ msg: 'Question not found' });
+        }
+        // Create array containing answers
+        var answers = [question.correctAnswer, question.wrongAnswers[0], question.wrongAnswers[1], question.wrongAnswers[2]];
+
+        // Randomly arrange answers
+        await shuffle(answers);
+
+        res.json(answers);
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
+// Function to randomly sort an array
+function shuffle(array) {
+    var currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 
