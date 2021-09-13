@@ -15,3 +15,4 @@ export { default as NavItems } from 'src/components/dashboard/NavItems';
 export { default as QuestionForm } from 'src/components/create/QuestionForm';
 export { default as TestForm } from 'src/components/create/TestForm';
 export { default as JoinForm } from 'src/components/join/JoinForm';
+export { default as QueryForm } from 'src/components/queries/QueryForm';
