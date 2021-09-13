@@ -15,10 +15,15 @@ export const createQuestion = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { category, content, rating, difficulty } = req.body;
+    const { category, content, rating, difficulty, correctAnswer, wrongAnswers } = req.body;
 
     //Retrieve the test id from url
     const testId = req.params.test_id;
+
+    //Validate wrong answers
+    if(wrongAnswers.length != 3){
+        return res.status(401).send('Error: Three wrong answers required');
+    }
 
     try {
         // Question instance with validated data
@@ -28,6 +33,8 @@ export const createQuestion = async (req, res) => {
             content,
             rating,
             difficulty, 
+            correctAnswer,
+            wrongAnswers
         });
 
         question.testIds.push(testId);
@@ -53,22 +60,35 @@ export const updateQuestion = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { category, content, rating, difficulty } = req.body;
+    const { category, content, rating, difficulty, correctAnswer, wrongAnswers } = req.body;
 
     const questionId = req.params.question_id;
-
+    
+    //Validate wrong answers
+    if(wrongAnswers.length != 3){
+        return res.status(401).send('Three wrong answers required');
+    }
     try {
         //Update the current question
-        await QuestionModel.findByIdAndUpdate(questionId, 
+        const found = await QuestionModel.findByIdAndUpdate(questionId, 
             { "$set": { 
                 "category": category, 
                 "content": content,
                 "rating": rating,
-                "difficulty": difficulty
+                "difficulty": difficulty,
+                "correctAnswer": correctAnswer,
+                "wrongAnswers": wrongAnswers
             }},
-        );
+        )
+
+        if(!found){
+            res.json({ msg: 'Question not found' });
+        }
+        else{
+            res.json({ msg: 'Question updated' });
+        }
         
-        res.json({ msg: 'Question updated' });
+        
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');

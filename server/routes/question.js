@@ -13,6 +13,8 @@ router.post('/:test_id', authHost,
     body('content', 'Content is required').not().isEmpty(),
     body('rating', 'Question rating is required').not().isEmpty().isNumeric(),
     body('difficulty', 'Difficulty is required').not().isEmpty(),
+    body('correctAnswer', 'Correct answer is required').not().isEmpty(),
+    body('wrongAnswers', 'Three wrong answers are required').not().isEmpty(),
     createQuestion
 );
 
@@ -21,6 +23,8 @@ router.put('/:test_id/:question_id', authHost,
     body('content', 'Content is required').not().isEmpty(),
     body('rating', 'Question rating is required').not().isEmpty().isNumeric(),
     body('difficulty', 'Difficulty is required').not().isEmpty(),
+    body('correctAnswer', 'Correct answer is required').not().isEmpty(),
+    body('wrongAnswers', 'Three wrong answers are required').not().isEmpty(),
     updateQuestion
 );
 
