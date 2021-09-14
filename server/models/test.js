@@ -11,8 +11,7 @@ const testSchema = mongoose.Schema({
     expiryDate: { type: Date, require: true },
     testLength: { type: Number, require: true },
     scoreIds: { type: [mongoose.Schema.Types.ObjectId], ref: "Score" },
-    contentType: { type: String, require: true },
-    pin: { type: String, require: true}
+    contentType: { type: String, require: true }
 });
 
 export default mongoose.model("Test", testSchema);
