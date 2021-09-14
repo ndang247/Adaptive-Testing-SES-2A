@@ -14,7 +14,7 @@ export const createTest = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { title, expiryDate, testLength, contentType, pin } = req.body;
+    const { title, expiryDate, testLength, contentType } = req.body;
 
     //Retrieve the current user id from the header for the creator field
     const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
@@ -31,12 +31,11 @@ export const createTest = async (req, res) => {
             expiryDate,
             testLength,
             scoreIds: [],
-            contentType,
-            pin   
+            contentType 
         });
 
         await test.save();
-        res.json({ msg: 'Test created' });
+        res.json(test._id);
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
@@ -54,14 +53,14 @@ export const validatePin = async (req, res) => {
     const { pin } = req.body;
     try {
         // Find one test based on ID in req parameters
-        const test = await TestModel.findOne({ test: req.params.test_id })  
+        const test = await TestModel.findOne({ test: pin })  
         
         if(!test){
             return res.status(400).json({ msg: 'Test not found' });
         }
 
         // If pin is not match throw error
-        if (test.pin != pin){
+        if (test._id != pin){
             return res.status(401).json({ msg: 'Invalid pin'})
         }
 
@@ -74,3 +73,4 @@ export const validatePin = async (req, res) => {
         return res.status(500).send('Server Error');
     }
 }
+

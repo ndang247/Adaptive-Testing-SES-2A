@@ -39,14 +39,21 @@ export const createQuestion = async (req, res) => {
 
         question.testIds.push(testId);
 
-        await question.save();
+        
 
         //Add the current question to its corresponding test entity
-        await TestModel.findByIdAndUpdate(testId, 
+        const found = await TestModel.findByIdAndUpdate(testId, 
             { "$push": { "questionIds": question._id } },
         );
 
-        res.json({ msg: 'Question created' });
+        if(!found){
+            res.json({ msg: 'Test not found' }); 
+        }
+        else{
+            await question.save();
+            res.json({ msg: 'Question created' });
+        }
+
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
