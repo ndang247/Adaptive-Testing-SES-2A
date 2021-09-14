@@ -5,7 +5,7 @@ import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
   ExamHistory, Exam,
-  CreateTest, CreateQuestion, JoinExam, Profile, EditProfile
+  CreateTest, CreateQuestion, JoinExam, Profile, EditProfile, SubmitQuery
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 
@@ -27,6 +27,7 @@ const App = () => {
             <Route path="/host/question" exact component={CreateQuestion} />
             <Route path="/host/test" exact component={CreateTest} />
             <Route path="/user/joinexam" exact component={JoinExam} />
+            <Route path="/user/query" exact component={SubmitQuery} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>

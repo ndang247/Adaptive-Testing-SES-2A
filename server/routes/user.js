@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { register, login } from '../controllers/user.controller.js';
+import { register, login, getUser } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -22,5 +22,9 @@ router.post('/login',
     body('email', 'Valid email required').isEmail(),
     body('password', 'Password required').exists(),
     login);
+
+// POST users/:user_id
+// Route to get a user by ID
+router.get('/:user_id', getUser);
 
 export default router;

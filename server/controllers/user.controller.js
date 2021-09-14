@@ -114,6 +114,22 @@ export const login = async (req, res) => {
     }
 }
 
+export const getUser = async (req, res) => {
+    try {
+        // Find one question based on ID in req parameters
+        const user = await UserModel.findOne({ test: req.params.user_id })  
+        
+        if(!user){
+            return res.status(400).json({ msg: 'User not found' });
+        }
+
+        res.json(user); 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
 async function hashPassword(password) {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
