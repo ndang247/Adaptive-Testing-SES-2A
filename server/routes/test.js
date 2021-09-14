@@ -13,16 +13,14 @@ router.post('/', authHost,
     body('expiryDate', 'Valid date required').not().isEmpty(),
     body('testLength', 'Valid test duration is required').not().isEmpty().isNumeric(),
     body('contentType', 'Test content description required').not().isEmpty(),
-    body('pin', 'Valid pin required').not().isEmpty().isLength({ min: 6, max: 6}),
     createTest
 );
 
-// GET tests/:test_id
+// GET tests/
 // Route to grant user access to a test
-router.get('/:test_id', authUser,
+router.get('/', authUser,
     // Validate pin
-    body('pin', 'Please enter a valid 6 digit pin')
-    .isLength({ min: 6, max: 6 })
+    body('pin', 'Please enter a valid pin')
     .not().isEmpty(),
     validatePin
 );
