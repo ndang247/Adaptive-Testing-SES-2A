@@ -8,6 +8,7 @@ import useStyles from './examStyles';
 // import { HeadContent, BodyContent, Footer, NavBar } from 'src/components';
 
 const Exam = () => {
+    
     const classes = useStyles();
     return (
         <React.Fragment>
