@@ -5,7 +5,8 @@ const scoreSchema = mongoose.Schema({
     testIds: { type: [mongoose.Schema.Types.ObjectId], ref: "Test" },
     userIds: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
     title: { type: String, require: true },
-    rating: { type: Number, require: true },
+    currentRating: { type: Number, require: true },
+    ratings: {type: [Number], require: true},
     dateCreated: { type: Date, default: new Date() }
 });
 
