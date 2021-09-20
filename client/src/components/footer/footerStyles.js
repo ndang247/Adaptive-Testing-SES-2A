@@ -5,5 +5,8 @@ export default makeStyles((theme) => ({
         backgroundColor: "#778da9",
         padding: theme.spacing(2),
     },
+    paper: {
+        height: theme.spacing(5)
+    }
 }));
 

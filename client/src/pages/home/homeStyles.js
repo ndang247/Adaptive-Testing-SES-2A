@@ -15,13 +15,13 @@ export default makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     headSpacer: {
-        aspectRatio: '960/200',
+        aspectRatio: '960/100',
         width: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
     footerSpacer: {
-        aspectRatio: '960/200',
+        aspectRatio: '960/100',
         width: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

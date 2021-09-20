@@ -28,6 +28,7 @@ app.use('/users', userRouter);
 app.use('/hosts', hostRouter);
 app.use('/tests', testRouter);
 app.use('/questions', questionRouter);
+app.use('/scores', testRouter);
 
 app.use(cors());
 

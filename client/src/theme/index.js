@@ -75,7 +75,10 @@ const Theme = createTheme({
         },
         overline: {
             fontWeight: 500
-        }
+        },
+        sub1: {
+            fontStyle: 'italic',
+        },
     }
 });
 
