@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { authUser, authHost } from '../middleware/auth.js';
-import { validatePin, createTest, createScore, updateScore } from '../controllers/test.controller.js';
+import { validatePin, createTest, createScore, updateScore, getOptimalQuestion } from '../controllers/test.controller.js';
 
 const router = express.Router();
 
@@ -35,5 +35,14 @@ router.put('/scores/:test_id/:question_id', authUser,
     // Validate answer field
     body('answer', 'Answer is required').not().isEmpty(),
 updateScore);
+
+// GET tests/scores/:test_id/:question_id
+// Retrieve the next optimal question
+
+router.get('/scores/:test_id/:question_id', authUser, getOptimalQuestion);
+
+// GET tests/scores/:test_id
+// Retrieve the next optimal question when the test is initialized
+router.get('/scores/:test_id', authUser, getOptimalQuestion)
 
 export default router;
