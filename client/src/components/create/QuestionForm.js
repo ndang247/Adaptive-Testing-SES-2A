@@ -9,22 +9,23 @@ import QuestionField from './QuestionField';
 const QuestionForm = () => {
     const classes = useStyles();
     const [value, setValue] = useState(50);
-    const handleSliderChange = (event, newValue) => {
-        setValue(newValue); // although it says event is unused, input and slider breaks without it
-    };
+
+    const handleSliderChange = (event, newValue) => setValue(newValue);
+
     const handleInputChange = (event) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
+
     const handleBlur = () => {
-        if (value < 0) {
-            setValue(0);
-        } else if (value > 100) {
-            setValue(100);
-        }
+        if (value < 0) setValue(0);
+        else if (value > 100) setValue(100);
     };
-    const handleSubmit = (onSubmitProps) => {
+
+    const handleSubmit = (e, onSubmitProps) => {
+        e.prevenDefault();
         onSubmitProps.resetForm();
     };
+
     return (
         <Container component="main" maxWidth={false}>
             <Paper className={classes.paperHead}>
@@ -35,13 +36,13 @@ const QuestionForm = () => {
             <Paper className={classes.paperBody} elevation={3}>
                 <form className={classes.questionForm} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <QuestionField name="question" label="Question Info" id="question-text" rowsMax={10} />
-                        <QuestionField name="optionA" label="First Choice" id="option-a" rowsMax={2} />
-                        <QuestionField name="optionB" label="Second Choice" id="option-b" rowsMax={2} />
-                        <QuestionField name="optionC" label="Third Choice" id="option-c" rowsMax={2} />
-                        <QuestionField name="optionD" label="Fourth Choice" id="option-d" rowsMax={2} />
+                        <QuestionField name="question" label="Question Info" id="question-text" maxRows={10} />
+                        <QuestionField name="optionA" label="First Choice" id="option-a" maxRows={2} />
+                        <QuestionField name="optionB" label="Second Choice" id="option-b" maxRows={2} />
+                        <QuestionField name="optionC" label="Third Choice" id="option-c" maxRows={2} />
+                        <QuestionField name="optionD" label="Fourth Choice" id="option-d" maxRows={2} />
                         <Grid item>
-                            <Typography variant="h5"> How difficult is this question? </Typography>
+                            <Typography variant="h5">How difficult is this question?</Typography>
                         </Grid>
                         <Grid container spacing={3}>
                             <Grid item> {/* band-aid fix to the slider edging out until I figure it out*/} </Grid>

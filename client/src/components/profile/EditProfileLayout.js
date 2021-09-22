@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { DashboardLayoutRoot, DashboardLayoutWrapper, 
-         DashboardLayoutContainer, DashboardLayoutContent
+import {
+    DashboardLayoutRoot, DashboardLayoutWrapper,
+    DashboardLayoutContainer, DashboardLayoutContent
 } from 'src/components/dashboard/dashboardLayoutStyles';
 import DashboardNavbar from 'src/components/dashboard/DashboardNavbar';
 import DashboardSidebar from 'src/components/dashboard/DashboardSidebar';

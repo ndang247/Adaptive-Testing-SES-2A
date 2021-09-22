@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
         position: 'relative',
     },
     root: {
-        minWidth: 350,
+        minWidth: 200,
     },
     title: {
         fontSize: 90,

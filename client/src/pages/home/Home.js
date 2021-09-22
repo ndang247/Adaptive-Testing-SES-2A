@@ -1,26 +1,31 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import useStyles from './homeStyles';
-import { HeadContent, BodyContent, Footer, NavBar } from 'src/components';
+import { Head, Body, Footer, NavBar } from 'src/components';
 import clsx from 'clsx';
+import { useMediaQuery } from 'react-responsive'
 
 const Home = () => {
     const classes = useStyles();
     const headLayer = clsx(classes.headSpacer, classes.headLayer);
     const footerLayer = clsx(classes.footerSpacer, classes.footerLayer);
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-width: 1224px)'
+    });
+
     return (
         <React.Fragment>
             <main>
                 <NavBar />
                 <div className={classes.heroContent}>
-                    <HeadContent />
+                    <Head />
                 </div>
-                <div className={headLayer}></div>
+                {isDesktopOrLaptop && <div className={headLayer}></div>}
                 <Container className={classes.cardGrid} maxWidth="md">
-                    <BodyContent />
+                    <Body />
                 </Container>
             </main>
-            <div className={footerLayer}></div>
+            {isDesktopOrLaptop && <div className={footerLayer}></div>}
             <Footer />
         </React.Fragment>
     );

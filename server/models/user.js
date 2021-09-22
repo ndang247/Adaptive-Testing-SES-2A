@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, require: true },
     password: { type: String, require: true },
     avatar: { type: String },
+    policy: { type: Boolean, require: true },
     role: { type: String, require: true },
     dateCreated: { type: Date, default: new Date() },
     scoreIds: { type: [mongoose.Schema.Types.ObjectId], ref: "Score" }

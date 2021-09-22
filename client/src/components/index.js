@@ -1,6 +1,6 @@
 // Export only components
-export { default as HeadContent } from 'src/components/contents/headContent/HeadContent';
-export { default as BodyContent } from 'src/components/contents/bodyContent/BodyContent';
+export { default as Head } from 'src/components/contents/head/Head';
+export { default as Body } from 'src/components/contents/body/Body';
 export { default as NavBar } from 'src/components/navbar/NavBar';
 export { default as Footer } from 'src/components/footer/Footer';
 export { default as LoginForm } from 'src/components/auth/LoginForm';

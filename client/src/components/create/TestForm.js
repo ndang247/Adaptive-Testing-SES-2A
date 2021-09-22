@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import {
-    Container, Button, Typography,
-    Paper, Grid, Table, TableContainer,
-    TableHead, TableBody, TableRow,
-    TableCell, TablePagination, TableFooter,
-    TextField, InputAdornment, ButtonGroup
+    Container, Button, Typography, Paper,
+    Grid, Table, TableContainer, TableHead,
+    TableBody, TableRow, TableCell, TablePagination,
+    TableFooter, TextField, InputAdornment, ButtonGroup
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import useStyles from './testFormStyles';
@@ -13,30 +12,32 @@ import useStyles from './testFormStyles';
 // For the selecting combo box
 const subjects = ['Math', 'Physics', 'Chemistry', 'Biology', 'English', 'Boss Stage'];
 
+function createData(question, difficulty) {
+    return { question, difficulty };
+};
+
+const rows = [
+    createData('Toaster dropped on my head', 92),
+    createData('Time to get a new phone', 87),
+    createData('My 6s+ Survived for 6 years', 97),
+    createData('Until the fire nation attacked', 42),
+    createData('It became burnt toast', 58),
+    createData('Not because of the toaster that dropped on my head', 1),
+    createData('It was because I forgot the peanut butter', 24),
+    createData('ココロに刻むんだ WATER BLUE', 101),
+];
+
+
 const TestForm = () => {
     const classes = useStyles();
 
     // Tables View
-    function createData(question, difficulty) {
-        return { question, difficulty };
-    };
-    const rows = [
-        createData('Toaster dropped on my head', 92),
-        createData('Time to get a new phone', 87),
-        createData('My 6s+ Survived for 6 years', 97),
-        createData('Until the fire nation attacked', 42),
-        createData('It became burnt toast', 58),
-        createData('Not because of the toaster that dropped on my head', 1),
-        createData('It was because I forgot the peanut butter', 24),
-        createData('ココロに刻むんだ WATER BLUE', 101),
-    ];
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     // Page Swapper
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    const handleChangePage = (event, newPage) => setPage(newPage);
+
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
@@ -48,13 +49,12 @@ const TestForm = () => {
 
     // Time Input
     const [values, setValues] = useState({ time: '' });
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+    const handleChange = (prop) => (event) => setValues({ ...values, [prop]: event.target.value });
 
-    //Submitting
+    // Submitting
     const handleSubmit = () => {
     };
+
     return (
         <Container component="main" className={classes.position}>
             <Paper className={classes.paperHead}>

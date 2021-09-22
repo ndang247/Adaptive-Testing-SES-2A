@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
     AppBar, Badge, Box, Hidden,
@@ -8,7 +8,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
-import logo from 'src/assets/images/logo.png';
+// import logo from 'src/assets/images/logo.png';
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
     const [notifications] = useState([]);
@@ -16,11 +16,11 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
     return (
         <AppBar elevation={0} {...rest} >
             <Toolbar>
-                <RouterLink to="/">
+                {/* <RouterLink to="/">
                     <img src={logo} alt="logo" height={60} />
-                </RouterLink>
+                </RouterLink> */}
                 <Box sx={{ flexGrow: 1 }} />
-                <Hidden xlDown>
+                <Hidden lgDown>
                     <IconButton color="inherit" size="large">
                         <Badge badgeContent={notifications.length} color="primary" variant="dot">
                             <NotificationsIcon />

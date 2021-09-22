@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Paper, TextField, TextareaAutosize } from '@material-ui/core';
+import { Container, Typography, Paper, TextField } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import useStyles from './QueryFormStyles'
 import * as Yup from 'yup';
