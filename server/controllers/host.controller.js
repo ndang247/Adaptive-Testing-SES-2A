@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, policy } = req.body;
 
     try {
         // Check to see if a user exists
@@ -41,6 +41,7 @@ export const register = async (req, res) => {
             email,
             password: hashedPassword,
             avatar,
+            policy,
             role: Host,
             dateCreated: DateTime.now(),
             scoreIds: []

@@ -1,14 +1,15 @@
-import { NavLink as RouterLink, matchPath, useHistory } from 'react-router-dom';
+import { NavLink as RouterLink, useLocation, matchPath } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, ListItem } from '@material-ui/core';
 
 const NavItems = ({ href, icon: Icon, title, ...rest }) => {
-    const history = useHistory();
+    const location = useLocation();
 
-    const active = href ? !!matchPath({
+    const active = href ? !!matchPath(location.pathname, {
         path: href,
-        end: false
-    }, history.location.pathname) : false;
+        exact: true,
+        strict: false
+    }) : false;
 
     return (
         <ListItem

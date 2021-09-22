@@ -12,7 +12,7 @@ import { NavItems } from 'src/components';
 
 const items = [
     {
-        href: '/host/dashboard/',
+        href: '/host/dashboard',
         icon: BarChartIcon,
         title: 'Dashboard'
     },
