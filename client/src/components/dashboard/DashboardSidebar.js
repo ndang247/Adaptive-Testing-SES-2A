@@ -10,13 +10,6 @@ import {
 } from 'react-feather';
 import { NavItems } from 'src/components';
 
-// Dummy user
-const user = {
-    avatar: '/static/images/avatars/avatar_6.png',
-    occupation: 'Senior Developer',
-    name: 'Katarina Smith'
-}
-
 const items = [
     {
         href: '/host/dashboard/',
@@ -37,6 +30,7 @@ const items = [
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         if (openMobile && onMobileClose) onMobileClose();
@@ -47,12 +41,12 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'column', p: 2 }}>
                 <Avatar
                     component={RouterLink}
-                    src={user.avatar}
+                    src={user.avatar ? user.avatar : ""}
                     sx={{ cursor: 'pointer', width: 64, height: 64 }}
                     to="/host/dashboard/account"
                 />
-                <Typography color="textPrimary" variant="h5">{user.name}</Typography>
-                <Typography color="textSecondary" variant="body2">{user.occupation}</Typography>
+                <Typography color="textPrimary" variant="h5">{`${user.firstName} ${user.lastName}`}</Typography>
+                <Typography color="textSecondary" variant="body2">{user.role}</Typography>
             </Box>
             <Divider />
             <Box sx={{ p: 2 }}>
@@ -81,7 +75,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
                     {Content}
                 </Drawer>
             </Hidden>
-            <Hidden xlDown>
+            <Hidden lgDown>
                 <Drawer
                     anchor="left"
                     open

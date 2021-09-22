@@ -4,8 +4,8 @@ import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
-  ExamHistory, Exam,
-  CreateTest, CreateQuestion, JoinExam, Profile, EditProfile, SubmitQuery
+  ExamHistory, Exam, CreateTest, CreateQuestion,
+  JoinExam, Profile, EditProfile, SubmitQuery
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 
@@ -17,16 +17,22 @@ const App = () => {
           <GlobalStyles />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/user/login" exact component={Login} />
-            <Route path="/user/register" exact component={Register} />
+            <Route path="/host/login" exact component={Login} />
+            <Route path="/host/register" exact component={Register} />
             <Route path="/host/dashboard" exact component={Dashboard} />
             <Route path="/host/dashboard/account" exact component={Profile} />
             <Route path="/host/dashboard/settings" exact component={EditProfile} />
+            <Route path="/host/create/question" exact component={CreateQuestion} />
+            <Route path="/host/create/test" exact component={CreateTest} />
+
+            <Route path="/user/login" exact component={Login} />
+            <Route path="/user/register" exact component={Register} />
+            <Route path="/user/dashboard" exact component={Dashboard} />
+            <Route path="/user/dashboard/account" exact component={Profile} />
+            <Route path="/user/dashboard/settings" exact component={EditProfile} />
             <Route path="/user/exam" exact component={Exam} />
-            <Route path="/user/history" exact component={ExamHistory} />
-            <Route path="/host/question" exact component={CreateQuestion} />
-            <Route path="/host/test" exact component={CreateTest} />
-            <Route path="/user/joinexam" exact component={JoinExam} />
+            <Route path="/user/exam/history" exact component={ExamHistory} />
+            <Route path="/user/exam/joinexam" exact component={JoinExam} />
             <Route path="/user/query" exact component={SubmitQuery} />
           </Switch>
         </ThemeProvider>

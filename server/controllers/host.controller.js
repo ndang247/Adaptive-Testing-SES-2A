@@ -61,7 +61,7 @@ export const register = async (req, res) => {
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: 3600000 },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.json({ token });
+                res.status(201).json({ token, firstName: user.firstName, lastName: user.lastName, role: user.role });
             });
 
     } catch (error) {
@@ -105,7 +105,7 @@ export const login = async (req, res) => {
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: 3600000 },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.json({ token });
+                res.status(201).json({ token, firstName: user.firstName, lastName: user.lastName, role: user.role });
             });
 
     } catch (error) {

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-import layeredWaves from 'src/assets/svg/layered-waves-haikei.svg';
+import layeredWaves from 'src/assets/svg/layered-waves-haikei-header.svg';
 import footerLayeredWaves from 'src/assets/svg/layered-waves-haikei-footer.svg';
 
 export default makeStyles((theme) => ({
@@ -15,13 +15,13 @@ export default makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     headSpacer: {
-        aspectRatio: '960/100',
+        aspectRatio: '960/480',
         width: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
     footerSpacer: {
-        aspectRatio: '960/100',
+        aspectRatio: '960/480',
         width: '100%',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -29,11 +29,13 @@ export default makeStyles((theme) => ({
     },
     headLayer: {
         backgroundImage: `url(${layeredWaves})`,
+        position: 'absolute',
     },
     flip: {
         transform: 'rotate(180deg)',
     },
     footerLayer: {
         backgroundImage: `url(${footerLayeredWaves})`,
+        marginTop: '-30%'
     }
 }));

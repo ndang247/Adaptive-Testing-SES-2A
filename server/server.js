@@ -23,14 +23,15 @@ app.use(express.urlencoded({
 // References:
 // https://stackoverflow.com/questions/62396498/tslint-marks-body-parser-as-deprecated.
 
-// Define Routes
-app.use('/users', userRouter);
-app.use('/hosts', hostRouter);
-app.use('/tests', testRouter);
-app.use('/questions', questionRouter);
-app.use('/scores', testRouter);
-
 app.use(cors());
+
+// Define Routes
+app.use('/api/users', userRouter);
+app.use('/api/hosts', hostRouter);
+app.use('/api/tests', testRouter);
+app.use('/api/questions', questionRouter);
+app.use('/api/scores', testRouter);
+
 
 const PORT = process.env.PORT || 8080;
 

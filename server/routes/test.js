@@ -20,21 +20,20 @@ router.post('/', authHost,
 // Route to grant user access to a test
 router.get('/', authUser,
     // Validate pin
-    body('pin', 'Please enter a valid pin')
-    .not().isEmpty(),
+    body('pin', 'Please enter a valid pin').not().isEmpty(),
     validatePin
 );
 
 // POST tests/scores/:test_id/:question_id
 // Route to initialize a user's attempt at a test, creates a score entity
-router.post('/scores/:test_id/:question_id', authUser, createScore );
+router.post('/scores/:test_id/:question_id', authUser, createScore);
 
 // PUT tests/scores/:test_id/:question_id
 // Route to mark a question correct or incorrect then update the rating of the player & question
-router.put('/scores/:test_id/:question_id', authUser, 
+router.put('/scores/:test_id/:question_id', authUser,
     // Validate answer field
     body('answer', 'Answer is required').not().isEmpty(),
-updateScore);
+    updateScore);
 
 // GET tests/scores/:test_id/:question_id
 // Retrieve the next optimal question

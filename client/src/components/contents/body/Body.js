@@ -1,20 +1,22 @@
 import React from 'react';
-import useStyles from './bodyContentStyles';
+import useStyles from './bodyStyles';
 import {
-    Grid, Card, CardMedia, CardContent,
-    Typography, CardActions, Button, CardActionArea, Container,
-    Box, Link, Paper
+    Card, CardMedia, CardContent,
+    Typography, CardActions, Button, CardActionArea,
+    Link
 } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
-import adapTest from 'src/assets/images/adapTest.jpg';
-import testing from 'src/assets/images/testing.jpg'
+import { Link as RouterLink } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
 const BodyContent = () => {
     const classes = useStyles();
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-width: 1224px)'
+    });
+
     return (
-        <main >
-            <Card className={classes.card}>
+        <main>
+            <Card style={{ marginTop: isDesktopOrLaptop ? '40%' : '0' }} className={classes.card}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
@@ -22,24 +24,18 @@ const BodyContent = () => {
                         title="random"
                     />
                     <CardContent>
-                        <Typography variant="h1" font= "Arial">For Adap Test</Typography>
+                        <Typography variant="h1" font="Arial">For Adap Test</Typography>
                         <Typography variant="sub1">???</Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                <Button size="small" color="primary">
-                        <Link
-                            color="inherit"
-                            component={RouterLink}
-                            underline="none"
-                            to=""
-                        >
+                    <Button size="small" color="primary">
+                        <Link color="inherit" component={RouterLink} underline="none" to="">
                             About Adap-Test
                         </Link>
                     </Button>
                 </CardActions>
             </Card>
-
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
@@ -54,18 +50,12 @@ const BodyContent = () => {
                 </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        <Link
-                            color="inherit"
-                            component={RouterLink}
-                            underline="none"
-                            to="/host/login"
-                        >
+                        <Link color="inherit" component={RouterLink} underline="none" to="/host/login" >
                             Join As Host
                         </Link>
                     </Button>
                 </CardActions>
             </Card>
-
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
@@ -80,47 +70,13 @@ const BodyContent = () => {
                 </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        <Link
-                            color="inherit"
-                            component={RouterLink}
-                            underline="none"
-                            to="/user/login"
-                        >
+                        <Link color="inherit" component={RouterLink} underline="none" to="/user/login" >
                             Join As Tester
                         </Link>
                     </Button>
                 </CardActions>
             </Card>
         </main>
-        /* {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                    <CardMedia
-                        className={classes.cardMedia}
-                        image="https://source.unsplash.com/random"
-                        title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Heading
-                        </Typography>
-                        <Typography>
-                            This is a media card. You can use this section to describe the content.
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                            View
-                        </Button>
-                        <Button size="small" color="primary">
-                            Edit
-                        </Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-        ))} */
-
-
     );
 };
 

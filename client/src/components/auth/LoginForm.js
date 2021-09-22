@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import {
@@ -12,9 +12,13 @@ import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { LoadingButton } from '@material-ui/lab';
+import { useDispatch } from 'react-redux';
+import { hostLogin, login } from 'src/redux/actions/auth';
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -23,12 +27,18 @@ const LoginForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: "",
+            password: "",
             remember: true
         },
         validationSchema: LoginSchema,
-        onSubmit: () => { }
+        onSubmit: async () => {
+            if (history.location.pathname === "/user/login") {
+                dispatch(login(values, history));
+            } else {
+                dispatch(hostLogin(values, history));
+            }
+        }
     });
 
     const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
@@ -39,87 +49,63 @@ const LoginForm = () => {
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Box sx={{ mb: 3 }}>
-                    <Typography
-                        color="textPrimary"
-                        variant="h2"
-                    >
+                    <Typography color="textPrimary" variant="h2">
                         Sign in
                     </Typography>
-                    <Typography
-                        color="textSecondary"
-                        gutterBottom
-                        variant="body2"
-                    >
+                    <Typography color="textSecondary" gutterBottom variant="body2">
                         Sign in on the internal platform
                     </Typography>
                 </Box>
                 <Grid container spacing={3}>
-                    <Grid
-                        item
-                        xs={12}
-                        md={6}
-                    >
+                    <Grid item xs={12} md={6}>
                         <Button
                             color="primary"
                             fullWidth
                             startIcon={<FacebookIcon />}
-                            onClick={handleSubmit}
                             size="large"
                             variant="contained"
+                            onClick={handleSubmit}
                         >
                             Login with Facebook
                         </Button>
                     </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        md={6}
-                    >
+                    <Grid item xs={12} md={6}>
                         <Button
                             fullWidth
                             startIcon={<GoogleIcon />}
-                            onClick={handleSubmit}
                             size="large"
                             variant="contained"
+                            onClick={handleSubmit}
                         >
                             Login with Google
                         </Button>
                     </Grid>
                 </Grid>
-                <Box
-                    sx={{
-                        pb: 1,
-                        pt: 3
-                    }}
-                >
-                    <Typography
-                        align="center"
-                        color="textSecondary"
-                        variant="body1"
-                    >
+                <Box sx={{ pb: 1, pt: 3 }}>
+                    <Typography align="center" color="textSecondary" variant="body1">
                         or login with email address
                     </Typography>
                 </Box>
                 <TextField
                     error={Boolean(touched.email && errors.email)}
-                    fullWidth
                     helperText={touched.email && errors.email}
+                    {...getFieldProps('email')}
+                    fullWidth
                     label="Email Address"
                     margin="normal"
                     name="email"
                     type="email"
-                    {...getFieldProps('email')}
                     variant="outlined"
                 />
                 <TextField
                     error={Boolean(touched.password && errors.password)}
-                    fullWidth
                     helperText={touched.password && errors.password}
+                    {...getFieldProps('password')}
+                    fullWidth
                     label="Password"
                     margin="normal"
                     name="password"
-                    type="password"
-                    {...getFieldProps('password')}
+                    type={showPassword ? "text" : "password"}
                     variant="outlined"
                     InputProps={{
                         endAdornment: (
@@ -143,13 +129,14 @@ const LoginForm = () => {
                         Sign in now
                     </LoadingButton>
                 </Box>
-                <Typography
-                    color="textSecondary"
-                    variant="body1"
-                >
+                <Typography color="textSecondary" variant="body1">
                     Don&apos;t have an account?
                     {' '}
-                    <Link component={RouterLink} to="/user/register" variant="h6" underline="hover">
+                    <Link
+                        component={RouterLink}
+                        to={history.location.pathname === "/user/login" ? "/user/register" : "/host/register"}
+                        variant="h6"
+                        underline="hover">
                         Sign up
                     </Link>
                 </Typography>

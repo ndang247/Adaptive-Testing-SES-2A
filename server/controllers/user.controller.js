@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, policy } = req.body;
 
     try {
         // Check to see if a user exists
@@ -41,6 +41,7 @@ export const register = async (req, res) => {
             email,
             password: hashedPassword,
             avatar,
+            policy,
             role: User,
             dateCreated: DateTime.now(),
             scoreIds: []
@@ -61,7 +62,7 @@ export const register = async (req, res) => {
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: 3600000 },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.status(201).json({ token });
+                res.status(201).json({ token, firstName: user.firstName, lastName: user.lastName, role: user.role });
             });
 
     } catch (error) {
@@ -105,7 +106,7 @@ export const login = async (req, res) => {
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: 3600000 },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.json({ token });
+                res.status(201).json({ token, firstName: user.firstName, lastName: user.lastName, role: user.role });
             });
 
     } catch (error) {
@@ -117,13 +118,13 @@ export const login = async (req, res) => {
 export const getUser = async (req, res) => {
     try {
         // Find one question based on ID in req parameters
-        const user = await UserModel.findOne({ test: req.params.user_id })  
-        
-        if(!user){
+        const user = await UserModel.findOne({ test: req.params.user_id })
+
+        if (!user) {
             return res.status(400).json({ msg: 'User not found' });
         }
 
-        res.json(user); 
+        res.json(user);
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
