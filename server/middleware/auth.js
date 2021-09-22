@@ -32,11 +32,11 @@ export const authUser = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
 
-        //Confirm account is a user and not a host
-        if (decoded?.user.role != "User"){
+        // confirm account is a user and not a host
+        if (decoded?.user.role != "User") {
             return res.status(401).json({ msg: 'User account required for access' });
-        } 
-        
+        }
+
         req.user = decoded?.user;
         next(); // move onto the next request
     } catch (error) {
@@ -56,10 +56,10 @@ export const authHost = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
 
-        //Confirm account is a host and not a user
-        if (decoded?.user.role != "Host"){
+        // confirm account is a host and not a user
+        if (decoded?.user.role != "Host") {
             return res.status(401).json({ msg: 'Host account required for access' });
-        } 
+        }
 
         req.user = decoded?.user;
         next(); // move onto the next request

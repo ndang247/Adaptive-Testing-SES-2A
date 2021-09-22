@@ -11,8 +11,7 @@ router.post('/register',
     body('firstName', 'Name is required').not().isEmpty(),
     body('lastName', 'Name is required').not().isEmpty(),
     body('email', 'Valid email required').isEmail(),
-    body('password', 'Please enter a password with 6 or more characters')
-        .isLength({ min: 6, max: 128 }),
+    body('password', 'Please enter a password with 6 or more characters').isLength({ min: 6, max: 128 }),
     register);
 
 // POST users/login

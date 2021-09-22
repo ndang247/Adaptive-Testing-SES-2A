@@ -21,4 +21,4 @@ const JoinExam = () => {
     );
 }
 
-export default JoinExam
+export default JoinExam;

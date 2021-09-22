@@ -5,14 +5,18 @@ import {
     TextField, Typography, InputAdornment, IconButton
 } from '@material-ui/core';
 import * as Yup from 'yup';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 import { LoadingButton } from "@material-ui/lab";
+import { useDispatch } from 'react-redux';
+import { hostRegister, register } from 'src/redux/actions/auth';
 
 const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const RegisterSchema = Yup.object().shape({
         firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("First name required"),
@@ -20,6 +24,7 @@ const RegisterForm = () => {
         email: Yup.string().email("Email must be a valid email address").required("Email is required"),
         password: Yup.string().required("Password is required"),
         confirmPassword: Yup.string().required("Please confirm your password"),
+        policy: Yup.boolean().oneOf([true], "You must accept the terms and conditions")
     });
 
     const formik = useFormik({
@@ -29,111 +34,101 @@ const RegisterForm = () => {
             email: "",
             password: "",
             confirmPassword: "",
+            policy: false
         },
         validationSchema: RegisterSchema,
-        onSubmit: () => { }
+        onSubmit: async () => {
+            if (history.location.pathname === "/user/register") {
+                dispatch(register(values, history));
+            } else {
+                dispatch(hostRegister(values, history));
+            }
+        }
     });
 
-    const { errors, touched, values, isSubmitting, setFieldValue, handleSubmit, getFieldProps } = formik;
+
+    const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
     return (
         <>
             <FormikProvider value={formik}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <Box sx={{ mb: 3 }}>
-                        <Typography
-                            color="textPrimary"
-                            variant="h2"
-                        >
-                            Create new account
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            gutterBottom
-                            variant="body2"
-                        >
+                        <Typography color="textPrimary" variant="h2" >Create new account</Typography>
+                        <Typography color="textSecondary" gutterBottom variant="body2" >
                             Use your email to create new account
                         </Typography>
                     </Box>
                     <TextField
                         error={Boolean(touched.firstName && errors.firstName)}
-                        fullWidth
                         helperText={touched.firstName && errors.firstName}
-                        label="First name"
+                        {...getFieldProps("firstName")}
+                        fullWidth
+                        label="First Name"
                         margin="normal"
                         name="firstName"
                         variant="outlined"
-                        {...getFieldProps("firstName")}
-
                     />
                     <TextField
                         error={Boolean(touched.lastName && errors.lastName)}
-                        fullWidth
                         helperText={touched.lastName && errors.lastName}
-                        label="Last name"
+                        {...getFieldProps("lastName")}
+                        fullWidth
+                        label="Last Name"
                         margin="normal"
                         name="lastName"
                         variant="outlined"
-                        {...getFieldProps("lastName")}
-
                     />
                     <TextField
                         error={Boolean(touched.email && errors.email)}
-                        fullWidth
                         helperText={touched.email && errors.email}
+                        {...getFieldProps("email")}
+                        fullWidth
                         label="Email Address"
                         margin="normal"
                         name="email"
                         type="email"
                         variant="outlined"
-                        {...getFieldProps("email")}
-
                     />
                     <TextField
                         error={Boolean(touched.password && errors.password)}
-                        fullWidth
                         helperText={touched.password && errors.password}
+                        {...getFieldProps("password")}
+                        fullWidth
                         label="Password"
                         margin="normal"
                         name="password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         variant="outlined"
-                        {...getFieldProps("password")}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
-                                    <IconButton
-                                        edge="end"
-                                        onClick={() => setShowPassword((prev) => !prev)}
-                                    >
-                                        <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                                    <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                                        <Icon icon={showPassword ? eyeOffFill : eyeFill} />
                                     </IconButton>
-                                </InputAdornment>
-                            ),
+                                </InputAdornment>)
                         }}
                     />
-                    <Box
-                        sx={{
-                            alignItems: 'center',
-                            display: 'flex',
-                            ml: -1
-                        }}
-                    >
-                        <Checkbox
-                            checked={values.policy}
-                            name="policy"
-                        />
-                        <Typography
-                            color="textSecondary"
-                            variant="body1"
-                        >
-                            I have read the
-                            {' '}
+                    <TextField
+                        error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                        helperText={touched.confirmPassword && errors.confirmPassword}
+                        {...getFieldProps("confirmPassword")}
+                        fullWidth
+                        label="Confirm Password"
+                        margin="normal"
+                        name="confirmPassword"
+                        type="password"
+                        variant="outlined"
+                    />
+                    <Box sx={{ alignItems: 'center', display: 'flex', ml: -1 }}>
+                        <Checkbox {...getFieldProps("policy")} checked={values.policy} name="policy" />
+                        <Typography color="textSecondary" variant="body1" >
+                            I have read the {' '}
                             <Link
                                 color="primary"
                                 component={RouterLink}
                                 to="#"
-                                underline="always"
+                                underline="hover"
                                 variant="h6"
                             >
                                 Terms and Conditions
@@ -141,10 +136,7 @@ const RegisterForm = () => {
                         </Typography>
                     </Box>
                     {Boolean(touched.policy && errors.policy) && (
-                        <FormHelperText error>
-                            {errors.policy}
-                        </FormHelperText>
-                    )}
+                        <FormHelperText error>{errors.policy}</FormHelperText>)}
                     <Box sx={{ py: 2 }}>
                         <LoadingButton
                             color="primary"
@@ -157,13 +149,13 @@ const RegisterForm = () => {
                             Sign up now
                         </LoadingButton>
                     </Box>
-                    <Typography
-                        color="textSecondary"
-                        variant="body1"
-                    >
-                        Have an account?
-                        {' '}
-                        <Link component={RouterLink} to="/user/login" variant="h6" underline="hover">
+                    <Typography color="textSecondary" variant="body1">
+                        Have an account?{' '}
+                        <Link
+                            component={RouterLink}
+                            to={history.location.pathname === "/user/register" ? "/user/login" : "/host/login"}
+                            variant="h6"
+                            underline="hover">
                             Sign in
                         </Link>
                     </Typography>

@@ -8,8 +8,8 @@ import useStyles from './examStyles';
 // import { HeadContent, BodyContent, Footer, NavBar } from 'src/components';
 
 const Exam = () => {
-    
     const classes = useStyles();
+
     return (
         <React.Fragment>
             <main >
@@ -95,7 +95,6 @@ const Exam = () => {
                                         </Typography>
                                     </Button>
                                 </Grid>
-
                                 <Grid xs={6}>
                                     <Button>
                                         <Typography variant="h1">
@@ -103,7 +102,6 @@ const Exam = () => {
                                         </Typography>
                                     </Button>
                                 </Grid>
-
                                 <Grid xs={6}>
                                     <Button>
                                         <Typography variant="h1">
@@ -111,7 +109,6 @@ const Exam = () => {
                                         </Typography>
                                     </Button>
                                 </Grid>
-
                                 <Grid xs={6}>
                                     <Button>
                                         <Typography variant="h1">

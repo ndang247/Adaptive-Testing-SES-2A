@@ -28,22 +28,17 @@ const rows = [
 
 const ExamHistory = () => {
     const classes = useStyles();
-    // Table pagination
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    const handleChangePage = (event, newPage) => setPage(newPage);
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
 
-    const preventDefault = (event) => event.preventDefault();
-
-    // Main function
     return (
         <>
             <div className={classes.heroContent}></div>
@@ -75,9 +70,7 @@ const ExamHistory = () => {
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                                 <TableRow key={row.name}>
                                     <TableCell component="th" scope="row" className={classes.name}>
-                                        <Link href="#" onClick={preventDefault}>
-                                            {row.name}
-                                        </Link>
+                                        <Link href="#">{row.name}</Link>
                                     </TableCell>
                                     <TableCell >
                                         <Grid container>
@@ -92,8 +85,7 @@ const ExamHistory = () => {
                                     <TableCell>{row.type}</TableCell>
                                     <TableCell>{row.result}</TableCell>
                                     <TableCell>{row.rank}</TableCell>
-                                </TableRow>
-                            ))}
+                                </TableRow>))}
                         </TableBody>
                         <TableFooter>
                             <TableRow>
