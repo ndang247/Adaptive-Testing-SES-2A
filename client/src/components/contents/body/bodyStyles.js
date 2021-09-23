@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         // height: '100%',
         // display: 'flex',
         // flexDirection: 'column',
-        marginBottom:theme.spacing(5),
+        marginBottom: theme.spacing(5),
     },
     cardMedia: {
         paddingTop: '56.25%', // 16:9
@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     cardContent: {
         flexGrow: 1,
     },
-    media :{
-        height: 500,
+    media: {
+        height: 250,
     },
 }));
