@@ -30,6 +30,7 @@ export default makeStyles((theme) => ({
     headLayer: {
         backgroundImage: `url(${layeredWaves})`,
         position: 'absolute',
+        zIndex: '-1'
     },
     flip: {
         transform: 'rotate(180deg)',

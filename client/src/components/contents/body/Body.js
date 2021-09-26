@@ -21,7 +21,7 @@ const BodyContent = () => {
                     <CardMedia
                         className={classes.media}
                         image="http://p5.itc.cn/images01/20200825/48701ab3d64b4aada25f4e55a5b695d2.jpeg"
-                        title="random"
+                        alt="random"
                     />
                     <CardContent>
                         <Typography variant="h1" font="Arial">For Adap Test</Typography>
@@ -41,7 +41,7 @@ const BodyContent = () => {
                     <CardMedia
                         className={classes.media}
                         image="https://2j61yv256vxd12hdls206jrv-wpengine.netdna-ssl.com/wp-content/uploads/2020/10/books-scaled.jpg"
-                        title="Adap Test"
+                        alt="Adap Test"
                     />
                     <CardContent>
                         <Typography variant="h1">For the Host</Typography>
@@ -61,7 +61,7 @@ const BodyContent = () => {
                     <CardMedia
                         className={classes.media}
                         image="https://www.eliteserien.no/videotest/_/image/fa0769e4-2da7-486b-b347-bb992f911e43:ad8b9078aa6a3b757fbe68d82beb4b22fec95228/wide-1600-900/test.jpg"
-                        title="Tester"
+                        alt="Tester"
                     />
                     <CardContent>
                         <Typography variant="h1">For the Tester</Typography>

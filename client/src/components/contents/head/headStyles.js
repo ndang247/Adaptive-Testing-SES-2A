@@ -18,7 +18,7 @@ export default makeStyles((theme) => ({
     },
     blobMotion: {
         position: 'absolute',
-        transform: 'translateY(-40%)',
+        transform: 'translateY(-65%)',
         zIndex: 0,
     },
     blobContent: {
