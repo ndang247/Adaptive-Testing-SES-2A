@@ -18,7 +18,7 @@ const TestForm = () => {
     const classes = useStyles();
 
     // Select Box
-    const [value, setValue] = useState(null);
+    const [boxValue, setBoxValue] = useState(null);
     const [inputValue, setInputValue] = useState('');
 
     // Time Input
@@ -30,24 +30,46 @@ const TestForm = () => {
         {
             content: '',
             correctAnswer: '',
-            wrongAnswers: ['', '', ''],
+            wrongA: '',
+            wrongB: '',
+            wrongC: '',
             rating: '',
         },
     ]);
 
     const handleFieldInput = (index, event) => {
         const values = [...inputFields];
-        values[index][event.target.content] = event.target.value;
+        values[index][event.target.name] = event.target.value;
         setInputFields(values);
+    }
+
+    // Adding Fields
+    const handleAddFields = () => {
+        setInputFields([...inputFields, {
+            content: '',
+            correctAnswer: '',
+            wrongA: '',
+            wrongB: '',
+            wrongC: '',
+            rating: '',
+        }]);
+    }
+
+    const handleRemoveFields = (index) => {
+        const values = [...inputFields];
+        if (index !== 0) {
+            values.splice(index, 1);
+            setInputFields(values);
+        };
     }
 
     // Slider Setting
     const [sliderValue, setSliderValue] = useState(50);
 
-    const handleSliderChange = (sliderEvent, newSliderValue) => setSliderValue(newSliderValue);
+    const handleSliderChange = (event, newValue) => setSliderValue(newValue);
 
-    const handleInputChange = (sliderEvent) => {
-        setSliderValue(sliderEvent.target.sliderValue === '' ? '' : Number(sliderEvent.target.sliderValue));
+    const handleInputChange = (event) => {
+        setSliderValue(event.target.value === '' ? '' : Number(event.target.value));
     };
 
     const handleBlur = () => {
@@ -93,9 +115,9 @@ const TestForm = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Autocomplete
-                                    value={value}
+                                    value={boxValue}
                                     onChange={(event, newValue) => {
-                                        setValue(newValue);
+                                        setBoxValue(newValue);
                                     }}
                                     inputValue={inputValue}
                                     onInputChange={(event, newInputValue) => {
@@ -140,8 +162,8 @@ const TestForm = () => {
                         </Grid>
                     </Paper>
                     {/* Questions Fields*/}
-                    <Paper className={classes.paperBody}>
-                        {inputFields.map((inputField, index) => (
+                    {inputFields.map((inputField, index) => (
+                        <Paper className={classes.paperBody}>
                             <Grid container spacing={2} key={index}>
                                 <Grid item xs={12} sm={10}>
                                     <TextField
@@ -156,72 +178,76 @@ const TestForm = () => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={2}>
-                                    <IconButton>
+                                    <IconButton onClick={() => handleAddFields()}>
                                         <AddIcon />
                                     </IconButton>
-                                    <IconButton>
+                                    <IconButton onClick={() => handleRemoveFields(index)}>
                                         <RemoveIcon />
                                     </IconButton>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         name="correctAnswer"
-                                        label="Input Correct Answer Here"
+                                        label="Correct Answer"
                                         variant="outlined"
                                         fullWidth
                                         value={inputField.correctAnswer}
-                                        multiline
-                                        maxRows={10}
+                                        onChange={event => handleFieldInput(index, event)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        name="content"
-                                        label="Question Info"
+                                        name="wrongA"
+                                        label="Incorrect Answer"
                                         variant="outlined"
                                         fullWidth
-                                        value={inputField.wrongAnswers[0]}
+                                        value={inputField.wrongA}
                                         multiline
                                         maxRows={10}
+                                        onChange={event => handleFieldInput(index, event)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        name="content"
-                                        label="Question Info"
+                                        name="wrongB"
+                                        label="Incorrect Answer"
                                         variant="outlined"
                                         fullWidth
-                                        value={inputField.wrongAnswers[1]}
+                                        value={inputField.wrongB}
                                         multiline
                                         maxRows={10}
+                                        onChange={event => handleFieldInput(index, event)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
-                                        name="content"
-                                        label="Question Info"
+                                        name="wrongC"
+                                        label="Incorrect Answer"
                                         variant="outlined"
                                         fullWidth
-                                        value={inputField.wrongAnswers[2]}
+                                        value={inputField.wrongC}
                                         multiline
                                         maxRows={10}
+                                        onChange={event => handleFieldInput(index, event)}
                                     />
                                 </Grid>
-                                <Grid item xs={0}> </Grid>
+                                <Grid item xs={12} align="center" justify="center" alignItems="center">
+                                    <Typography variant="h5">Rate the difficulty of this question, the greater the number, the harder it is.</Typography>
+                                </Grid>
                                 <Grid item xs={10}>
                                     <Slider
                                         name="rating"
-                                        value={typeof value === 'number' ? value : 0}
+                                        value={typeof sliderValue === 'number' ? sliderValue : 0}
                                         onChange={handleSliderChange}
                                         aria-labelledby="input-slider"
                                         color="secondary"
                                         {...getFieldProps("rating")}
                                     />
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={2}>
                                     <Input
                                         className={classes.input}
-                                        value={value}
+                                        value={sliderValue}
                                         margin="dense"
                                         onChange={handleInputChange}
                                         onBlur={handleBlur}
@@ -235,8 +261,8 @@ const TestForm = () => {
                                     />
                                 </Grid>
                             </Grid>
-                        ))}
-                    </Paper>
+                        </Paper>
+                    ))}
                     <Grid
                         container
                         spacing={0}
