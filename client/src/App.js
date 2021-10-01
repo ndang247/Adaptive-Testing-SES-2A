@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
-<<<<<<< Updated upstream
-  ExamHistory, Exam, CreateTest, CreateQuestion,
-  JoinExam, Profile, EditProfile, SubmitQuery
-=======
-  ExamHistory, Exam,
-  CreateTest, CreateQuestion, JoinExam, Profile, EditProfile, SubmitQuery,
-  ExamCreated,
-  QuestionCreated,
->>>>>>> Stashed changes
+  ExamHistory, Exam, CreateTest, CreateQuestion, 
+  JoinExam, Profile, EditProfile, SubmitQuery, 
+  ExamCreated, QuestionCreated
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
+import { getQuestions } from 'src/redux/actions/question';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
+
+  const dispatch = useDispatch();
+    
+  useEffect(() => {
+      dispatch(getQuestions("614042516f6abc6cc5dc59d8", "6140434a2bb7b7dc2b4970dc"));
+  }, []);
 
   return (
     <BrowserRouter>
@@ -35,10 +37,11 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard/settings" exact component={EditProfile} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/create/question" exact component={CreateQuestion} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/create/test" exact component={CreateTest} />
+            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history" exact component={ExamCreated} />
+            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history/question" exact component={QuestionCreated} />
             {/* User */}
             <Route path="/user/login" exact component={Login} />
             <Route path="/user/register" exact component={Register} />
-<<<<<<< Updated upstream
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard" exact component={Dashboard} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/account" exact component={Profile} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/settings" exact component={EditProfile} />
@@ -46,19 +49,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/history" exact component={ExamHistory} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/joinexam" exact component={JoinExam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/query" exact component={SubmitQuery} />
-=======
-            <Route path="/host/dashboard" exact component={Dashboard} />
-            <Route path="/host/dashboard/account" exact component={Profile} />
-            <Route path="/host/dashboard/settings" exact component={EditProfile} />
-            <Route path="/user/exam" exact component={Exam} />
-            <Route path="/user/history" exact component={ExamHistory} />
-            <Route path="/host/question" exact component={CreateQuestion} />
-            <Route path="/host/test" exact component={CreateTest} />
-            <Route path="/user/joinexam" exact component={JoinExam} />
-            <Route path="/user/query" exact component={SubmitQuery} />
-            <Route path="/host/history" exact component={ExamCreated} />
-            <Route path="/host/history/question" exact component={QuestionCreated} />
->>>>>>> Stashed changes
+            
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>

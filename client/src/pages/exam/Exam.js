@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Paper, Typography, Button, Grid,
     Container, CssBaseline, AppBar, Toolbar,
     Divider,
 } from '@material-ui/core';
 import useStyles from './examStyles';
+import { useSelector } from 'react-redux';
 // import { HeadContent, BodyContent, Footer, NavBar } from 'src/components';
 
 const Exam = () => {
     const classes = useStyles();
+    const {questionData, loading} = useSelector((state) => state.question);
+    console.log(questionData);
+    if (!questionData) return <>Loading...</>;
 
     return (
         <React.Fragment>
-            <main >
+            <main>
                 <CssBaseline />
                 <AppBar position="relative">
                     <Toolbar>
@@ -29,12 +33,12 @@ const Exam = () => {
                 <Divider />
                 <div>
                     <Grid container flexDirection="column" alignItems="revert">
-                        <Grid xs={3}>
+                        <Grid item xs={3}>
                             <Typography variant="h3" align="center" color="Highlight" fontStyle="oblique">
                                 Time Left :
                             </Typography>
                         </Grid>
-                        <Grid xs={3}>
+                        <Grid item xs={3}>
                             <Typography variant="h3" align="center" color="Highlight">
                                 29:59
                             </Typography>
@@ -46,7 +50,7 @@ const Exam = () => {
                     <Paper elevation={10} >
                         <Container>
                             <Grid container>
-                                <Grid xs={11}>
+                                <Grid item xs={11}>
                                     <Toolbar>
                                         <Typography variant="h1">
                                             Question 1
@@ -54,7 +58,7 @@ const Exam = () => {
                                     </Toolbar>
                                 </Grid>
 
-                                <Grid xs={1} >
+                                <Grid item xs={1} >
                                     <Toolbar>
                                         <Typography variant="h1" >
                                             1/40
@@ -66,8 +70,7 @@ const Exam = () => {
                         <Divider />
                         <div>
                             <Typography variant="h1" >
-                                If I have ten apples, Chris wants to take 3 apples from me.
-                                How many apples will be left.
+                                {questionData.content}
                             </Typography>
                         </div>
                     </Paper>
@@ -75,7 +78,7 @@ const Exam = () => {
                 <div className={classes.answer} >
                     <Paper elevation={10} align="center">
                         <Grid container>
-                            <Grid xs={8}>
+                            <Grid item xs={8}>
                                 <Toolbar>
                                     <Typography variant="h1">
                                         Multiple choice
@@ -88,34 +91,22 @@ const Exam = () => {
                         {/* 4 answer buttons */}
                         <div className={classes.answer}>
                             <Grid container >
-                                <Grid xs={6}>
+                                <Grid item xs={6}>
                                     <Button>
                                         <Typography variant="h1">
-                                            A. 7
+                                            {questionData.correctAnswer}
                                         </Typography>
                                     </Button>
                                 </Grid>
-                                <Grid xs={6}>
+                                {questionData.wrongAnswers.map((wrongAnswer) => (
+                                    <Grid key={wrongAnswer} item xs={6}>
                                     <Button>
                                         <Typography variant="h1">
-                                            B. 6
+                                            {wrongAnswer}
                                         </Typography>
                                     </Button>
-                                </Grid>
-                                <Grid xs={6}>
-                                    <Button>
-                                        <Typography variant="h1">
-                                            C. 5
-                                        </Typography>
-                                    </Button>
-                                </Grid>
-                                <Grid xs={6}>
-                                    <Button>
-                                        <Typography variant="h1">
-                                            D. 9
-                                        </Typography>
-                                    </Button>
-                                </Grid>
+                                    </Grid>
+                                ))}
                             </Grid>
                         </div>
                     </Paper>
