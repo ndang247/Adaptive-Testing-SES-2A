@@ -1,24 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
-    Grid, Table, TableContainer, TableBody,
-    TableRow, TableCell, TextField, Typography,
-    Paper
+    Table, Grid, TableContainer, TableBody,
+    TableRow, TableCell, TextField, Typography, Paper
 } from '@material-ui/core';
 import useStyles from './profileStyles';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSettings } from 'src/redux/actions/settings';
 
 function createUserData(id, field, info) {
     return { id, field, info };
 }
 
-const rows = [
-    createUserData('name', 'Name:', 'Katarina Smith'),
-    createUserData('email', 'Email Address', 'katarinasmith05@gmail.com'),
-    createUserData('password', 'Password', 'temppassword'),
-    createUserData('password', 'Confirm Password', ''),
-];
-
 const EditDetails = () => {
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(userSettings(user.email));
+    }, []);
+
+    const {userData} = useSelector((state) => state.settings);
+    if(!userData) return <>Loading...</>;
+
+    const rows = [
+        createUserData('name', 'Name:', userData.firstName + ' ' + userData.lastName),
+        createUserData('email', 'Email Address', userData.email),
+        createUserData('password', 'Password', ''),
+        createUserData('password', 'Confirm Password', ''),
+    ];
 
     return (
         <div>

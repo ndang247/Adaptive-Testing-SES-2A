@@ -6,6 +6,7 @@ import userRouter from './routes/user.js';
 import hostRouter from './routes/host.js';
 import testRouter from './routes/test.js';
 import questionRouter from './routes/question.js'
+import settingsRouter from './routes/settings.js'
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,7 @@ app.use('/api/users', userRouter);
 app.use('/api/hosts', hostRouter);
 app.use('/api/tests', testRouter);
 app.use('/api/questions', questionRouter);
+app.use('/api/settings', settingsRouter);
 app.use('/api/scores', testRouter);
 
 

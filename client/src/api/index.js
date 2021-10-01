@@ -14,3 +14,6 @@ export const login = (form) => API.post('/api/users/login', form);
 export const register = (form) => API.post('/api/users/register', form);
 export const hostLogin = (form) => API.post('/api/hosts/login', form);
 export const hostRegister = (form) => API.post('/api/hosts/register', form);
+
+//Settings
+export const userSettings = (email) => API.get(`api/settings/${email}`);
