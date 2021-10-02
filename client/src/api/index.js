@@ -14,3 +14,6 @@ export const login = (form) => API.post('/api/users/login', form);
 export const register = (form) => API.post('/api/users/register', form);
 export const hostLogin = (form) => API.post('/api/hosts/login', form);
 export const hostRegister = (form) => API.post('/api/hosts/register', form);
+
+// Create Test
+export const createTest = (form) => API.post('api/questions/test_id', form);
