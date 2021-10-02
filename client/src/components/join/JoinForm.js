@@ -14,14 +14,12 @@ const JoinExam = () => {
     const dispatch = useDispatch();
 
     const JoinRoomSchema = Yup.object().shape({
-        roomID: Yup.string().required('Room ID is required'),
-        password: Yup.string().required('Password is required')
+        roomPIN: Yup.string().required('Room PIN is required'),
     });
 
     const formik = useFormik({
         initialValues: {
-            roomID: '',
-            password: '',
+            roomPIN: '',
             remember: true
         },
         validationSchema: JoinRoomSchema,
@@ -39,30 +37,19 @@ const JoinExam = () => {
                     Join An Exam
                 </Typography>
                 <Typography variant="h4" align="center" paddingTop="15px" marginBottom="20px">
-                    To start your exam, please enter the room ID and password given to you.
+                    To start your exam, please enter the room PIN given to you.
                 </Typography>
                 <FormikProvider value={formik}>
                     <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <TextField
-                            error={Boolean(touched.roomID && errors.roomID)}
+                            error={Boolean(touched.roomPIN && errors.roomPIN)}
                             fullWidth
-                            helperText={touched.roomID && errors.roomID}
-                            label="Room ID"
+                            helperText={touched.roomPIN && errors.roomPIN}
+                            label="Room PIN"
                             margin="normal"
-                            name="roomID"
+                            name="roomPIN"
                             type="text"
-                            {...getFieldProps('roomID')}
-                            variant="outlined"
-                        />
-                        <TextField
-                            error={Boolean(touched.password && errors.password)}
-                            fullWidth
-                            helperText={touched.password && errors.password}
-                            label="Password"
-                            margin="normal"
-                            name="password"
-                            type="text"
-                            {...getFieldProps('password')}
+                            {...getFieldProps('roomPIN')}
                             variant="outlined"
                         />
                         <LoadingButton
