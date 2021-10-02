@@ -45,7 +45,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard" exact component={Dashboard} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/account" exact component={Profile} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/settings" exact component={EditProfile} />
-            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam" exact component={Exam} />
+            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/:pin" exact component={Exam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/history" exact component={ExamHistory} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/joinexam" exact component={JoinExam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/query" exact component={SubmitQuery} />

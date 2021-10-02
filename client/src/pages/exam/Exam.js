@@ -6,14 +6,35 @@ import {
 } from '@material-ui/core';
 import useStyles from './examStyles';
 import { useSelector } from 'react-redux';
+import { useState } from 'react'
+import { nextUntil } from 'dom-helpers';
+
 // import { HeadContent, BodyContent, Footer, NavBar } from 'src/components';
 
 const Exam = () => {
-    const classes = useStyles();
-    const {questionData, loading} = useSelector((state) => state.question);
-    console.log(questionData);
-    if (!questionData) return <>Loading...</>;
+    const [num, setNum] = useState(1);
 
+    const incrementNum = () => {
+        setNum(num + 1);
+    }
+
+    const handleNext = () => {
+        incrementNum();
+    }
+
+
+    const handleUpdate = () => {
+         document.getElementById('nextButton').disabled = 0;
+         document.getElementById('updateButton').disabled = 1;
+    }
+
+
+    const classes = useStyles();
+    const { questionData } = useSelector((state) => state.question);
+    //const { testData } = useSelector((state) => state.test);
+    console.log(questionData);
+    //console.log(testData);
+    if (!questionData) return <>Loading...</>;
     return (
         <React.Fragment>
             <main>
@@ -25,51 +46,63 @@ const Exam = () => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <div >
-                    <Typography variant="h1" align="center">
+                <Container sx={{ marginTop: 2, marginBottom: 2 }}>
+                    <Typography variant="h1" align="center" fontFamily="fantasy" color="black">
                         Math Test
                     </Typography>
-                </div>
-                <Divider />
-                <div>
-                    <Grid container flexDirection="column" alignItems="revert">
-                        <Grid item xs={3}>
-                            <Typography variant="h3" align="center" color="Highlight" fontStyle="oblique">
-                                Time Left :
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant="h3" align="center" color="Highlight">
-                                29:59
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </div>
-                <Divider />
+                </Container>
+
+                <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
+
                 <div className={classes.paper} >
                     <Paper elevation={10} >
                         <Container>
-                            <Grid container>
-                                <Grid item xs={11}>
+                            <Grid container sx={{ marginLeft: 2 }}>
+                                <Grid item >
                                     <Toolbar>
                                         <Typography variant="h1">
-                                            Question 1
+                                            Question
+                                        </Typography>
+                                    </Toolbar>
+                                </Grid>
+                                <Grid item sx={{ marginLeft: -4 }}>
+                                    <Toolbar>
+                                        <Typography variant="h1">
+                                            {num}
                                         </Typography>
                                     </Toolbar>
                                 </Grid>
 
-                                <Grid item xs={1} >
+                                <Grid item  >
                                     <Toolbar>
-                                        <Typography variant="h1" >
-                                            1/40
+                                        <Typography variant="h1" sx={{ marginLeft: 90 }}>
+                                            {num}
+                                        </Typography>
+                                    </Toolbar>
+                                </Grid>
+
+                                <Grid item  >
+                                    <Toolbar>
+                                        <Typography variant="h1" sx={{ marginLeft: -3 }}>
+                                            /
+                                        </Typography>
+                                    </Toolbar>
+                                </Grid>
+
+                                <Grid item  >
+                                    <Toolbar>
+                                        <Typography variant="h1" sx={{ marginLeft: -5 }}>
+                                            2
                                         </Typography>
                                     </Toolbar>
                                 </Grid>
                             </Grid>
                         </Container>
+
                         <Divider />
+
                         <div>
-                            <Typography variant="h1" >
+                            <Typography variant="h1" sx={{ marginLeft: 8, marginTop: 2, marginRight: 3 }}>
                                 {questionData.content}
                             </Typography>
                         </div>
@@ -80,8 +113,8 @@ const Exam = () => {
                         <Grid container>
                             <Grid item xs={8}>
                                 <Toolbar>
-                                    <Typography variant="h1">
-                                        Multiple choice
+                                    <Typography variant="h1" sx={{ marginLeft: 5 }}>
+                                        Multiple Choice
                                     </Typography>
                                 </Toolbar>
                             </Grid>
@@ -91,7 +124,7 @@ const Exam = () => {
                         {/* 4 answer buttons */}
                         <div className={classes.answer}>
                             <Grid container >
-                                <Grid item xs={6}>
+                                <Grid item xs={6} sx={{ marginTop: 1 }}>
                                     <Button>
                                         <Typography variant="h1">
                                             {questionData.correctAnswer}
@@ -99,23 +132,39 @@ const Exam = () => {
                                     </Button>
                                 </Grid>
                                 {questionData.wrongAnswers.map((wrongAnswer) => (
-                                    <Grid key={wrongAnswer} item xs={6}>
-                                    <Button>
-                                        <Typography variant="h1">
-                                            {wrongAnswer}
-                                        </Typography>
-                                    </Button>
+                                    <Grid key={wrongAnswer} item xs={6} sx={{ marginTop: 1 }}>
+                                        <Button>
+                                            <Typography variant="h1">
+                                                {wrongAnswer}
+                                            </Typography>
+                                        </Button>
                                     </Grid>
                                 ))}
                             </Grid>
                         </div>
                     </Paper>
                 </div>
-                <div align="center">
-                    <Button variant="contained" color="primary">
+
+                <Container align="center">
+                    {/* UPDATE SCORE BUTTON */}
+                    <Button id="updateButton" variant="contained" color="primary"
+                        sx={{ marginTop: 2, marginRight: 6 }}
+                        onClick={handleUpdate}
+
+                    >
+                        Update score
+                    </Button>
+
+                    {/* NEXT BUTTON */}
+                    <Button id="nextButton" variant="contained" color="primary"
+                        sx={{ marginTop: 2 }}
+                        onClick={handleNext}
+                        disabled = {true}
+                    >
                         Next
                     </Button>
-                </div>
+                </Container>
+
             </main>
         </React.Fragment>
     );
