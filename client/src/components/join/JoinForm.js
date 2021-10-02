@@ -14,12 +14,12 @@ const JoinExam = () => {
     const dispatch = useDispatch();
 
     const JoinRoomSchema = Yup.object().shape({
-        roomPIN: Yup.string().required('Room PIN is required'),
+        pin: Yup.string().required('Room PIN is required')
     });
 
     const formik = useFormik({
         initialValues: {
-            roomPIN: '',
+            pin: "",
             remember: true
         },
         validationSchema: JoinRoomSchema,
@@ -42,14 +42,14 @@ const JoinExam = () => {
                 <FormikProvider value={formik}>
                     <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <TextField
-                            error={Boolean(touched.roomPIN && errors.roomPIN)}
+                            error={Boolean(touched.pin && errors.pin)}
                             fullWidth
-                            helperText={touched.roomPIN && errors.roomPIN}
+                            helperText={touched.pin && errors.pin}
+                            {...getFieldProps('pin')}
                             label="Room PIN"
                             margin="normal"
-                            name="roomPIN"
+                            name="pin"
                             type="text"
-                            {...getFieldProps('roomPIN')}
                             variant="outlined"
                         />
                         <LoadingButton

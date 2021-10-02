@@ -16,6 +16,6 @@ export const hostLogin = (form) => API.post('/api/hosts/login', form);
 export const hostRegister = (form) => API.post('/api/hosts/register', form);
 
 // Exam
-export const joinexam = (form) => API.post('/api/users/exam/joinexam', form); //NEED TO CHANGE FOR BACKEND
+export const joinexam = (form) => API.post('api/tests/join', form);
 
 export const questions = (testId, questionId) => API.get(`api/questions/${testId}/${questionId}`); 
