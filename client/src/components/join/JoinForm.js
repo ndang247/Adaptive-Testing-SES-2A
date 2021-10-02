@@ -1,12 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Typography, Paper, TextField } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import useStyles from './joinFormStyles'
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
+import { useDispatch } from 'react-redux';
+import { joinExam } from 'src/redux/actions/examroom';
 
 const JoinExam = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     const JoinRoomSchema = Yup.object().shape({
         roomID: Yup.string().required('Room ID is required'),
@@ -20,10 +25,12 @@ const JoinExam = () => {
             remember: true
         },
         validationSchema: JoinRoomSchema,
-        onSubmit: () => { }
+        onSubmit: () => {
+            dispatch(joinExam(values, history));
+        }
     });
 
-    const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+    const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
     return (
         <Container component="main" maxWidth="sm">
