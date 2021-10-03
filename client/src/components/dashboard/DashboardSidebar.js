@@ -6,15 +6,21 @@ import {
     Hidden, List, Typography
 } from '@material-ui/core';
 import {
-    BarChart as BarChartIcon, Settings as SettingsIcon, User as UserIcon
+    BarChart as BarChartIcon, Settings as SettingsIcon, User as UserIcon, PlusCircle as PlusCircleIcon,
+    LogIn as LogInIcon, List as ListIcon, HelpCircle as HelpCircleIcon
 } from 'react-feather';
 import { NavItems } from 'src/components';
 
-const items = [
+const hostItems = [
     {
         href: '/host/dashboard',
         icon: BarChartIcon,
         title: 'Dashboard'
+    },
+    {
+        href: '/host/create/test',
+        icon: PlusCircleIcon,
+        title: 'Create Test'
     },
     {
         href: '/host/dashboard/account',
@@ -23,6 +29,39 @@ const items = [
     },
     {
         href: '/host/dashboard/settings',
+        icon: SettingsIcon,
+        title: 'Settings'
+    },
+]
+
+const userItems = [
+    {
+        href: '/user/dashboard',
+        icon: BarChartIcon,
+        title: 'Dashboard'
+    },
+    {
+        href: '/user/create/test',
+        icon: LogInIcon,
+        title: 'Join Exam'
+    },
+    {
+        href: '/user/create/test',
+        icon: ListIcon,
+        title: 'Exam History'
+    },
+    {
+        href: '/user/create/test',
+        icon: HelpCircleIcon,
+        title: 'Query'
+    },
+    {
+        href: '/user/dashboard/account',
+        icon: UserIcon,
+        title: 'Account'
+    },
+    {
+        href: '/user/dashboard/settings',
         icon: SettingsIcon,
         title: 'Settings'
     },
@@ -51,13 +90,21 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             <Divider />
             <Box sx={{ p: 2 }}>
                 <List>
-                    {items.map((item) => (
-                        <NavItems
-                            href={item.href}
-                            key={item.title}
-                            title={item.title}
-                            icon={item.icon}
-                        />))}
+                    {user.role === 'Host' ?
+                        hostItems.map((item) => (
+                            <NavItems
+                                href={item.href}
+                                key={item.title}
+                                title={item.title}
+                                icon={item.icon}
+                            />)) :
+                        userItems.map((item) => (
+                            <NavItems
+                                href={item.href}
+                                key={item.title}
+                                title={item.title}
+                                icon={item.icon}
+                            />))}
                 </List>
             </Box>
         </Box>

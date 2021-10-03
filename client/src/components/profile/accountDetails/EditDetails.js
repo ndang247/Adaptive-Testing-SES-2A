@@ -1,29 +1,30 @@
 import React from 'react';
 import {
-    Table, Grid, Typography, TableContainer,
-    TableBody, TableRow, TableCell, Paper
+    Grid, Table, TableContainer, TableBody,
+    TableRow, TableCell, TextField, Typography,
+    Paper
 } from '@material-ui/core';
-import useStyles from './profileStyles';
+import useStyles from '../profileStyles';
 
-function createUserData(field, info) {
-    return { field, info };
+function createUserData(id, field, info) {
+    return { id, field, info };
 }
 
 const rows = [
-    createUserData('Name:', 'Katarina Smith'),
-    createUserData('Email Address', 'katarinasmith05@gmail.com'),
-    createUserData('Creation Date', 'September 9, 2021'),
-    createUserData('Account Role', 'Host'),
+    createUserData('name', 'Name:', 'Katarina Smith'),
+    createUserData('email', 'Email Address', 'katarinasmith05@gmail.com'),
+    createUserData('password', 'Password', 'temppassword'),
+    createUserData('password', 'Confirm Password', ''),
 ];
 
-const AccountDetails = () => {
+const EditDetails = () => {
     const classes = useStyles();
 
     return (
         <div>
             <div className={classes.div}>
                 <Typography variant="h1" align="center">
-                    Account Details
+                    Edit Account Details
                 </Typography>
             </div>
             <div>
@@ -36,8 +37,8 @@ const AccountDetails = () => {
                                         <TableCell>
                                             {row.field}
                                         </TableCell>
-                                        <TableCell>
-                                            {row.info}
+                                        <TableCell align="justify">
+                                            <TextField className={classes.textField} id={row.id} type={row.id === "password" ? "password" : ""} defaultValue={row.info} variant="outlined" />
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -50,4 +51,4 @@ const AccountDetails = () => {
     );
 }
 
-export default AccountDetails
+export default EditDetails

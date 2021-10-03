@@ -9,8 +9,7 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import useStyles from './testFormStyles';
 
-// For the selecting combo box
-const subjects = ['Math', 'Physics', 'Chemistry', 'Biology', 'English', 'Boss Stage'];
+const subjects = ['Math'];
 
 function createData(question, difficulty) {
     return { question, difficulty };
@@ -27,15 +26,12 @@ const rows = [
     createData('ココロに刻むんだ WATER BLUE', 101),
 ];
 
-
 const TestForm = () => {
     const classes = useStyles();
 
-    // Tables View
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
-    // Page Swapper
     const handleChangePage = (event, newPage) => setPage(newPage);
 
     const handleChangeRowsPerPage = (event) => {
@@ -43,30 +39,28 @@ const TestForm = () => {
         setPage(0);
     };
 
-    // Select Box
     const [value, setValue] = useState(null);
     const [inputValue, setInputValue] = useState('');
-
-    // Time Input
     const [values, setValues] = useState({ time: '' });
     const handleChange = (prop) => (event) => setValues({ ...values, [prop]: event.target.value });
 
-    // Submitting
     const handleSubmit = () => {
     };
 
     return (
         <Container component="main" className={classes.position}>
             <Paper className={classes.paperHead}>
-                <Typography variant="h3">
-                    Test Creation
-                </Typography>
+                <Typography variant="h3">Test Creation</Typography>
             </Paper>
             <form className={classes.testForm} onSubmit={handleSubmit}>
                 <Paper className={classes.paperBody}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField name="Title" label="Title of the Test" id="test-title" variant="outlined" fullWidth />
+                            <TextField
+                                name="title"
+                                label="Title of the Test"
+                                variant="outlined"
+                                fullWidth />
                         </Grid>
                         <Grid item xs={12}>
                             <Autocomplete
@@ -78,12 +72,10 @@ const TestForm = () => {
                                 onInputChange={(event, newInputValue) => {
                                     setInputValue(newInputValue);
                                 }}
-                                id="test-content"
                                 options={subjects}
                                 renderInput={(params) =>
                                     <TextField {...params}
                                         name="content"
-                                        id="test-content"
                                         label="Test Subject"
                                         variant="outlined"
                                     />}
@@ -92,10 +84,10 @@ const TestForm = () => {
                         <Grid item xs={12}>
                             <TextField
                                 label="Maximum Allowed Time"
-                                id="test-max-duration"
                                 className={clsx(classes.margin, classes.textField)}
                                 InputProps={{
-                                    endAdornment: <InputAdornment position="end">minutes</InputAdornment>,
+                                    endAdornment:
+                                        <InputAdornment position="end">minutes</InputAdornment>,
                                 }}
                                 variant="outlined"
                                 fullWidth
@@ -104,7 +96,6 @@ const TestForm = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                id="test-expiry-date"
                                 label="Test to be completed by"
                                 type="datetime-local"
                                 defaultValue="2021-09-10T20:00"
@@ -115,10 +106,16 @@ const TestForm = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField name="room-id" label="Room ID" id="room-id" variant="outlined" fullWidth />
+                            <TextField
+                                label="Room ID"
+                                variant="outlined"
+                                fullWidth />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField name="room-pin" label="Unique Room Pin" id="room-pin" variant="outlined" fullWidth />
+                            <TextField
+                                label="Unique Room Pin"
+                                variant="outlined"
+                                fullWidth />
                         </Grid>
                     </Grid>
                 </Paper>
@@ -133,8 +130,8 @@ const TestForm = () => {
                         <Table className={classes.table} >
                             <TableHead>
                                 <TableRow>
-                                    <TableCell className={classes.tableHeader}> Question Info </TableCell>
-                                    <TableCell className={classes.tableHeader}> Difficulty </TableCell>
+                                    <TableCell className={classes.tableHeader}> Question Info</TableCell>
+                                    <TableCell className={classes.tableHeader}> Difficulty</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

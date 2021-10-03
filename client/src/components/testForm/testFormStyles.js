@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 
 export default makeStyles((theme) => ({
     position: {
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(5),
     },
     paperHead: {
         display: 'flex',
