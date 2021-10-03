@@ -1,30 +1,29 @@
 import React from 'react';
 import {
-    Grid, Table, TableContainer, TableBody,
-    TableRow, TableCell, TextField, Typography,
-    Paper
+    Table, Grid, Typography, TableContainer,
+    TableBody, TableRow, TableCell, Paper
 } from '@material-ui/core';
-import useStyles from './profileStyles';
+import useStyles from '../profileStyles';
 
-function createUserData(id, field, info) {
-    return { id, field, info };
+function createUserData(field, info) {
+    return { field, info };
 }
 
 const rows = [
-    createUserData('name', 'Name:', 'Katarina Smith'),
-    createUserData('email', 'Email Address', 'katarinasmith05@gmail.com'),
-    createUserData('password', 'Password', 'temppassword'),
-    createUserData('password', 'Confirm Password', ''),
+    createUserData('Name:', 'Katarina Smith'),
+    createUserData('Email Address', 'katarinasmith05@gmail.com'),
+    createUserData('Creation Date', 'September 9, 2021'),
+    createUserData('Account Role', 'Host'),
 ];
 
-const EditDetails = () => {
+const AccountDetails = () => {
     const classes = useStyles();
 
     return (
         <div>
             <div className={classes.div}>
                 <Typography variant="h1" align="center">
-                    Edit Account Details
+                    Account Details
                 </Typography>
             </div>
             <div>
@@ -37,8 +36,8 @@ const EditDetails = () => {
                                         <TableCell>
                                             {row.field}
                                         </TableCell>
-                                        <TableCell align="justify">
-                                            <TextField className={classes.textField} id={row.id} type={row.id === "password" ? "password" : ""} defaultValue={row.info} variant="outlined" />
+                                        <TableCell>
+                                            {row.info}
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -51,4 +50,4 @@ const EditDetails = () => {
     );
 }
 
-export default EditDetails
+export default AccountDetails;

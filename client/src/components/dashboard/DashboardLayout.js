@@ -20,8 +20,7 @@ const DashboardLayout = () => {
             />
             <DashboardLayoutWrapper>
                 <DashboardLayoutContainer>
-                    <DashboardLayoutContent>
-                    </DashboardLayoutContent>
+                    <DashboardLayoutContent></DashboardLayoutContent>
                 </DashboardLayoutContainer>
             </DashboardLayoutWrapper>
         </DashboardLayoutRoot>

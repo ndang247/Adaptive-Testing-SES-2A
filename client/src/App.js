@@ -4,8 +4,8 @@ import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
-  ExamHistory, Exam, CreateTest, CreateQuestion, 
-  JoinExam, Profile, EditProfile, SubmitQuery, 
+  ExamHistory, Exam, CreateTest, CreateQuestion,
+  JoinExam, Profile, EditProfile, SubmitQuery,
   ExamCreated, QuestionCreated
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
@@ -15,12 +15,6 @@ import { useDispatch } from 'react-redux';
 
 const App = () => {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
-
-  const dispatch = useDispatch();
-    
-  useEffect(() => {
-      dispatch(getQuestions("614042516f6abc6cc5dc59d8", "6140434a2bb7b7dc2b4970dc"));
-  }, []);
 
   return (
     <BrowserRouter>
@@ -39,6 +33,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/create/test" exact component={CreateTest} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history" exact component={ExamCreated} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history/question" exact component={QuestionCreated} />
+
             {/* User */}
             <Route path="/user/login" exact component={Login} />
             <Route path="/user/register" exact component={Register} />
@@ -49,7 +44,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/history" exact component={ExamHistory} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/joinexam" exact component={JoinExam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/query" exact component={SubmitQuery} />
-            
+
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
