@@ -7,7 +7,6 @@ export { default as EditProfile } from './profileSetting/EditProfile';
 export { default as Exam } from './exam/Exam';
 export { default as ExamHistory } from './examHistory/ExamHistory';
 export { default as CreateTest } from './createTest/CreateTest';
-export { default as CreateQuestion } from './createQuestion/CreateQuestion';
 export { default as JoinExam } from './joinExam/JoinExam';
 export { default as SubmitQuery } from './query/SubmitQuery';
 export { default as ExamCreated } from './examCreated/ExamCreated';

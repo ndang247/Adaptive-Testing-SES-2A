@@ -16,7 +16,6 @@ export { default as EditDetails } from 'src/components/profile/accountDetails/Ed
 export { default as LoginForm } from 'src/components/auth/LoginForm';
 export { default as RegisterForm } from 'src/components/auth/RegisterForm';
 export { default as TestForm } from 'src/components/testForm/TestForm';
-export { default as QuestionForm } from 'src/components/questionForm/QuestionForm';
 export { default as JoinForm } from 'src/components/join/JoinForm';
 export { default as QueryForm } from 'src/components/queries/QueryForm';
 

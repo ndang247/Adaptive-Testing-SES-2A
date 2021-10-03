@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import {
     Container, Typography, Paper, Grid,
     TextField, Box, Button,
-    IconButton, Slider, Input
+    IconButton, Slider, Input, Autocomplete
 } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove'
 import AddIcon from '@material-ui/icons/Add'
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import useStyles from './testFormStyles';
 import { useDispatch } from 'react-redux';
 import { createTest } from 'src/redux/actions/test';

@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
 import {
-    Card, Grid, Paper, Typography, Button,
-    Container, CssBaseline, AppBar, Toolbar,
-    Divider,
+    Grid, Paper, Typography,
+    Container, Toolbar, Divider,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         marginBottom: theme.spacing(5),
-        
+
         '& > *': {
             margin: theme.spacing(1),
             width: theme.spacing(100),
@@ -21,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
             //borderRadius: 25,
         },
     },
-    paper2:{
+    paper2: {
         border: '3px solid #A0AEF0',
-        
+
     },
-    grid:{
+    grid: {
         backgroundColor: "#E3E6F4",
     }
 }));
@@ -87,7 +86,7 @@ const Question = () => {
                     </Grid>
                 </Grid>
                 <Grid>
-                    <Typography variant="h1" color = "#5379F3" >
+                    <Typography variant="h1" color="#5379F3" >
                         Answer: A
                     </Typography>
                 </Grid>

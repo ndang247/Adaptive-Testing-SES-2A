@@ -29,7 +29,7 @@ const QuestionCreated = () => {
                     <h1>Test-Created-History</h1>
                 </Typography>
 
-                <Container className ={classes.container}>
+                <Container className={classes.container}>
                     <Question />
                     <Question />
                     <Question />

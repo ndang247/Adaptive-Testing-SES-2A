@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider, StyledEngineProvider } from '@material-ui/core';
 import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
-  ExamHistory, Exam, CreateTest, CreateQuestion,
+  ExamHistory, Exam, CreateTest,
   JoinExam, Profile, EditProfile, SubmitQuery,
   ExamCreated, QuestionCreated
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
-import { getQuestions } from 'src/redux/actions/question';
-import { useDispatch } from 'react-redux';
 
 const App = () => {
   const [profile, setProfile] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -29,7 +27,6 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard" exact component={Dashboard} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard/account" exact component={Profile} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard/settings" exact component={EditProfile} />
-            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/create/question" exact component={CreateQuestion} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/create/test" exact component={CreateTest} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history" exact component={ExamCreated} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/history/question" exact component={QuestionCreated} />
