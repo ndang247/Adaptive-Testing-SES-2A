@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
+import { useFormik, Form, FormikProvider } from "formik";
 import {
     Table, Grid, TableContainer, TableBody,
-    TableRow, TableCell, TextField, Typography, Paper
+    TableRow, TableCell, TextField, Typography, Paper, Button
 } from '@material-ui/core';
 import useStyles from './profileStyles';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,10 +15,11 @@ function createUserData(id, field, info) {
 const EditDetails = () => {
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('profile'));
-
+    
     const dispatch = useDispatch();
+    const settingsDispatch = useDispatch();
     useEffect(() => {
-        dispatch(userSettings(user.email));
+        settingsDispatch(userSettings(user.email));
     }, []);
 
     const {userData} = useSelector((state) => state.settings);
@@ -30,6 +32,10 @@ const EditDetails = () => {
         createUserData('password', 'Confirm Password', ''),
     ];
 
+    // Submitting
+    const handleSubmit = () => {
+    };
+
     return (
         <div>
             <div className={classes.div}>
@@ -38,24 +44,40 @@ const EditDetails = () => {
                 </Typography>
             </div>
             <div>
-                <Grid container spacing={0} alignItems="center">
-                    <TableContainer component={Paper} className={classes.tableContainer}>
-                        <Table className={classes.table}>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <TableRow>
-                                        <TableCell>
-                                            {row.field}
-                                        </TableCell>
-                                        <TableCell align="justify">
-                                            <TextField className={classes.textField} id={row.id} type={row.id === "password" ? "password" : ""} defaultValue={row.info} variant="outlined" />
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
+                {/* <Form></Form> */}
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={0} alignItems="center">
+                        <TableContainer component={Paper} className={classes.tableContainer}>
+                            <Table className={classes.table}>
+                                <TableBody>
+                                    {rows.map((row) => (
+                                        <TableRow>
+                                            <TableCell>
+                                                {row.field}
+                                            </TableCell>
+                                            <TableCell align="justify">
+                                                <TextField 
+                                                    className={classes.textField} 
+                                                    id={row.id} 
+                                                    type={row.id === "password" ? "password" : ""} 
+                                                    defaultValue={row.info} 
+                                                    variant="outlined" />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
                         </Table>
-                    </TableContainer>
-                </Grid>
+                        </TableContainer>
+                        <Button
+                            Button type="submit"
+                            fullWidth
+                            size="large"
+                            variant="contained"
+                        >
+                            Edit Details
+                        </Button>
+                    </Grid>
+                </form>
             </div>
         </div>
     );

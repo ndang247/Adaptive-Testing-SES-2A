@@ -24,3 +24,7 @@ export const getProfile = async (req, res) => {
         return res.status(500).send('Server Error');
     }
 }
+
+async function validatePassword(plainPassword, hashedPassword) {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+}

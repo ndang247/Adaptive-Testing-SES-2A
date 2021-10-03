@@ -26,7 +26,7 @@ const AccountDetails = () => {
     const rows = [
         createUserData('Name:', userData.firstName + ' ' + userData.lastName),
         createUserData('Email Address', userData.email),
-        createUserData('Creation Date', userData.dateCreated),
+        createUserData('Creation Date', userData.dateCreated.slice(0, 10)),
         createUserData('Account Role', userData.role),
     ];
 
