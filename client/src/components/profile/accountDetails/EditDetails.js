@@ -4,7 +4,7 @@ import {
     Table, Grid, TableContainer, TableBody,
     TableRow, TableCell, TextField, Typography, Paper, Button
 } from '@material-ui/core';
-import useStyles from './profileStyles';
+import useStyles from '../profileStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSettings } from 'src/redux/actions/settings';
 

@@ -5,8 +5,7 @@ import {
 } from 'src/components/dashboard/dashboardLayoutStyles';
 import DashboardNavbar from 'src/components/dashboard/DashboardNavbar';
 import DashboardSidebar from 'src/components/dashboard/DashboardSidebar';
-
-import EditDetails from './EditDetails'
+import { EditDetails } from 'src/components';
 
 const EditProfileLayout = () => {
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);

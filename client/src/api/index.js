@@ -17,3 +17,8 @@ export const hostRegister = (form) => API.post('/api/hosts/register', form);
 
 //Settings
 export const userSettings = (email) => API.get(`api/settings/${email}`);
+
+// Exam
+export const questions = (testId, questionId) => API.get(`api/questions/${testId}/${questionId}`);
+// Create Test
+export const createTest = (form) => API.post('api/questions/test_id', form);

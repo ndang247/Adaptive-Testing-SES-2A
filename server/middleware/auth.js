@@ -3,16 +3,16 @@ import jwt from 'jsonwebtoken';
 // Auth method to confirm any user has access using json web token
 export const auth = (req, res, next) => {
     // get token from header
-    const token = req.header('x-auth-token');
-
+    const token = req.header('authorization').split(" ")[1];
+    
     // confirm token is present
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
-
+    
     // verify and decode token
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
-
         req.user = decoded?.user;
+
         next(); // move onto the next request
     } catch (error) {
         res.status(401).json({ msg: 'Token is not valid' });
@@ -23,7 +23,7 @@ export const auth = (req, res, next) => {
 // Auth method to confirm only a user has access using json web token
 export const authUser = (req, res, next) => {
     // get token from header
-    const token = req.header('x-auth-token');
+    const token = req.header('authorization').split(" ")[1];
 
     // confirm token is present
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
@@ -47,7 +47,7 @@ export const authUser = (req, res, next) => {
 // Auth method to confirm only a host has access using json web token
 export const authHost = (req, res, next) => {
     // get token from header
-    const token = req.header('x-auth-token');
+    const token = req.header('authorization').split(" ")[1];
 
     // confirm token is present
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });

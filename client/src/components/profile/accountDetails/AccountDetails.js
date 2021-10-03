@@ -3,7 +3,7 @@ import {
     Table, Grid, Typography, TableContainer,
     TableBody, TableRow, TableCell, Paper
 } from '@material-ui/core';
-import useStyles from './profileStyles';
+import useStyles from '../profileStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { userSettings } from 'src/redux/actions/settings';
 
