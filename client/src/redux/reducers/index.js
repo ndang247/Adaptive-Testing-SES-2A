@@ -5,4 +5,3 @@ import test from './test';
 import settings from './settings'
 
 export const reducers = combineReducers({ auth, question, test, settings  });
-export const reducers = combineReducers({ auth, settings });
