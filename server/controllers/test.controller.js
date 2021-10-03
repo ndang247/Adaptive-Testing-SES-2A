@@ -254,7 +254,7 @@ async function retrieveQuestion(score, test, makeEasier) {
     var difference;
     var optimalQuestionId;
 
-    test.questionIds.forEach(questionId => {
+    test.questionIds.forEach(questionId => async () => {
         // Make sure the question is not previously answered
         const found = score.answeredQuestionIds.find(i => i = questionId);
 
