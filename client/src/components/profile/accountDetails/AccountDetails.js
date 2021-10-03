@@ -1,23 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     Table, Grid, Typography, TableContainer,
     TableBody, TableRow, TableCell, Paper
 } from '@material-ui/core';
 import useStyles from '../profileStyles';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSettings } from 'src/redux/actions/settings';
 
 function createUserData(field, info) {
     return { field, info };
 }
 
-const rows = [
-    createUserData('Name:', 'Katarina Smith'),
-    createUserData('Email Address', 'katarinasmith05@gmail.com'),
-    createUserData('Creation Date', 'September 9, 2021'),
-    createUserData('Account Role', 'Host'),
-];
-
 const AccountDetails = () => {
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(userSettings(user.email));
+    }, []);
+
+    const {userData} = useSelector((state) => state.settings);
+    if(!userData) return <>Loading...</>;
+
+    const rows = [
+        createUserData('Name:', userData.firstName + ' ' + userData.lastName),
+        createUserData('Email Address', userData.email),
+        createUserData('Creation Date', userData.dateCreated.slice(0, 10)),
+        createUserData('Account Role', userData.role),
+    ];
 
     return (
         <div>
@@ -50,4 +61,4 @@ const AccountDetails = () => {
     );
 }
 
-export default AccountDetails;
+export default AccountDetails
