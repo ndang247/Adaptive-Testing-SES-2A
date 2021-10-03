@@ -18,9 +18,14 @@ const hostItems = [
         title: 'Dashboard'
     },
     {
-        href: '/host/create/test',
+        href: '/host/dashboard/exam/create',
         icon: PlusCircleIcon,
-        title: 'Create Test'
+        title: 'Create Exam'
+    },
+    {
+        href: '/host/dashboard/exam/history',
+        icon: ListIcon,
+        title: 'Exams'
     },
     {
         href: '/host/dashboard/account',
@@ -41,17 +46,17 @@ const userItems = [
         title: 'Dashboard'
     },
     {
-        href: '/user/create/test',
+        href: '/user/dashboard/exam/joinexam',
         icon: LogInIcon,
         title: 'Join Exam'
     },
     {
-        href: '/user/create/test',
+        href: '/user/dashboard/exam/history',
         icon: ListIcon,
         title: 'Exam History'
     },
     {
-        href: '/user/create/test',
+        href: '/user/dashboard/query',
         icon: HelpCircleIcon,
         title: 'Query'
     },

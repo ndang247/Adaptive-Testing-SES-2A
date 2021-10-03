@@ -1,17 +1,15 @@
 import React from 'react';
 import { Container, Box } from '@material-ui/core';
-import { EditProfileLayout } from 'src/components';
+import { ProfileLayout } from 'src/components';
 
-const EditProfile = () => {
+const Profile = () => {
     return (
         <>
             <Box sx={{ backgroundColor: 'background.default', minHeight: '100%', py: 3 }} >
-                <Container maxWidth={'lg'}>
-                    <EditProfileLayout />
-                </Container>
+                <Container maxWidth={'lg'}><ProfileLayout /></Container>
             </Box>
         </>
     );
 }
 
-export default EditProfile;
+export default Profile;

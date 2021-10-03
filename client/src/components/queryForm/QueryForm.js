@@ -1,61 +1,73 @@
 import React from 'react';
 import { Container, Typography, Paper, TextField } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
-import useStyles from './joinFormStyles'
+import useStyles from './QueryFormStyles'
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 
-const JoinExam = () => {
+const SubmitQuery = () => {
     const classes = useStyles();
 
-    const JoinRoomSchema = Yup.object().shape({
-        roomID: Yup.string().required('Room ID is required'),
-        password: Yup.string().required('Password is required')
+    const QueryFormSchema = Yup.object().shape({
+        fullName: Yup.string().required('Full Name is required'),
+        email: Yup.string().required('Email is required'),
+        queryBox: Yup.string().required('Query is required')
     });
 
     const formik = useFormik({
         initialValues: {
-            roomID: '',
-            password: '',
-            remember: true
+            fullName: '',
+            email: '',
+            queryBox: ''
         },
-        validationSchema: JoinRoomSchema,
+        validationSchema: QueryFormSchema,
         onSubmit: () => { }
     });
 
     const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
 
     return (
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="sm" className={classes.position}>
             <Paper className={classes.paperBody} elevation={4}>
                 <Typography variant="h1">
-                    Join An Exam
+                    Submit A Query
                 </Typography>
                 <Typography variant="h4" align="center" paddingTop="15px" marginBottom="20px">
-                    To start your exam, please enter the room ID and password given to you.
+                    To submit a query, please enter your full name and email address.
                 </Typography>
                 <FormikProvider value={formik}>
                     <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <TextField
-                            error={Boolean(touched.roomID && errors.roomID)}
+                            error={Boolean(touched.fullName && errors.fullName)}
                             fullWidth
-                            helperText={touched.roomID && errors.roomID}
-                            label="Room ID"
+                            helperText={touched.fullName && errors.fullName}
+                            label="Full Name"
                             margin="normal"
-                            name="roomID"
+                            name="fullName"
                             type="text"
-                            {...getFieldProps('roomID')}
+                            {...getFieldProps('fullName')}
                             variant="outlined"
                         />
                         <TextField
-                            error={Boolean(touched.password && errors.password)}
+                            error={Boolean(touched.email && errors.email)}
                             fullWidth
-                            helperText={touched.password && errors.password}
-                            label="Password"
+                            helperText={touched.email && errors.email}
+                            label="Email"
                             margin="normal"
-                            name="password"
+                            name="email"
                             type="text"
-                            {...getFieldProps('password')}
+                            {...getFieldProps('email')}
+                            variant="outlined"
+                        />
+                        <TextField
+                            error={Boolean(touched.queryBox && errors.queryBox)}
+                            fullWidth
+                            helperText={touched.queryBox && errors.queryBox}
+                            label="Query"
+                            margin="normal"
+                            name="queryBox"
+                            type="text"
+                            {...getFieldProps('queryBox')}
                             variant="outlined"
                         />
                         <LoadingButton
@@ -68,7 +80,7 @@ const JoinExam = () => {
                             type="submit"
                             variant="contained"
                         >
-                            Join Room
+                            Submit Query
                         </LoadingButton>
                     </Form>
                 </FormikProvider>
@@ -77,4 +89,4 @@ const JoinExam = () => {
     );
 }
 
-export default JoinExam;
+export default SubmitQuery;

@@ -5,10 +5,8 @@ import { DashboardLayout } from 'src/components';
 const Dashboard = () => {
     return (
         <>
-            <DashboardLayout />
             <Box sx={{ backgroundColor: 'background.default', minHeight: '100%', py: 3 }} >
-                <Container maxWidth={false}>
-                </Container>
+                <Container maxWidth={'lg'}><DashboardLayout /></Container>
             </Box>
         </>
     );

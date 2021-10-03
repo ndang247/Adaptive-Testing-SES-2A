@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/styles';
 
 export default makeStyles((theme) => ({
+    position: {
+        marginTop: theme.spacing(5),
+    },
     paperBody: {
         display: 'flex',
         flexDirection: 'column',

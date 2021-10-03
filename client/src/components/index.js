@@ -2,25 +2,37 @@
 // Content
 export { default as Head } from 'src/components/contents/head/Head';
 export { default as Body } from 'src/components/contents/body/Body';
-export { default as NavBar } from 'src/components/navbar/NavBar';
+export { default as NavBar } from 'src/components/navBar/NavBar';
 export { default as Footer } from 'src/components/footer/Footer';
 
 // Dashboard
 export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
 export { default as DashboardSidebar } from 'src/components/dashboard/DashboardSidebar';
 export { default as NavItems } from 'src/components/dashboard/NavItems';
-export { default as AccountDetails } from 'src/components/profile/accountDetails/AccountDetails';
-export { default as EditDetails } from 'src/components/profile/accountDetails/EditDetails';
+
+// Exam
+export { default as Exams } from 'src/components/exams/Exams';
+export { default as PastExams } from 'src/components/pastExams/PastExams';
+
+// Profile
+export { default as AccountDetails } from 'src/components/account/AccountDetails';
+
+// Settings
+export { default as EditDetails } from 'src/components/settings/EditDetails';
 
 // Form
 export { default as LoginForm } from 'src/components/auth/LoginForm';
 export { default as RegisterForm } from 'src/components/auth/RegisterForm';
-export { default as TestForm } from 'src/components/testForm/TestForm';
-export { default as JoinForm } from 'src/components/join/JoinForm';
-export { default as QueryForm } from 'src/components/queries/QueryForm';
+export { default as CreateExamForm } from 'src/components/createExamForm/CreateExamForm';
+export { default as JoinExamForm } from 'src/components/joinExamForm/JoinExamForm';
+export { default as QueryForm } from 'src/components/queryForm/QueryForm';
 
 // Layout
 export { default as DashboardLayout } from 'src/components/dashboard/DashboardLayout';
-export { default as ProfileLayout } from 'src/components/profile/ProfileLayout';
-export { default as EditProfileLayout } from 'src/components/profile/EditProfileLayout';
-export { default as TestFormLayout } from 'src/components/testForm/TestFormLayout';
+export { default as ProfileLayout } from 'src/components/account/ProfileLayout';
+export { default as EditProfileLayout } from 'src/components/settings/EditProfileLayout';
+export { default as CreateExamFormLayout } from 'src/components/createExamForm/CreateExamFormLayout';
+export { default as ExamsLayout } from 'src/components/exams/ExamsLayout';
+export { default as JoinExamFormLayout } from 'src/components/joinExamForm/JoinExamFormLayout';
+export { default as PastExamsLayout } from 'src/components/pastExams/PastExamsLayout';
+export { default as QueryLayout } from 'src/components/queryForm/QueryLayout';

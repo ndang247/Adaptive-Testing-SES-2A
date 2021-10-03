@@ -5,9 +5,9 @@ import {
 } from 'src/components/dashboard/dashboardLayoutStyles';
 import DashboardNavbar from 'src/components/dashboard/DashboardNavbar';
 import DashboardSidebar from 'src/components/dashboard/DashboardSidebar';
-import { TestForm } from 'src/components';
+import { PastExams } from 'src/components';
 
-const TestFormLayout = () => {
+const PastExamsLayout = () => {
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
@@ -20,7 +20,7 @@ const TestFormLayout = () => {
             <DashboardLayoutWrapper>
                 <DashboardLayoutContainer>
                     <DashboardLayoutContent>
-                        <TestForm />
+                        <PastExams />
                     </DashboardLayoutContent>
                 </DashboardLayoutContainer>
             </DashboardLayoutWrapper>
@@ -28,4 +28,4 @@ const TestFormLayout = () => {
     );
 }
 
-export default TestFormLayout;
+export default PastExamsLayout;
