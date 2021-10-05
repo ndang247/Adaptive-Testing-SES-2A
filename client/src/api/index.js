@@ -23,3 +23,4 @@ export const questions = (testId, questionId) => API.get(`api/questions/${testId
 
 // Create Test
 export const createTest = (form) => API.post('api/questions/test_id', form);
+export const joinexam = (form) => API.post('api/tests/join', form);

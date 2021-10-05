@@ -1,58 +1,52 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Typography, Paper, TextField } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import useStyles from './joinExamFormStyles'
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
+import { useDispatch } from 'react-redux';
+import { joinExam } from 'src/redux/actions/examroom';
 
 const JoinExamForm = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     const JoinRoomSchema = Yup.object().shape({
-        roomID: Yup.string().required('Room ID is required'),
-        password: Yup.string().required('Password is required')
+        pin: Yup.string().required('Room PIN is required')
     });
 
     const formik = useFormik({
         initialValues: {
-            roomID: '',
-            password: '',
+            pin: "",
             remember: true
         },
         validationSchema: JoinRoomSchema,
-        onSubmit: () => { }
+        onSubmit: () => {
+            dispatch(joinExam(values, history));
+        }
     });
 
-    const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+    const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
     return (
         <Container component="main" maxWidth="sm" className={classes.position}>
             <Paper className={classes.paperBody} elevation={4}>
                 <Typography variant="h1">Join An Exam</Typography>
                 <Typography variant="h4" align="center" paddingTop="15px" marginBottom="20px">
-                    To start your exam, please enter the room ID and password given to you.
+                    To start your exam, please enter the room PIN given to you.
                 </Typography>
                 <FormikProvider value={formik}>
                     <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <TextField
-                            error={Boolean(touched.roomID && errors.roomID)}
-                            helperText={touched.roomID && errors.roomID}
-                            {...getFieldProps('roomID')}
+                            error={Boolean(touched.pin && errors.pin)}
                             fullWidth
-                            label="Room ID"
+                            helperText={touched.pin && errors.pin}
+                            {...getFieldProps('pin')}
+                            label="Room PIN"
                             margin="normal"
-                            name="roomID"
-                            type="text"
-                            variant="outlined"
-                        />
-                        <TextField
-                            error={Boolean(touched.password && errors.password)}
-                            helperText={touched.password && errors.password}
-                            {...getFieldProps('password')}
-                            fullWidth
-                            label="Password"
-                            margin="normal"
-                            name="password"
+                            name="pin"
                             type="text"
                             variant="outlined"
                         />

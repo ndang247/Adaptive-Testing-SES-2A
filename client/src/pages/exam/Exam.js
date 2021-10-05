@@ -28,7 +28,6 @@ const Exam = () => {
          document.getElementById('updateButton').disabled = 1;
     }
 
-
     const classes = useStyles();
     const { questionData } = useSelector((state) => state.question);
     //const { testData } = useSelector((state) => state.test);

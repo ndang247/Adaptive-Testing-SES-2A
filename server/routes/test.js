@@ -18,7 +18,7 @@ router.post('/', authHost,
 
 // GET tests/
 // Route to grant user access to a test
-router.get('/', authUser,
+router.post('/join', authUser,
     // Validate pin
     body('pin', 'Please enter a valid pin').not().isEmpty(),
     validatePin
