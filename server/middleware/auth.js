@@ -27,7 +27,7 @@ export const authUser = (req, res, next) => {
 
     // confirm token is present
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
-
+    
     // verify and decode token
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
