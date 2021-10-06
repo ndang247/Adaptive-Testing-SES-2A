@@ -5,9 +5,9 @@ import {
 } from 'src/components/dashboard/dashboardLayoutStyles';
 import DashboardNavbar from 'src/components/dashboard/DashboardNavbar';
 import DashboardSidebar from 'src/components/dashboard/DashboardSidebar';
-import { EditDetails } from 'src/components';
+import { AccountDetails } from 'src/components';
 
-const EditProfileLayout = () => {
+const AccountDetailsLayout = () => {
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
@@ -20,7 +20,7 @@ const EditProfileLayout = () => {
             <DashboardLayoutWrapper>
                 <DashboardLayoutContainer>
                     <DashboardLayoutContent>
-                        <EditDetails />
+                        <AccountDetails />
                     </DashboardLayoutContent>
                 </DashboardLayoutContainer>
             </DashboardLayoutWrapper>
@@ -28,4 +28,4 @@ const EditProfileLayout = () => {
     );
 }
 
-export default EditProfileLayout;
+export default AccountDetailsLayout;

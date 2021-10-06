@@ -1,2 +1,2 @@
-export const host = 'host';
-export const user = 'user';
+export const Host = 'Host';
+export const User = 'User';

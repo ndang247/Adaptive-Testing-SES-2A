@@ -3,7 +3,7 @@ import {
     Table, Grid, Typography, TableContainer,
     TableBody, TableRow, TableCell, Paper
 } from '@material-ui/core';
-import useStyles from './profileStyles';
+import useStyles from './accountDetailsStyles';
 
 function createUserData(field, info) {
     return { field, info };

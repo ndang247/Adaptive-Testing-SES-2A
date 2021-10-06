@@ -7,7 +7,7 @@ import DashboardNavbar from 'src/components/dashboard/DashboardNavbar';
 import DashboardSidebar from 'src/components/dashboard/DashboardSidebar';
 import { QueryForm } from 'src/components';
 
-const QueryLayout = () => {
+const QueryFormLayout = () => {
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
@@ -28,4 +28,4 @@ const QueryLayout = () => {
     );
 }
 
-export default QueryLayout;
+export default QueryFormLayout;

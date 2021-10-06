@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { register, login, getUser } from '../controllers/user.controller.js';
+import { register, login, getUserById } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -24,6 +24,6 @@ router.post('/login',
 
 // POST users/:user_id
 // Route to get a user by ID
-router.get('/:user_id', getUser);
+router.get('/:user_id', getUserById);
 
 export default router;

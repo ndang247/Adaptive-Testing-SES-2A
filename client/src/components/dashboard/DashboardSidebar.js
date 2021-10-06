@@ -10,6 +10,7 @@ import {
     LogIn as LogInIcon, List as ListIcon, HelpCircle as HelpCircleIcon
 } from 'react-feather';
 import { NavItems } from 'src/components';
+import { Host } from 'src/constants/role';
 
 const hostItems = [
     {
@@ -95,7 +96,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             <Divider />
             <Box sx={{ p: 2 }}>
                 <List>
-                    {user.role === 'Host' ?
+                    {user.role === Host ?
                         hostItems.map((item) => (
                             <NavItems
                                 href={item.href}

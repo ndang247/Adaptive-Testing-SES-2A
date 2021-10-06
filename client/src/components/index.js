@@ -14,11 +14,11 @@ export { default as NavItems } from 'src/components/dashboard/NavItems';
 export { default as Exams } from 'src/components/exams/Exams';
 export { default as PastExams } from 'src/components/pastExams/PastExams';
 
-// Profile
+// Account
 export { default as AccountDetails } from 'src/components/account/AccountDetails';
 
 // Settings
-export { default as EditDetails } from 'src/components/settings/EditDetails';
+export { default as EditAccountDetails } from 'src/components/settings/EditAccountDetails';
 
 // Form
 export { default as LoginForm } from 'src/components/auth/LoginForm';
@@ -29,10 +29,10 @@ export { default as QueryForm } from 'src/components/queryForm/QueryForm';
 
 // Layout
 export { default as DashboardLayout } from 'src/components/dashboard/DashboardLayout';
-export { default as ProfileLayout } from 'src/components/account/ProfileLayout';
-export { default as EditProfileLayout } from 'src/components/settings/EditProfileLayout';
+export { default as AccountDetailsLayout } from 'src/components/account/AccountDetailsLayout';
+export { default as EditAccountDetailsLayout } from 'src/components/settings/EditAccountDetailsLayout';
 export { default as CreateExamFormLayout } from 'src/components/createExamForm/CreateExamFormLayout';
 export { default as ExamsLayout } from 'src/components/exams/ExamsLayout';
 export { default as JoinExamFormLayout } from 'src/components/joinExamForm/JoinExamFormLayout';
 export { default as PastExamsLayout } from 'src/components/pastExams/PastExamsLayout';
-export { default as QueryLayout } from 'src/components/queryForm/QueryLayout';
+export { default as QueryFormLayout } from 'src/components/queryForm/QueryFormLayout';

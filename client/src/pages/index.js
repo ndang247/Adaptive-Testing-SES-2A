@@ -5,7 +5,7 @@ export { default as Register } from './auth/Register';
 
 // Dashboard
 export { default as Dashboard } from './dashboard/Dashboard';
-export { default as Profile } from './account/Profile';
+export { default as Account } from './account/Account';
 export { default as Settings } from './settings/Settings';
 
 // User
