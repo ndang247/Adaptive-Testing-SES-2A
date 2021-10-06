@@ -21,3 +21,4 @@ export const getUserById = (id) => API.get(`api/users/${id}`);
 // For Exam
 export const questions = (testId, questionId) => API.get(`api/questions/${testId}/${questionId}`);
 export const createTest = (form) => API.post('api/questions/test_id', form);
+export const joinexam = (form) => API.post('api/tests/join', form);

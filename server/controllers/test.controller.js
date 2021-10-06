@@ -25,7 +25,7 @@ export const createTest = async (req, res) => {
     const { title, expiryDate, testLength, contentType } = req.body;
 
     // Retrieve the current user id from the header for the creator field
-    const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
+    const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
 
     const userId = decoded?.user._id;
 
@@ -82,7 +82,7 @@ export const validatePin = async (req, res) => {
 
 export const createScore = async (req, res) => {
     //Retrieve the current user id from the header for the user id field
-    const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
+    const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
 
     const userId = decoded?.user._id;
 
@@ -130,7 +130,7 @@ export const updateScore = async (req, res) => {
 
     const { answer } = req.body;
 
-    const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
+    const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
 
     const userId = decoded?.user._id;
 
@@ -176,7 +176,7 @@ export const updateScore = async (req, res) => {
 }
 
 export const getOptimalQuestion = async (req, res) => {
-    const decoded = jwt.verify(req.header('x-auth-token'), process.env.JWT_SECRET_TOKEN);
+    const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
 
     const userId = decoded?.user._id;
 
