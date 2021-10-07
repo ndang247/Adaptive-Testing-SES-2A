@@ -28,7 +28,7 @@ const Head = () => {
 
     return (
         <Container maxWidth="md">
-            <section>
+            <section >
                 {isDesktopOrLaptop && (
                     <>
                         <div className={classes.blobContent}>
@@ -95,7 +95,7 @@ const Head = () => {
                                 </CardActions>
                             </Card>
                         </Grid>
-                        <Grid item xs={12} md={6} lg={6}>
+                        <Grid item xs={12} md={6} lg={6} marginBottom={15}>
                             <Card sx={{ minWidth: 275 }} elevation={6}>
                                 <CardContent>
                                     <Typography textAlign="center" color="textSecondary" gutterBottom>

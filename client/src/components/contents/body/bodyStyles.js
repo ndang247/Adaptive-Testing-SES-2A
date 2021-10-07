@@ -14,6 +14,6 @@ export default makeStyles((theme) => ({
         flexGrow: 1,
     },
     media: {
-        height: 250,
+        height: 350,
     },
 }));
