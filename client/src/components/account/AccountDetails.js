@@ -14,7 +14,7 @@ const AccountDetails = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
 
     const rows = [
-        createUserData('Name:', user.firstName + ' ' + user.lastName),
+        createUserData('Name', user.firstName + ' ' + user.lastName),
         createUserData('Email Address', user.email),
         // createUserData('Creation Date', user.dateCreated.slice(0, 10)),
         createUserData('Account Role', user.role)

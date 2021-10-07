@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Typography, Paper, TextField } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
-import useStyles from './QueryFormStyles'
+import useStyles from './queryFormStyles'
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 

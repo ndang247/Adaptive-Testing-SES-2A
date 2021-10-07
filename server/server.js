@@ -6,7 +6,7 @@ import userRouter from './routes/user.js';
 import hostRouter from './routes/host.js';
 import testRouter from './routes/test.js';
 import questionRouter from './routes/question.js'
-import settingsRouter from './routes/settings.js'
+import settingsRouter from './routes/setting.js'
 
 const app = express();
 dotenv.config();

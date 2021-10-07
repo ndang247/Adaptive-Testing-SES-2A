@@ -9,7 +9,7 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-
+// Authentication
 export const login = (form) => API.post('/api/users/login', form);
 export const register = (form) => API.post('/api/users/register', form);
 export const hostLogin = (form) => API.post('/api/hosts/login', form);
@@ -17,8 +17,4 @@ export const hostRegister = (form) => API.post('/api/hosts/register', form);
 
 // For Settings
 export const getUserById = (id) => API.get(`api/users/${id}`);
-
-// For Exam
-export const questions = (testId, questionId) => API.get(`api/questions/${testId}/${questionId}`);
-export const createTest = (form) => API.post('api/questions/test_id', form);
-export const joinexam = (form) => API.post('api/tests/join', form);
+export const updateUser = (id, form) => API.patch(`api/settings/${id}`, form);

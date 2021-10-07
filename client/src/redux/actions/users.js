@@ -1,4 +1,4 @@
-import { FETCH_USER_BY_ID } from "src/constants/actionType";
+import { FETCH_USER_BY_ID, SETTING_ERROR, UPDATE_USER } from "src/constants/actionType";
 import * as api from 'src/api';
 
 export const getUserById = (id) => async (dispatch) => {
@@ -10,3 +10,14 @@ export const getUserById = (id) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const updateUser = (id, form) => async (dispatch) => {
+    try {
+        const { data } = await api.updateUser(id, form);
+
+        dispatch({ type: UPDATE_USER, data });
+    } catch (error) {
+        dispatch({ type: SETTING_ERROR, errors: error.response.data });
+        console.log(error);
+    }
+}

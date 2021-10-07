@@ -5,13 +5,10 @@ import { LoadingButton } from '@material-ui/lab';
 import useStyles from './joinExamFormStyles'
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { useDispatch } from 'react-redux';
-import { joinExam } from 'src/redux/actions/examroom';
 
 const JoinExamForm = () => {
     const classes = useStyles();
     const history = useHistory();
-    const dispatch = useDispatch();
 
     const JoinRoomSchema = Yup.object().shape({
         pin: Yup.string().required('Room PIN is required')
@@ -23,9 +20,7 @@ const JoinExamForm = () => {
             remember: true
         },
         validationSchema: JoinRoomSchema,
-        onSubmit: () => {
-            dispatch(joinExam(values, history));
-        }
+        onSubmit: () => { }
     });
 
     const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;

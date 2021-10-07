@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import {
     Table, Grid, TableContainer, TableBody,
     TableRow, TableCell, TextField, Typography,
-    Paper, Button
+    Paper, Button, Alert, IconButton,
+    InputAdornment
 } from '@material-ui/core';
 import useStyles from '../account/accountDetailsStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from 'src/redux/actions/users';
+import { Icon } from '@iconify/react';
+import eyeFill from '@iconify/icons-eva/eye-fill';
+import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 
 const user = JSON.parse(localStorage.getItem('profile'));
 
@@ -13,36 +19,47 @@ function createRow(name, label) {
 }
 
 const initialForm = {
-    name: user.firstName + ' ' + user.lastName,
-    email: user.email,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
     oldPassword: '',
-    newPassword: ''
+    newPassword: '',
+    confirmNewPassword: ''
 }
 
 const EditAccountDetails = () => {
     const [form, setForm] = useState(initialForm);
+    const [error, setError] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const { userData, errors } = useSelector((state) => state.users);
 
     const rows = [
-        createRow('name', 'Name'),
-        createRow('email', 'Email Address'),
+        createRow('firstName', 'First Name'),
+        createRow('lastName', 'Last Name'),
         createRow('oldPassword', 'Old Password'),
-        createRow('newPassword', 'New Password')
+        createRow('newPassword', 'New Password'),
+        createRow('confirmNewPassword', 'Confirm New Password')
     ];
 
     const handleChange = (e) => {
-        // console.log(e.target.value);
         setForm({ ...form, [e.target.name]: e.target.value });
     }
+
+    const handleShowPassword = () => setShowPassword((show) => !show);
 
     // Submitting
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
+        if (form.newPassword !== form.confirmNewPassword) setError(true);
+        else dispatch(updateUser(user.id, form));
     };
 
     return (
         <div>
+            {userData && <Alert severity="success">Account Saved Successfully</Alert>}
+            {(error || errors) && <Alert severity="error">{error ? 'Please enter matching new password' : errors.errors}</Alert>}
             <div className={classes.div}>
                 <Typography variant="h1" align="center">Edit Account Details</Typography>
             </div>
@@ -61,10 +78,20 @@ const EditAccountDetails = () => {
                                                     value={form[row.name]}
                                                     onChange={handleChange}
                                                     className={classes.textField}
-                                                    type={row.name === 'oldPassword' ? 'password'
-                                                        : row.name === 'newPassword' ? 'password'
-                                                            : ''}
+                                                    type={row.name.includes("Password") && !showPassword ? 'password' : 'text'}
                                                     variant="outlined"
+                                                    required
+                                                    InputProps={{
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                {row.name.includes("Password") && (
+                                                                    <IconButton onClick={handleShowPassword} edge="end">
+                                                                        <Icon icon={showPassword ? eyeOffFill : eyeFill} />
+                                                                    </IconButton>
+                                                                )}
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
                                                 />
                                             </TableCell>
                                         </TableRow>
