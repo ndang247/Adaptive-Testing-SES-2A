@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Container } from '@material-ui/core';
-import { QueryFormLayout } from 'src/components';
+import { ExamResultLayout } from 'src/components';
 
-const Query = () => {
+const Result = () => {
     return (
         <>
             <Box sx={{ backgroundColor: 'background.default', minHeight: '100%', py: 3 }} >
-                <Container maxWidth={'lg'}><QueryFormLayout /></Container>
+                <Container maxWidth={'lg'}><ExamResultLayout /></Container>
             </Box>
         </>
     );
 }
 
-export default Query;
+export default Result;

@@ -13,7 +13,7 @@ export { default as JoinExam } from './joinExam/JoinExam';
 export { default as Exam } from './exam/Exam';
 export { default as PastExams } from './pastExams/PastExams';
 export { default as Query } from './query/Query';
-
+export { default as Result } from './result/Result';
 // Host
 export { default as CreateExam } from './createExam/CreateExam';
 export { default as Exams } from './exams/Exams';

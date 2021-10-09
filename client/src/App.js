@@ -5,7 +5,7 @@ import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
   PastExams, Exam, CreateExam, JoinExam,
-  Account, Settings, Query, Exams
+  Account, Settings, Query, Exams, Result
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
@@ -39,6 +39,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/exam/history" exact component={PastExams} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/exam/joinexam" exact component={JoinExam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/query" exact component={Query} />
+            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/exam/result" exact component={Result} />
           </Switch>
         </ThemeProvider>
       </StyledEngineProvider>
