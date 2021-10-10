@@ -1,58 +1,52 @@
 import QuestionModel from '../models/question.js';
-import TestModel from '../models/test.js';
 import { validationResult } from 'express-validator';
 import dotenv from 'dotenv';
+import { Easy, Expert, Hard, Intermediate, Master } from '../constants/difficulties.js';
 
 dotenv.config();
 
-export const createQuestion = async (req, res) => {
-    const result = validationResult(req);
+export const createQuestion = async (questions) => {
+    let questionIds = [];
 
-    // Return bad request on validation error
-    // If the result is not empty then there is something wrong
-    if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
+    for (const question of questions) {
+        const {
+            category,
+            content,
+            rating,
+            correctAnswer,
+            wrongA,
+            wrongB,
+            wrongC,
+        } = question;
 
-    const { category, content, rating, difficulty, correctAnswer, wrongAnswers } = req.body;
+        let difficulty = '';
 
-    // Retrieve the test id from url
-    const testId = req.params.test_id;
+        if (inRange(rating, 0, 19)) difficulty = Easy;
+        else if (inRange(rating, 20, 39)) difficulty = Intermediate;
+        else if (inRange(rating, 40, 59)) difficulty = Hard;
+        else if (inRange(rating, 60, 79)) difficulty = Expert;
+        else if (inRange(rating, 80, 100)) difficulty = Master;
 
-    // Validate wrong answers
-    if (wrongAnswers.length != 3) {
-        return res.status(401).send('Error: Three wrong answers required');
-    }
-
-    try {
-        // Question instance with validated data
-        const question = new QuestionModel({
-            testIds: [],
+        const newQuestion = new QuestionModel({
             category,
             content,
             rating,
             difficulty,
             correctAnswer,
-            wrongAnswers
+            wrongAnswers: [wrongA, wrongB, wrongC]
         });
 
-        question.testIds.push(testId);
+        try {
+            await newQuestion.save();
 
-        //Add the current question to its corresponding test entity
-        const found = await TestModel.findByIdAndUpdate(testId,
-            { "$push": { "questionIds": question._id } },
-        );
-
-        if (!found) {
-            res.json({ msg: 'Test not found' });
+            const question = await QuestionModel.findOne().sort({ _id: -1 });
+            questionIds.push(question._id);
+        } catch (error) {
+            console.log(error);
         }
-        else {
-            await question.save();
-            res.json({ msg: 'Question created' });
-        }
-
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Server Error');
     }
+
+    return questionIds;
 }
 
 export const updateQuestion = async (req, res) => {
@@ -157,4 +151,6 @@ function shuffle(array) {
     return array;
 }
 
-
+function inRange(x, min, max) {
+    return ((x - min) * (x - max) <= 0);
+}

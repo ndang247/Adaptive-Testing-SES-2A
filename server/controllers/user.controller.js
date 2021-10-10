@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/role.js';
+import { User } from '../constants/role.js';
 import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
 

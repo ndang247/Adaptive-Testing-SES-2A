@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const testSchema = mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
-    creatorId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+    creatorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     title: { type: String, require: true },
     // participantIds: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
     // maximumAttempts: { type: Number, require: true },
     questionIds: { type: [mongoose.Schema.Types.ObjectId], ref: "Question" },
     dateCreated: { type: Date, default: new Date() },
     expiryDate: { type: Date, require: true },
-    testLength: { type: Number, require: true },
+    // testLength: { type: Number, require: true },
     scoreIds: { type: [mongoose.Schema.Types.ObjectId], ref: "Score" },
     contentType: { type: String, require: true }
 });

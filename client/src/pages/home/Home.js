@@ -16,27 +16,20 @@ const Home = () => {
 
     return (
         <React.Fragment>
-
             <main>
-
                 <NavBar />
                 <div className={classes.heroContent}>
                     <Head />
                 </div>
-
                 <Box height={100}>
                     {isDesktopOrLaptop && <div className={headLayer}></div>}
-
                 </Box>
-
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Body />
                 </Container>
-
             </main>
             {isDesktopOrLaptop && <div className={footerLayer}></div>}
-            {isDesktopOrLaptop && <Footer/>}
-
+            <Footer />
         </React.Fragment>
     );
 };

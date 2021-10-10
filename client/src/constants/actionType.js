@@ -14,4 +14,5 @@ export const FETCH_USER_BY_ID = 'FETCH_USER_BY_ID';
 export const UPDATE_USER = 'UPDATE_USER';
 
 // Exam
+export const EXAM_ERROR = 'EXAM_ERROR';
 export const CREATE_EXAM = 'CREATE_EXAM';

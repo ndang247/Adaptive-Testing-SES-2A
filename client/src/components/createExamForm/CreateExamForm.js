@@ -7,34 +7,36 @@ import {
 import RemoveIcon from '@material-ui/icons/Remove'
 import AddIcon from '@material-ui/icons/Add'
 import useStyles from './createExamFormStyles';
+import { useDispatch } from 'react-redux';
+import { createExam } from 'src/redux/actions/exams';
+
+const user = JSON.parse(localStorage.getItem('profile'));
 
 const subjects = ['Math'];
 
 const initialForm = {
+    creatorId: user.id,
     title: '',
     questions: [],
-    dateCreated: new Date(),
     expiryDate: new Date(),
-    testLenght: '',
-    scoreIds: [],
     contentType: ''
 }
 
 const CreateExamForm = () => {
     const classes = useStyles();
     const [form, setForm] = useState(initialForm);
+    const dispatch = useDispatch();
 
     // Question Fields
-    const [inputFields, setInputFields] = useState([
-        {
-            content: '',
-            correctAnswer: '',
-            wrongA: '',
-            wrongB: '',
-            wrongC: '',
-            rating: 50,
-        },
-    ]);
+    const [inputFields, setInputFields] = useState([{
+        category: '',
+        content: '',
+        rating: 50,
+        correctAnswer: '',
+        wrongA: '',
+        wrongB: '',
+        wrongC: '',
+    }]);
 
     const handleFieldInput = (index, event) => {
         const values = [...inputFields];
@@ -43,7 +45,6 @@ const CreateExamForm = () => {
             handleBlur(index, event, values);
             return;
         }
-
         values[index][event.target.name] = event.target.value;
         setInputFields(values);
         setForm({ ...form, questions: inputFields });
@@ -52,12 +53,13 @@ const CreateExamForm = () => {
     // Adding Fields
     const handleAddFields = () => {
         setInputFields([...inputFields, {
+            category: '',
             content: '',
+            rating: 50,
             correctAnswer: '',
             wrongA: '',
             wrongB: '',
             wrongC: '',
-            rating: 50,
         }]);
     }
 
@@ -80,7 +82,8 @@ const CreateExamForm = () => {
     // Submitting
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
+        dispatch(createExam(form));
+        // console.log(form);
     }
 
     return (
@@ -88,7 +91,7 @@ const CreateExamForm = () => {
             <Paper className={classes.paperHead}>
                 <Typography variant="h3">Exam Creation</Typography>
             </Paper>
-            <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+            <form autoComplete="off" onSubmit={handleSubmit}>
                 <Paper className={classes.paperBody}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -152,6 +155,19 @@ const CreateExamForm = () => {
                             <Grid item xs={12} sm={2}>
                                 <IconButton onClick={() => handleAddFields()}><AddIcon /></IconButton>
                                 {inputFields.length > 1 && <IconButton onClick={() => handleRemoveFields(index)}><RemoveIcon /></IconButton>}
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    name="category"
+                                    label="Category"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={inputField.category}
+                                    onChange={event => handleFieldInput(index, event)}
+                                    multiline
+                                    maxRows={10}
+                                    required
+                                />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField

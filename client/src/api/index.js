@@ -18,3 +18,6 @@ export const hostRegister = (form) => API.post('/api/hosts/register', form);
 // For Settings
 export const getUserById = (id) => API.get(`api/users/${id}`);
 export const updateUser = (id, form) => API.patch(`api/settings/${id}`, form);
+
+// Exam
+export const createExam = (newExam) => API.post('api/tests', newExam);

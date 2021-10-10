@@ -1,7 +1,10 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { authUser, authHost } from '../middleware/auth.js';
-import { validatePin, createTest, createScore, updateScore, getOptimalQuestion } from '../controllers/test.controller.js';
+import {
+    validatePin, createTest, createScore, updateScore,
+    getOptimalQuestion
+} from '../controllers/test.controller.js';
 
 const router = express.Router();
 
@@ -10,8 +13,8 @@ const router = express.Router();
 router.post('/', authHost,
     // Validate test fields
     body('title', 'Title is required').not().isEmpty(),
+    body('questions', 'Must have a least one question').isArray({ min: 1 }),
     body('expiryDate', 'Valid date required').not().isEmpty(),
-    body('testLength', 'Valid test duration is required').not().isEmpty().isNumeric(),
     body('contentType', 'Test content description required').not().isEmpty(),
     createTest
 );

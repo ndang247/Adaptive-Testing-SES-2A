@@ -30,9 +30,7 @@ app.use(cors());
 app.use('/api/users', userRouter);
 app.use('/api/hosts', hostRouter);
 app.use('/api/tests', testRouter);
-app.use('/api/questions', questionRouter);
 app.use('/api/settings', settingsRouter);
-app.use('/api/scores', testRouter);
 
 
 const PORT = process.env.PORT || 8080;

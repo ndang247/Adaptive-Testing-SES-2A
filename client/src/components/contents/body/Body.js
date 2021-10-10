@@ -3,7 +3,7 @@ import useStyles from './bodyStyles';
 import {
     Card, CardMedia, CardContent,
     Typography, CardActions, Button, CardActionArea,
-    Link, divider
+    Link
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
@@ -23,10 +23,10 @@ const BodyContent = () => {
                         <CardMedia
                             className={classes.media}
                             image="http://p5.itc.cn/images01/20200825/48701ab3d64b4aada25f4e55a5b695d2.jpeg"
-                            alt="random"
+                            alt="Random"
                         />
                         <CardContent>
-                            <Typography variant="h1" fontFamily="Arial Black" sx={{ marginBottom: 2 }}>For Adap Test</Typography>
+                            <Typography variant="h1" fontFamily="Arial Black" sx={{ marginBottom: 2 }}>For AdapTest</Typography>
                             <Typography variant="h4" fontFamily="Verdana">
                                 AdapTest is an online exam system. You are welcome to join us as either a host or a tester. To use our system, you
                                 need to register an account first. When you sign-in, you will be transferred to your dashboard page.
@@ -34,7 +34,7 @@ const BodyContent = () => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button size="large" color="primary">
                             <Link color="inherit" component={RouterLink} underline="none" to="">
                                 About Adap-Test
                             </Link>
@@ -46,7 +46,7 @@ const BodyContent = () => {
                         <CardMedia
                             className={classes.media}
                             image="https://2j61yv256vxd12hdls206jrv-wpengine.netdna-ssl.com/wp-content/uploads/2020/10/books-scaled.jpg"
-                            alt="Adap Test"
+                            alt="AdapTest"
                         />
                         <CardContent>
                             <Typography variant="h1" fontFamily="Arial Black" sx={{ marginBottom: 2 }}>For the Host</Typography>
@@ -57,7 +57,7 @@ const BodyContent = () => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button size="large" color="primary">
                             <Link color="inherit" component={RouterLink} underline="none" to="/host/login" >
                                 Join As Host
                             </Link>
@@ -81,7 +81,7 @@ const BodyContent = () => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button size="large" color="primary">
                             <Link color="inherit" component={RouterLink} underline="none" to="/user/login" >
                                 Join As Tester
                             </Link>

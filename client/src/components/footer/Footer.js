@@ -18,7 +18,7 @@ const Footer = () => {
                 &nbsp;
                 <Container>
                     <Grid container>
-                        <Grid item xs={3}>
+                        <Grid item xs={12} sm={12} lg={3}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Our Company
                             </Typography>
@@ -35,7 +35,7 @@ const Footer = () => {
                                 Our Instagram
                             </Typography>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12} sm={12} lg={3}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Our Service
                             </Typography>
@@ -46,7 +46,7 @@ const Footer = () => {
                                 For Tester
                             </Typography>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12} sm={12} lg={3}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Test
                             </Typography>
@@ -63,8 +63,7 @@ const Footer = () => {
                                 Find Your Test History
                             </Typography>
                         </Grid>
-
-                        <Grid xs={3} sx={{ marginTop: -13, }}>
+                        <Grid item xs={12} sm={12} lg={3} sx={{ marginTop: -15, }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', }}>
                                 {isDesktopOrLaptop && (<img src={footer} alt="footer-illustration" height={300} />)}
                             </div>

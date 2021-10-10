@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
-import { Host } from '../models/role.js';
+import { Host } from '../constants/role.js';
 
 dotenv.config();
 

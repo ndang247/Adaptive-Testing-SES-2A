@@ -7,10 +7,12 @@ import { validationResult } from 'express-validator';
 import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
 import question from '../models/question.js';
+import { createQuestion } from './question.controller.js';
 
 dotenv.config();
 
-// Global variables for elo system - Scale factor indicates how drastically it will increase/decrease
+// Global variables for elo system
+// Scale factor indicates how drastically it will increase/decrease
 const defaultRating = 2000;
 const userScaleFactor = 256;
 const questionScaleFactor = 32;
@@ -22,28 +24,30 @@ export const createTest = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { title, expiryDate, testLength, contentType } = req.body;
+    const {
+        creatorId,
+        title,
+        questions,
+        expiryDate,
+        contentType
+    } = req.body;
 
-    // Retrieve the current user id from the header for the creator field
-    const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
+    const questionIds = await createQuestion(questions);
 
-    const userId = decoded?.user._id;
+    const newTest = new TestModel({
+        creatorId,
+        title,
+        questionIds,
+        dateCreated: new Date(),
+        expiryDate,
+        scoreIds: [],
+        contentType
+    });
 
     try {
-        // Test instance with validated data
-        const test = new TestModel({
-            title,
-            creatorId: userId,
-            questionIds: [],
-            dateCreated: DateTime.now(),
-            expiryDate,
-            testLength,
-            scoreIds: [],
-            contentType
-        });
+        await newTest.save();
 
-        await test.save();
-        res.json(test._id);
+        res.status(201).json(newTest);
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
