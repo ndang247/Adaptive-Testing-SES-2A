@@ -1,5 +1,5 @@
 import React from 'react';
-import { autocompleteClasses, Container, Paper, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import useStyles from './homeStyles';
 import { Head, Body, Footer, NavBar } from 'src/components';
 import clsx from 'clsx';

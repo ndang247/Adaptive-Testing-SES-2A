@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive'
 const Footer = () => {
     const classes = useStyles();
     const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-width: 768px)'
+        query: '(min-width: 1224px)'
     });
 
     return (
@@ -18,7 +18,7 @@ const Footer = () => {
                 &nbsp;
                 <Container>
                     <Grid container>
-                        <Grid item xs={12} sm={12} lg={3}>
+                        <Grid item xs={12} sm={12} lg={isDesktopOrLaptop ? 3 : 4}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Our Company
                             </Typography>
@@ -35,7 +35,7 @@ const Footer = () => {
                                 Our Instagram
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} lg={3}>
+                        <Grid item xs={12} sm={12} lg={isDesktopOrLaptop ? 3 : 4}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Our Service
                             </Typography>
@@ -46,7 +46,7 @@ const Footer = () => {
                                 For Tester
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} lg={3}>
+                        <Grid item xs={12} sm={12} lg={isDesktopOrLaptop ? 3 : 4}>
                             <Typography textAlign="center" variant="h2" align="left" color="black" component="p">
                                 Test
                             </Typography>
@@ -63,11 +63,13 @@ const Footer = () => {
                                 Find Your Test History
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} lg={3} sx={{ marginTop: -15, }}>
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', }}>
-                                {isDesktopOrLaptop && (<img src={footer} alt="footer-illustration" height={300} />)}
-                            </div>
-                        </Grid>
+                        {isDesktopOrLaptop && (
+                            <Grid item xs={12} sm={12} lg={3} sx={{ marginTop: -15, }}>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', }}>
+                                    <img src={footer} alt="footer-illustration" height={300} />
+                                </div>
+                            </Grid>
+                        )}
                     </Grid>
                 </Container>
                 &nbsp;
