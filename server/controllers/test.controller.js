@@ -198,7 +198,7 @@ export const getOptimalQuestion = async (req, res) => {
         const ratings = score.progressiveRatings;
 
         // Check the variance threshold to see if a user's score can already be determined
-        if(Math.variance(ratings) < varianceThreshold){
+        if(Math.variance(ratings) < varianceThreshold || ratings.length > 8){
             // TODO change response to something front-end can recognize
             res.json({ msg: 'Test has concluded' });
         }
