@@ -20,7 +20,8 @@ export const createQuestion = async (questions) => {
         } = question;
 
         let difficulty = '';
-
+        rating *= 40;
+        
         if (inRange(rating, 0, 19)) difficulty = Easy;
         else if (inRange(rating, 20, 39)) difficulty = Intermediate;
         else if (inRange(rating, 40, 59)) difficulty = Hard;
