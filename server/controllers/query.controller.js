@@ -1,55 +1,34 @@
-import QuestionModel from '../models/question.js';
+import QueryModel from '../models/query.js';
 import { validationResult } from 'express-validator';
-import dotenv from 'dotenv';
-import { Easy, Expert, Hard, Intermediate, Master } from '../constants/difficulties.js';
+import { DateTime } from 'luxon';
 
-dotenv.config();
+export const createQuery = async (req, res) => {
 
-export const createQuestion = async (questions) => {
-    let questionIds = [];
+    const result = validationResult(req);
 
-    for (const question of questions) {
-        const {
-            category,
-            content,
-            rating,
-            correctAnswer,
-            wrongA,
-            wrongB,
-            wrongC,
-        } = question;
+    // Return bad request on validation error
+    // If the result is not empty then there is something wrong
+    if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-        let difficulty = '';
+    const { fullName, email, query } = req.body;
         
-
-        if (inRange(rating, 0, 19)) difficulty = Easy;
-        else if (inRange(rating, 20, 39)) difficulty = Intermediate;
-        else if (inRange(rating, 40, 59)) difficulty = Hard;
-        else if (inRange(rating, 60, 79)) difficulty = Expert;
-        else if (inRange(rating, 80, 100)) difficulty = Master;
-
-        rating *= 40;
-        
-        const newQuestion = new QuestionModel({
-            category,
-            content,
-            rating,
-            difficulty,
-            correctAnswer,
-            wrongAnswers: [wrongA, wrongB, wrongC]
+    try {
+        // Create new query
+        const newQuery = new QueryModel({ 
+            fullName,
+            email,
+            query,
+            dateCreated: new Date()
         });
+        
+        // Post query to database
+        await newQuery.save();
 
-        try {
-            await newQuestion.save();
+        res.json({ msg: 'Query sent' });
 
-            const question = await QuestionModel.findOne().sort({ _id: -1 });
-            questionIds.push(question._id);
-        } catch (error) {
-            console.log(error);
-        }
+    } catch (error) {
+        console.log(error);
     }
-
-    return questionIds;
 }
 
 export const updateQuestion = async (req, res) => {
