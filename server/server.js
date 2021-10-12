@@ -5,8 +5,9 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.js';
 import hostRouter from './routes/host.js';
 import testRouter from './routes/test.js';
-import questionRouter from './routes/question.js'
-import settingsRouter from './routes/setting.js'
+import questionRouter from './routes/question.js';
+import settingsRouter from './routes/setting.js';
+import queriesRouter from './routes/query.js';
 
 const app = express();
 dotenv.config();
@@ -31,6 +32,7 @@ app.use('/api/users', userRouter);
 app.use('/api/hosts', hostRouter);
 app.use('/api/tests', testRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/queries', queriesRouter);
 
 
 const PORT = process.env.PORT || 8080;
