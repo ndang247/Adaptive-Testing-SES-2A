@@ -22,6 +22,7 @@ export const updateUser = (id, form) => API.patch(`api/settings/${id}`, form);
 // Exam
 export const createExam = (newExam) => API.post('api/tests', newExam);
 export const getExams = () => API.get('api/tests');
+export const validateExamPin = (form) => API.post('api/tests/validate', form);
 
 // Query
 export const createQuery = (newQuery) => API.post('api/queries', newQuery);

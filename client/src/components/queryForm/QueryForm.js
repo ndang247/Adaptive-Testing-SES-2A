@@ -38,8 +38,7 @@ const SubmitQuery = () => {
 
     return (
         <Container component="main" maxWidth="sm" className={classes.position}>
-            {msg && (<Alert variant="filled" severity="success">{msg.msg}</Alert>)}
-            &nbsp;
+            {msg && (<><Alert variant="filled" severity="success">{msg.msg}</Alert>&nbsp;</>)}
             <Paper className={classes.paperBody} elevation={4}>
                 <Typography variant="h1">Submit A Query</Typography>
                 <Typography variant="h4" align="center" paddingTop="15px" marginBottom="20px">

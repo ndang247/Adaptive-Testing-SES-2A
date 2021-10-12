@@ -21,9 +21,9 @@ router.post('/', authHost,
     createTest
 );
 
-// GET tests/
-// Route to grant user access to a test
-router.post('/join', authUser,
+// POST tests/validate
+// Route to validate user input exam's id
+router.post('/validate', authUser,
     // Validate pin
     body('pin', 'Please enter a valid pin').not().isEmpty(),
     validatePin

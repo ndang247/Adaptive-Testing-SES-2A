@@ -17,6 +17,8 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const EXAM_ERROR = 'EXAM_ERROR';
 export const GET_EXAMS = 'GET_EXAMS';
 export const CREATE_EXAM = 'CREATE_EXAM';
+export const VALIDATE_EXAM_PIN = 'VALIDATE_EXAM_PIN';
+export const VALIDATION_ERROR = 'VALIDATION_ERROR';
 
 // Query
 export const CREATE_QUERY = 'CREATE_QUERY';

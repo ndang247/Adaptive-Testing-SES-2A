@@ -8,6 +8,7 @@ import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
 import question from '../models/question.js';
 import { createQuestion } from './question.controller.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -70,7 +71,6 @@ export const createTest = async (req, res) => {
     }
 }
 
-
 export const validatePin = async (req, res) => {
     const result = validationResult(req);
 
@@ -79,21 +79,22 @@ export const validatePin = async (req, res) => {
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
     const { pin } = req.body;
+
     try {
-        // Find one test based on ID in req parameters
-        const test = await TestModel.findOne({ test: pin });
+        if (!mongoose.Types.ObjectId.isValid(pin)) return res.status(400).json('Invalid pin');
 
-        if (!test) return res.status(400).json({ msg: 'Test not found' });
+        // Find one test based on pin
+        const test = await TestModel.findById(pin);
 
-        // If pin is not match throw error
-        if (test._id != pin) {
-            return res.status(401).json({ msg: 'Invalid pin' });
-        }
 
-        // TODO: Return true/false or positive message as front-end changes
+        if (!test) return res.status(400).json({ msg: 'Invalid pin' });
+
+        // Optional as this condition is unnecessary 
+        // If pin is not match return an error msg
+        if (String(test?._id) != pin) return res.status(400).json({ msg: 'Invalid pin' });
+
         // Return test if valid
         res.json(test);
-
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
