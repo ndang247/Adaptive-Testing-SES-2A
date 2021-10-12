@@ -42,7 +42,7 @@ const ExamHistory = () => {
         <>
             <Container component="main" maxWidth='lg' className={classes.position}>
                 <Paper className={classes.paperHead}>
-                    <Typography variant="h4" color='primary'>Exam History</Typography>
+                    <Typography variant="h3">Exams History</Typography>
                 </Paper>
                 <TableContainer component={Paper} className={classes.tableContainer} >
                     <Table className={classes.table} >

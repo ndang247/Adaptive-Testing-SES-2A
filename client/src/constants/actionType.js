@@ -15,4 +15,9 @@ export const UPDATE_USER = 'UPDATE_USER';
 
 // Exam
 export const EXAM_ERROR = 'EXAM_ERROR';
+export const GET_EXAMS = 'GET_EXAMS';
 export const CREATE_EXAM = 'CREATE_EXAM';
+
+// Query
+export const CREATE_QUERY = 'CREATE_QUERY';
+export const QUERY_ERROR = 'QUERY_ERROR';

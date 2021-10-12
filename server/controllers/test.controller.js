@@ -19,6 +19,20 @@ const questionScaleFactor = 32;
 
 const varianceThreshold = 20; //If variance in score drops below this value the test ends
 
+export const getTests = async (req, res) => {
+    try {
+        const tests = await TestModel.find()
+            .populate({ path: "creatorId" })
+            .populate({ path: "questionIds" })
+            .populate({ path: "scoreIds" });
+
+        res.status(200).json(tests);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
 export const createTest = async (req, res) => {
     const result = validationResult(req);
 
@@ -87,7 +101,7 @@ export const validatePin = async (req, res) => {
 }
 
 export const createScore = async (req, res) => {
-    //Retrieve the current user id from the header for the user id field
+    // Retrieve the current user id from the header for the user id field
     const decoded = jwt.verify(req.header('authorization').split(" ")[1], process.env.JWT_SECRET_TOKEN);
 
     const userId = decoded?.user._id;
@@ -198,7 +212,7 @@ export const getOptimalQuestion = async (req, res) => {
         const ratings = score.progressiveRatings;
 
         // Check the variance threshold to see if a user's score can already be determined
-        if(Math.variance(ratings) < varianceThreshold || ratings.length > 8){
+        if (Math.variance(ratings) < varianceThreshold || ratings.length > 8) {
             // TODO change response to something front-end can recognize
             res.json({ msg: 'Test has concluded' });
         }
@@ -296,5 +310,3 @@ async function retrieveQuestion(score, test, makeEasier) {
     // Return -1 if no question could be found - indicates test should end prematurely
     return -1;
 }
-
-

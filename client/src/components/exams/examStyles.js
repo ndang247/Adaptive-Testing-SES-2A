@@ -9,8 +9,7 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(2),
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(2),
     },
     historyTable: {
         padding: 'normal',

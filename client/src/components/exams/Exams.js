@@ -1,39 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-    Typography, Paper, Grid, Table,
+    Container, Typography, Paper, Table,
     TableContainer, TableHead, TableRow, TableCell,
     TableBody, TablePagination, TableFooter, Link,
-    Container
+    Skeleton
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import useStyles from './examStyles';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-
-function createData(id, examTitle, length, password, subject, created, due_date) {
-    return { id, examTitle, length, password, subject, created, due_date };
-}
-
-// Dummy
-const rows = [
-    createData('id1', 'AdapTest', 180, 'password', 'Math', '2021-09-10', '2021-09-10'),
-    createData('id2', 'AdapTest', 180, 'password', 'Math', '2021-09-10', '2021-09-10'),
-    createData('id3', 'AdapTest', 180, 'password', 'Math', '2021-09-10', '2021-09-10'),
-    createData('id4', 'AdapTest', 180, 'password', 'Math', '2021-09-10', '2021-09-10'),
-    createData('id5', 'AdapTest', 180, 'password', 'Math', '2021-09-10', '2021-09-10'),
-];
+import { DateTime } from 'luxon';
+import { useSelector } from 'react-redux';
+import { getExams } from 'src/redux/actions/exams';
+import { useDispatch } from 'react-redux';
 
 const headCells = [
     { label: 'Exam ID' },
     { label: 'Exam Title' },
-    { label: 'Length' },
-    { label: 'Password' },
+    { label: 'Creator' },
     { label: 'Subject' },
-    { label: 'Created' },
+    { label: 'Created Date' },
     { label: 'Due Date' }
 ];
 
 const Exams = () => {
     const classes = useStyles();
+    const { exams, loading } = useSelector((state) => state.exams);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getExams());
+    }, []);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -45,6 +41,13 @@ const Exams = () => {
         setPage(0);
     };
 
+    const getDateCreated = (dateCreated) => {
+        const date = DateTime.fromISO(dateCreated).toLocal();
+        return date.day + "-" + date.month + "-" + date.year + " at " + date.hour + ":" + date.minute + ":" + date.second;
+    }
+
+    if (!exams.length && !loading) return 'No exams';
+
     return (
         <>
             <Container component="main" maxWidth='lg' className={classes.position}>
@@ -52,43 +55,47 @@ const Exams = () => {
                     <Typography variant="h3">Exams History</Typography>
                 </Paper>
                 <TableContainer component={Paper} className={classes.tableContainer}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {headCells.map((headCell) => (
-                                    <TableCell className={classes.tableHeaderCell} key={headCell.label}>{headCell.label}</TableCell>))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                                <TableRow key={row.id}>
-                                    <TableCell component="th" scope="row" className={classes.name}>
-                                        <Link component={RouterLink} to="/host/dashboard/exam/history" variant="h6" underline="hover">
-                                            {row.id}
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{row.examTitle}</TableCell>
-                                    <TableCell>{row.length}</TableCell>
-                                    <TableCell>{row.password}</TableCell>
-                                    <TableCell>{row.subject}</TableCell>
-                                    <TableCell>{row.created}</TableCell>
-                                    <TableCell>{row.due_date}</TableCell>
+                    {loading ?
+                        <Skeleton variant="rectangular" width="100%">
+                            <div style={{ paddingTop: '50%' }} />
+                        </Skeleton>
+                        :
+                        (<Table>
+                            <TableHead>
+                                <TableRow>
+                                    {headCells.map((headCell) => (
+                                        <TableCell className={classes.tableHeaderCell} key={headCell.label}>{headCell.label}</TableCell>))}
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10, 15]}
-                                    count={rows.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
-                                />
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
+                            </TableHead>
+                            <TableBody>
+                                {exams.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((exam) => (
+                                    <TableRow key={exam._id}>
+                                        <TableCell component="th" scope="row" className={classes.name}>
+                                            <Link component={RouterLink} to="/host/dashboard/exam/history" variant="h6" underline="hover">
+                                                {exam._id}
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{exam.title}</TableCell>
+                                        <TableCell>{`${exam.creatorId?.firstName} ${exam.creatorId?.lastName}`}</TableCell>
+                                        <TableCell>{exam.contentType}</TableCell>
+                                        <TableCell>{getDateCreated(exam.dateCreated)}</TableCell>
+                                        <TableCell>{getDateCreated(exam.expiryDate)}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                    <TablePagination
+                                        rowsPerPageOptions={[5, 10, 15]}
+                                        count={exams.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onPageChange={handleChangePage}
+                                        onRowsPerPageChange={handleChangeRowsPerPage}
+                                    />
+                                </TableRow>
+                            </TableFooter>
+                        </Table>)}
                 </TableContainer>
             </Container>
         </>

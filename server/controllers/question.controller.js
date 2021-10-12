@@ -21,19 +21,19 @@ export const createQuestion = async (questions) => {
 
         let difficulty = '';
         
-
         if (inRange(rating, 0, 19)) difficulty = Easy;
         else if (inRange(rating, 20, 39)) difficulty = Intermediate;
         else if (inRange(rating, 40, 59)) difficulty = Hard;
         else if (inRange(rating, 60, 79)) difficulty = Expert;
         else if (inRange(rating, 80, 100)) difficulty = Master;
 
-        rating *= 40;
+        // Cannot assign a const rating
+        const scaledRating = rating * 40;
         
         const newQuestion = new QuestionModel({
             category,
             content,
-            rating,
+            rating: scaledRating,
             difficulty,
             correctAnswer,
             wrongAnswers: [wrongA, wrongB, wrongC]
