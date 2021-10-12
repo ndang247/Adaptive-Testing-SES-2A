@@ -15,7 +15,7 @@ const user = JSON.parse(localStorage.getItem('profile'));
 const subjects = ['Math'];
 
 const initialForm = {
-    creatorId: user.id,
+    creatorId: user?.id,
     title: '',
     questions: [],
     expiryDate: new Date(),
