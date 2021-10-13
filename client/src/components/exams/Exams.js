@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import useStyles from './examStyles';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import { DateTime } from 'luxon';
 import { useSelector } from 'react-redux';
 import { getExamsByCreator } from 'src/redux/actions/exams';
