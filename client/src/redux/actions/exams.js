@@ -1,12 +1,12 @@
 import * as api from 'src/api';
-import { CREATE_EXAM, EXAM_ERROR, GET_EXAMS, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR } from 'src/constants/actionType';
+import { CREATE_EXAM, EXAM_ERROR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAMS_BY_CREATOR } from 'src/constants/actionType';
 
-export const getExams = () => async (dispatch) => {
+export const getExamsByCreator = (creatorId) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        const { data } = await api.getExams();
+        const { data } = await api.getExamsByCreator(creatorId);
 
-        dispatch({ type: GET_EXAMS, data });
+        dispatch({ type: GET_EXAMS_BY_CREATOR, data });
         dispatch({ type: END_LOADING });
     } catch (error) {
         dispatch({ type: EXAM_ERROR, errors: error.response.data });

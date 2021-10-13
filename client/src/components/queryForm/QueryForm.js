@@ -10,9 +10,8 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { createQuery } from 'src/redux/actions/queries';
 import { useDispatch, useSelector } from 'react-redux';
 
-const user = JSON.parse(localStorage.getItem('profile'));
-
 const SubmitQuery = () => {
+    const user = JSON.parse(localStorage.getItem('profile'));
     const classes = useStyles();
     const dispatch = useDispatch();
     const { msg } = useSelector((state) => state.queries);

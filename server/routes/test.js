@@ -3,12 +3,12 @@ import { body } from 'express-validator';
 import { authUser, authHost } from '../middleware/auth.js';
 import {
     validatePin, createTest, createScore, updateScore,
-    getOptimalQuestion, getTests
+    getOptimalQuestion, getTestsByCreator
 } from '../controllers/test.controller.js';
 
 const router = express.Router();
 
-router.get('/', authHost, getTests);
+router.get('/:creatorId', authHost, getTestsByCreator);
 
 // POST tests/
 // Route for host to create a new test
@@ -22,7 +22,7 @@ router.post('/', authHost,
 );
 
 // POST tests/validate
-// Route to validate user input exam's id
+// Route to validate user input exam's id/pin
 router.post('/validate', authUser,
     // Validate pin
     body('pin', 'Please enter a valid pin').not().isEmpty(),

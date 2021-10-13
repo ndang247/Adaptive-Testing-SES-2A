@@ -18,11 +18,13 @@ const defaultRating = 2000;
 const userScaleFactor = 384;
 const questionScaleFactor = 32;
 
-const varianceThreshold = 20; //If variance in score drops below this value the test ends
+const varianceThreshold = 20; // If variance in score drops below this value the test ends
 
-export const getTests = async (req, res) => {
+export const getTestsByCreator = async (req, res) => {
+    const { creatorId } = req.params;
+
     try {
-        const tests = await TestModel.find()
+        const tests = await TestModel.find({ creatorId })
             .populate({ path: "creatorId" })
             .populate({ path: "questionIds" })
             .populate({ path: "scoreIds" });
