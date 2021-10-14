@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 import layeredWaves from 'src/assets/svg/layered-waves-haikei-header.svg';
 import footerLayeredWaves from 'src/assets/svg/layered-waves-haikei-footer.svg';
-import { height } from '@material-ui/system';
 
 export default makeStyles((theme) => ({
     icon: {
