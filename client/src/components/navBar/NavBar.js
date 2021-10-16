@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar, Toolbar, CssBaseline, useScrollTrigger,
-    Link, Grid, Typography
+    Link, Grid, Button, Typography
 } from '@material-ui/core';
 import useStyles from './navBarStyles';
 import logo from 'src/assets/images/navbarlogo.png';
@@ -40,7 +40,7 @@ const NavBar = (props) => {
                                         <img src={logo} alt="logo" className={classes.image}/>
                                     </Grid>
                                     <Grid item xs={0}>
-                                        <Typography color="white" variant="h2" className={classes.text}>
+                                        <Typography color="white" variant="h3" className={classes.text}>
                                             AdapTest
                                         </Typography>
                                     </Grid>
@@ -51,9 +51,9 @@ const NavBar = (props) => {
                         </Grid>
                         <Grid item xs={0}>
                             <Link color="inherit" component={RouterLink} underline="none" to="/about">
-                                <Typography color="white" variant="h2" className={classes.text}>
+                                <Button className={classes.button}>
                                     About Us
-                                </Typography>
+                                </Button>
                             </Link>
                         </Grid>
                     </Grid>

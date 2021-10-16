@@ -5,19 +5,14 @@ export default makeStyles(() => ({
     root: {
         flexGrow: 1,
     },
-    
+
     appBar: {
-        background: 'black',
+        background: '#1e364e',
         boxShadow: 'none',
     },
 
-    color: {
-        border: '1px solid white',
-        textAlign: 'center',
-    },
-
     image: {
-        marginRight: '20px',
+        marginRight: '25px',
         height: '50px',
         display: 'block',
         fontSize: '0',
@@ -26,5 +21,16 @@ export default makeStyles(() => ({
     text: {
         lineHeight: '50px',
         height: '50px',
+    },
+
+    button: {
+        lineHeight: '50px',
+        height: '50px',
+        color: 'white',
+        fontSize: '25px',
+        '&:hover': {
+            backgroundColor: '#fff',
+            color: '#3c52b2',
+        }
     }
 }));
