@@ -15,7 +15,7 @@ dotenv.config();
 // Global variables for elo system
 // Scale factor indicates how drastically it will increase/decrease
 const defaultRating = 2000;
-const userScaleFactor = 384;
+const userScaleFactor = 600;
 const questionScaleFactor = 32;
 
 const varianceThreshold = 20; // If variance in score drops below this value the test ends
