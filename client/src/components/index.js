@@ -7,6 +7,9 @@ export { default as Footer } from 'src/components/footer/Footer';
 export { default as AboutHeader } from 'src/components/about/AboutHeader';
 export { default as AboutCard } from 'src/components/about/AboutCard';
 
+export { default as ContactHeader } from 'src/components/contact/ContactHeader';
+export { default as ContactContents } from 'src/components/contact/ContactContents';
+
 // Dashboard
 export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
 export { default as DashboardSidebar } from 'src/components/dashboard/DashboardSidebar';

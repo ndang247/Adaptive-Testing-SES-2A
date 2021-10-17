@@ -5,6 +5,7 @@ export { default as Register } from './auth/Register';
 
 // Content
 export { default as About } from './about/About';
+export { default as Contact } from './contact/Contact';
 
 // Dashboard
 export { default as Dashboard } from './dashboard/Dashboard';

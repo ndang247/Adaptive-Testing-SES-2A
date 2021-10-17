@@ -6,7 +6,7 @@ import {
   Home, Login, Register, Dashboard,
   PastExams, Exam, CreateExam, JoinExam,
   Account, Settings, Query, Exams, Result,
-  About
+  About, Contact
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
@@ -23,6 +23,7 @@ const App = () => {
             {/* Host */}
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
+            <Route path="/contact" exact component={Contact} />
             <Route path="/host/login" exact component={Login} />
             <Route path="/host/register" exact component={Register} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard" exact component={Dashboard} />
