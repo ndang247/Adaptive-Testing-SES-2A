@@ -93,7 +93,7 @@ export const validatePin = async (req, res) => {
 
         // Optional as this condition is unnecessary 
         // If pin is not match return an error msg
-        if (String(test?._id) != pin) return res.status(400).json({ msg: 'Invalid pin' });
+        if (String(test?._id) !== pin) return res.status(400).json({ msg: 'Invalid pin' });
 
         // Return test if valid
         res.json(test);
