@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-export default makeStyles((theme) => ({
+export default makeStyles(() => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
@@ -19,5 +19,5 @@ export default makeStyles((theme) => ({
     shiftDown: {
         color: "#E0E1DD",
         fontSize: "4em",
-    }
+    },
 }));

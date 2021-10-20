@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Typography, Container, CssBaseline, AppBar,
-    Toolbar, Divider,
+    Toolbar, Divider, LinearProgress
 } from '@material-ui/core';
 import { Question } from 'src/components';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getExamById } from 'src/redux/actions/exams';
 
 const Exam = () => {
+    const { pin } = useParams();
+    const { exam } = useSelector((state) => state.exams);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!exam) dispatch(getExamById(pin));
+    }, []);
+
     return (
         <>
             <main>
@@ -17,14 +28,16 @@ const Exam = () => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
-                <Container sx={{ marginTop: 2, marginBottom: 2 }}>
-                    <Typography variant="h1" align="center" fontFamily="fantasy" color="black">
-                        Math Test
-                    </Typography>
-                </Container>
-                <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
-                <Question />
+                {exam ? (
+                    <>
+                        <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
+                        <Container sx={{ marginTop: 2, marginBottom: 2 }}>
+                            <Typography variant="h1" align="center" fontFamily="fantasy" color="black">{`${exam.contentType} Test`}</Typography>
+                        </Container>
+                        <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
+                        <Question />
+                    </>
+                ) : (<LinearProgress color="secondary" />)}
             </main>
         </>
     );

@@ -5,7 +5,7 @@ import {
     Link, Grid, Button, Typography
 } from '@material-ui/core';
 import useStyles from './navBarStyles';
-import logo from 'src/assets/images/navbarlogo.png';
+import logo from 'src/assets/images/navbarLogo.png';
 import { Link as RouterLink } from 'react-router-dom';
 
 function ElevationScroll(props) {
@@ -33,11 +33,11 @@ const NavBar = (props) => {
             <AppBar className={classes.appBar}>
                 <Toolbar>
                     <Grid container>
-                        <Grid item xs={0} > 
+                        <Grid item xs={0} >
                             <Link color="inherit" component={RouterLink} underline="none" to="/">
                                 <Grid container>
                                     <Grid item xs={0}>
-                                        <img src={logo} alt="logo" className={classes.image}/>
+                                        <img src={logo} alt="logo" className={classes.image} />
                                     </Grid>
                                     <Grid item xs={0}>
                                         <Typography color="white" variant="h3" className={classes.text}>
@@ -50,7 +50,7 @@ const NavBar = (props) => {
                         <Grid item xs={0} style={{ flex: 1 }}>
                         </Grid>
                         <Grid item xs={0}>
-                            <Link color="inherit" component={RouterLink} underline="none" to="/about">
+                            <Link color="inherit" component={RouterLink} underline="none" to="/about-us">
                                 <Button className={classes.button}>
                                     About Us
                                 </Button>
