@@ -6,7 +6,7 @@ import {
 import { Question } from 'src/components';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPastExamsByID } from 'src/redux/actions/exams';
+import { getExamById } from 'src/redux/actions/exams';
 
 const Exam = () => {
     const { pin } = useParams();
@@ -14,7 +14,7 @@ const Exam = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!exam) dispatch(getPastExamsByID(pin));
+        if (!exam) dispatch(getExamById(pin));
     }, []);
 
     return (
