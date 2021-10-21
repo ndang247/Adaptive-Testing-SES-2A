@@ -5,8 +5,8 @@ import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
   PastExams, Exam, CreateExam, JoinExam,
-  Account, Settings, Query, Exams, Result,
-  About, Contact
+  Account, Settings, Query, Exams, 
+  Result, About, Contact
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
@@ -22,7 +22,7 @@ const App = () => {
           <Switch>
             {/* Host */}
             <Route path="/" exact component={Home} />
-            <Route path="/about" exact component={About} />
+            <Route path="/about-us" exact component={About} />
             <Route path="/contact" exact component={Contact} />
             <Route path="/host/login" exact component={Login} />
             <Route path="/host/register" exact component={Register} />
