@@ -5,7 +5,8 @@ import Theme from 'src/theme';
 import {
   Home, Login, Register, Dashboard,
   PastExams, Exam, CreateExam, JoinExam,
-  Account, Settings, Query, Exams, Result
+  Account, Settings, Query, Exams,
+  Result, About
 } from 'src/pages';
 import GlobalStyles from "src/components/GlobalStyles";
 import PrivateRoute from "src/routes/PrivateRoute";
@@ -21,6 +22,7 @@ const App = () => {
           <Switch>
             {/* Host */}
             <Route path="/" exact component={Home} />
+            <Route path="/about-us" exact component={About} />
             <Route path="/host/login" exact component={Login} />
             <Route path="/host/register" exact component={Register} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/host/dashboard" exact component={Dashboard} />
@@ -35,7 +37,7 @@ const App = () => {
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard" exact component={Dashboard} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/account" exact component={Account} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/settings" exact component={Settings} />
-            {/* <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/:pin" exact component={Exam} /> */}
+            <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/exam/:pin" exact component={Exam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/exam/history" exact component={PastExams} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/exam/joinexam" exact component={JoinExam} />
             <PrivateRoute isAuth={profile} setProfile={setProfile} path="/user/dashboard/query" exact component={Query} />

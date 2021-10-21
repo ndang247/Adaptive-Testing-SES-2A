@@ -3,12 +3,14 @@ import { body } from 'express-validator';
 import { authUser, authHost } from '../middleware/auth.js';
 import {
     validatePin, createTest, createScore, updateScore,
-    getOptimalQuestion, getTestsByCreator
+    getOptimalQuestion, getTestsByCreator, getTestById
 } from '../controllers/test.controller.js';
 
 const router = express.Router();
 
 router.get('/:creatorId', authHost, getTestsByCreator);
+
+router.get('/user/exam/:id', authUser, getTestById);
 
 // POST tests/
 // Route for host to create a new test
