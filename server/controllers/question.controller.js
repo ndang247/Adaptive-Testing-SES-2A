@@ -20,7 +20,7 @@ export const createQuestion = async (questions) => {
         } = question;
 
         let difficulty = '';
-
+        
         if (inRange(rating, 0, 19)) difficulty = Easy;
         else if (inRange(rating, 20, 39)) difficulty = Intermediate;
         else if (inRange(rating, 40, 59)) difficulty = Hard;
@@ -29,14 +29,14 @@ export const createQuestion = async (questions) => {
 
         // Cannot assign a const rating
         const scaledRating = rating * 40;
-
+        
         const newQuestion = new QuestionModel({
             category,
             content,
             rating: scaledRating,
             difficulty,
             correctAnswer,
-            answers: [correctAnswer, wrongA, wrongB, wrongC]
+            wrongAnswers: [wrongA, wrongB, wrongC]
         });
 
         try {
@@ -136,7 +136,7 @@ export const getRandomAnswers = async (req, res) => {
 }
 
 // Function to randomly sort an array
-export const shuffle = (array) => {
+function shuffle(array) {
     var currentIndex = array.length, randomIndex;
 
     // While there remain elements to shuffle
@@ -146,9 +146,12 @@ export const shuffle = (array) => {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        // And swap it with the current element
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
     }
+
+    return array;
 }
 
 function inRange(x, min, max) {

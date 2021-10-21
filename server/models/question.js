@@ -8,7 +8,7 @@ const questionSchema = mongoose.Schema({
     rating: { type: Number, require: true },
     difficulty: { type: String, require: true },
     correctAnswer: { type: String, require: true },
-    answers: { type: [String], require: true }
+    wrongAnswers: { type: [String], require: true }
 });
 
 export default mongoose.model("Question", questionSchema);

@@ -4,8 +4,6 @@ export { default as Head } from 'src/components/contents/head/Head';
 export { default as Body } from 'src/components/contents/body/Body';
 export { default as NavBar } from 'src/components/navBar/NavBar';
 export { default as Footer } from 'src/components/footer/Footer';
-export { default as AboutHeader } from 'src/components/about/AboutHeader';
-export { default as AboutCard } from 'src/components/about/AboutCard';
 
 // Dashboard
 export { default as DashboardNavbar } from 'src/components/dashboard/DashboardNavbar';
@@ -16,7 +14,7 @@ export { default as NavItems } from 'src/components/dashboard/NavItems';
 export { default as Exams } from 'src/components/exams/Exams';
 export { default as PastExams } from 'src/components/pastExams/PastExams';
 export { default as ExamResult } from 'src/components/result/ExamResult';
-export { default as Question } from 'src/components/exam/Question';
+
 // Account
 export { default as AccountDetails } from 'src/components/account/AccountDetails';
 

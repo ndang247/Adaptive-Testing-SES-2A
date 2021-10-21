@@ -23,8 +23,7 @@ export default makeStyles((theme) => ({
     },
     blobContent: {
         zIndex: 1,
-        position: 'relative',
-        marginTop: '50px'
+        position: 'relative'
     },
     joinBtn: {
         display: 'flex',

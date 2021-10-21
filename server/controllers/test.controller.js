@@ -7,7 +7,7 @@ import { validationResult } from 'express-validator';
 import { DateTime } from 'luxon';
 import dotenv from 'dotenv';
 import question from '../models/question.js';
-import { createQuestion, shuffle } from './question.controller.js';
+import { createQuestion } from './question.controller.js';
 import mongoose from 'mongoose';
 
 dotenv.config();
@@ -15,7 +15,7 @@ dotenv.config();
 // Global variables for elo system
 // Scale factor indicates how drastically it will increase/decrease
 const defaultRating = 2000;
-const userScaleFactor = 600;
+const userScaleFactor = 384;
 const questionScaleFactor = 32;
 
 const varianceThreshold = 20; // If variance in score drops below this value the test ends
@@ -30,24 +30,6 @@ export const getTestsByCreator = async (req, res) => {
             .populate({ path: "scoreIds" });
 
         res.status(200).json(tests);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Server Error');
-    }
-}
-
-export const getTestById = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const test = await TestModel.findById(id)
-            .populate({ path: "creatorId" })
-            .populate({ path: "questionIds" })
-            .populate({ path: "scoreIds" });
-
-        shuffle(test.questionIds);
-
-        res.status(200).json(test);
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
@@ -104,19 +86,15 @@ export const validatePin = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(pin)) return res.status(400).json('Invalid pin');
 
         // Find one test based on pin
-        const test = await TestModel.findById(pin)
-            .populate({ path: "creatorId" })
-            .populate({ path: "questionIds" })
-            .populate({ path: "scoreIds" });
+        const test = await TestModel.findById(pin);
 
 
         if (!test) return res.status(400).json({ msg: 'Invalid pin' });
 
         // Optional as this condition is unnecessary 
         // If pin is not match return an error msg
-        if (String(test?._id) !== pin) return res.status(400).json({ msg: 'Invalid pin' });
+        if (String(test?._id) != pin) return res.status(400).json({ msg: 'Invalid pin' });
 
-        shuffle(test.questionIds);
         // Return test if valid
         res.json(test);
     } catch (error) {
