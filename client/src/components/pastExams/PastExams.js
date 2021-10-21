@@ -6,7 +6,6 @@ import {
     Skeleton
 } from '@material-ui/core';
 import useStyles from './pastExamsStyles';
-import { Link as RouterLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPastExamsByID } from 'src/redux/actions/exams';
 
@@ -44,7 +43,7 @@ const ExamHistory = () => {
                     <Typography variant="h3">Exams History</Typography>
                 </Paper>
                 {(!exams.length && !loading) ?
-                    (<Typography className={classes.paperHead} variant="h3">No exams</Typography>)
+                    (<Typography className={classes.paperHead} variant="h3">No Past Exams Completed </Typography>)
                     : (<TableContainer component={Paper} className={classes.tableContainer} >
                         {loading ?
                             <Skeleton variant="rectangular" width="100%">
