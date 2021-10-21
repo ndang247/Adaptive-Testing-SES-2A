@@ -4,7 +4,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './AboutCardStyles';
+import useStyles from './aboutCardStyles';
 
 const CardInfo = ({ info }) => {
     const classes = useStyles();
@@ -26,7 +26,7 @@ const CardInfo = ({ info }) => {
                 </CardContent>
             </CardActionArea>
         </Card>
-    )
+    );
 }
 
-export default CardInfo
+export default CardInfo;

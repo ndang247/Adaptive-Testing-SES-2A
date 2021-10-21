@@ -1,5 +1,5 @@
 import * as api from 'src/api';
-import { CREATE_EXAM, EXAM_ERROR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAMS_BY_CREATOR } from 'src/constants/actionType';
+import { CREATE_EXAM, EXAM_ERROR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAMS_BY_CREATOR, GET_EXAM_BY_ID, GET_PAST_EXAMS_BY_ID } from 'src/constants/actionType';
 
 export const getExamsByCreator = (creatorId) => async (dispatch) => {
     try {
@@ -7,6 +7,19 @@ export const getExamsByCreator = (creatorId) => async (dispatch) => {
         const { data } = await api.getExamsByCreator(creatorId);
 
         dispatch({ type: GET_EXAMS_BY_CREATOR, data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        dispatch({ type: EXAM_ERROR, errors: error.response.data });
+        console.log(error);
+    }
+}
+
+export const getExamById = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.getExamById(id);
+
+        dispatch({ type: GET_EXAM_BY_ID, data });
         dispatch({ type: END_LOADING });
     } catch (error) {
         dispatch({ type: EXAM_ERROR, errors: error.response.data });
@@ -34,6 +47,19 @@ export const validateExamPin = (form, router) => async (dispatch) => {
         router.push(`/user/exam/${form.pin}`);
     } catch (error) {
         dispatch({ type: VALIDATION_ERROR, errors: error.response.data });
+        console.log(error);
+    }
+}
+
+export const getPastExamsByID = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.getPastExamsByID(id);
+
+        dispatch({ type: GET_PAST_EXAMS_BY_ID, data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        dispatch({ type: EXAM_ERROR, errors: error.response.data });
         console.log(error);
     }
 }

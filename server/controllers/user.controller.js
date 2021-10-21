@@ -1,4 +1,5 @@
 import UserModel from '../models/user.js';
+import ScoreModel from '../models/score.js';
 import { validationResult } from 'express-validator';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
@@ -139,6 +140,27 @@ export const getUserById = async (req, res) => {
         }
 
         res.json(user);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
+export const getTestHistory = async (req, res) => {
+
+    try {
+        const user = await UserModel.find({ test: req.params.user_id })
+        const scores = await ScoreModel.find({ userId: req.params.user_id }); //Find all scores by userId
+
+        if (user.scoreIds !== scores.scoreIds || scores.length === 0) {
+            return res.json({ msg: "No test history" });
+        }
+        user
+            .populate({ path: "user_id" })
+            .populate({ path: "title" })
+            .populate({ path: "currentRating" })
+
+        res.status(200).json(user);
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');

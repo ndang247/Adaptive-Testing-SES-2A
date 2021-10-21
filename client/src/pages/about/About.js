@@ -1,6 +1,6 @@
 import React from 'react';
 import { CssBaseline } from '@material-ui/core';
-import { NavBar, AboutHeader, AboutCard } from 'src/components'
+import { NavBar, AboutHeader, AboutCard } from 'src/components';
 import useStyles from './AboutStyles';
 
 const About = () => {
@@ -14,7 +14,7 @@ const About = () => {
                 <AboutCard />
             </div>
         </>
-    )
+    );
 }
 
-export default About
+export default About;

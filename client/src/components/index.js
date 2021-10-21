@@ -19,7 +19,7 @@ export { default as NavItems } from 'src/components/dashboard/NavItems';
 export { default as Exams } from 'src/components/exams/Exams';
 export { default as PastExams } from 'src/components/pastExams/PastExams';
 export { default as ExamResult } from 'src/components/result/ExamResult';
-
+export { default as Question } from 'src/components/exam/Question';
 // Account
 export { default as AccountDetails } from 'src/components/account/AccountDetails';
 

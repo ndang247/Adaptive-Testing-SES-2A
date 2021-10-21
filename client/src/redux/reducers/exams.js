@@ -1,4 +1,4 @@
-import { CREATE_EXAM, EXAM_ERROR, GET_EXAMS_BY_CREATOR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR } from "src/constants/actionType";
+import { CREATE_EXAM, EXAM_ERROR, GET_EXAMS_BY_CREATOR, GET_PAST_EXAMS_BY_ID, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAM_BY_ID } from "src/constants/actionType";
 
 const examsReducer = (state = { exams: [], exam: null, newExam: null, loading: false, errors: null }, action) => {
     switch (action.type) {
@@ -7,6 +7,24 @@ const examsReducer = (state = { exams: [], exam: null, newExam: null, loading: f
         case END_LOADING:
             return { ...state, loading: false };
         case GET_EXAMS_BY_CREATOR:
+            return {
+                ...state,
+                exams: action?.data,
+                exam: null,
+                newExam: null,
+                loading: false,
+                errors: null
+            }
+        case GET_EXAM_BY_ID:
+            return {
+                ...state,
+                exams: [...state.exams],
+                exam: action?.data,
+                newExam: null,
+                loading: false,
+                errors: null
+            };
+        case GET_PAST_EXAMS_BY_ID:
             return {
                 ...state,
                 exams: action?.data,
