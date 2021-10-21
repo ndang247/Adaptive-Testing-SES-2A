@@ -15,6 +15,15 @@ const examsReducer = (state = { exams: [], exam: null, newExam: null, loading: f
                 loading: false,
                 errors: null
             }
+        case GET_EXAM_BY_ID:
+            return {
+                ...state,
+                exams: [...state.exams],
+                exam: action?.data,
+                newExam: null,
+                loading: false,
+                errors: null
+            };
         case GET_PAST_EXAMS_BY_ID:
             return {
                 ...state,
