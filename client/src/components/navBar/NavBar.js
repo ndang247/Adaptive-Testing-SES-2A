@@ -5,7 +5,7 @@ import {
     Link, Grid, Button, Typography
 } from '@material-ui/core';
 import useStyles from './navBarStyles';
-import logo from 'src/assets/images/navbarLogo.png';
+import logo from 'src/assets/images/logo.png';
 import { Link as RouterLink } from 'react-router-dom';
 
 function ElevationScroll(props) {

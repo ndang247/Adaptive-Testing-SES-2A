@@ -21,7 +21,6 @@ export const auth = (req, res, next) => {
     }
 }
 
-
 // Auth method to confirm only a user has access using jwt
 export const authUser = (req, res, next) => {
     try {

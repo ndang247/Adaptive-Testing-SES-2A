@@ -20,7 +20,7 @@ export const EXAM_ERROR = 'EXAM_ERROR';
 export const VALIDATE_EXAM_PIN = 'VALIDATE_EXAM_PIN';
 export const VALIDATION_ERROR = 'VALIDATION_ERROR';
 export const GET_EXAM_BY_ID = 'GET_EXAM_BY_ID';
-export const GET_PAST_EXAMS_BY_ID = 'GET_PAST_EXAMS_BY_ID';
+export const GET_PAST_EXAMS = 'GET_PAST_EXAMS';
 
 // Query
 export const CREATE_QUERY = 'CREATE_QUERY';

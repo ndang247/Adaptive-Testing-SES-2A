@@ -1,7 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { register, login, getUserById, getTestHistory } from '../controllers/user.controller.js';
-import { authUser} from '../middleware/auth.js';
+import { register, login, getUserById } from '../controllers/user.controller.js';
 
 const router = express.Router();
 
@@ -27,7 +26,4 @@ router.post('/login',
 // Route to get a user by ID
 router.get('/:user_id', getUserById);
 
-// GET users/:user_id/test_history
-// Route to get history of scores by user id
-router.get('/:user_id/test_history', authUser, getTestHistory)
 export default router;

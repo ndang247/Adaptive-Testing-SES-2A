@@ -2,15 +2,20 @@ import express from 'express';
 import { body } from 'express-validator';
 import { authUser, authHost } from '../middleware/auth.js';
 import {
-    validatePin, createTest, createScore, updateScore,
-    getOptimalQuestion, getTestsByCreator, getTestById
+    validatePin, createTest, getTestsByCreator, getTestById,
+    getTestHistory
 } from '../controllers/test.controller.js';
+import { createScore, updateScore } from '../controllers/score.controller.js';
 
 const router = express.Router();
 
 router.get('/:creatorId', authHost, getTestsByCreator);
 
 router.get('/user/exam/:id', authUser, getTestById);
+
+// GET tests/history
+// Route to get history of tests by user id
+router.get('/user/history', authUser, getTestHistory);
 
 // POST tests/
 // Route for host to create a new test
@@ -31,7 +36,6 @@ router.post('/validate', authUser,
     validatePin
 );
 
-// POST tests/scores/:test_id/:question_id
 // Route to initialize a user's attempt at a test, creates a score entity
 router.post('/scores/:test_id/:question_id', authUser, createScore);
 
@@ -42,13 +46,5 @@ router.put('/scores/:test_id/:question_id', authUser,
     body('answer', 'Answer is required').not().isEmpty(),
     updateScore
 );
-
-// GET tests/scores/:test_id/:question_id
-// Retrieve the next optimal question
-router.get('/scores/:test_id/:question_id', authUser, getOptimalQuestion);
-
-// GET tests/scores/:test_id
-// Retrieve the next optimal question when the test is initialized
-router.get('/scores/:test_id', authUser, getOptimalQuestion);
 
 export default router;

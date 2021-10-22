@@ -7,7 +7,8 @@ import {
 } from '@material-ui/core';
 import useStyles from './pastExamsStyles';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPastExamsByID } from 'src/redux/actions/exams';
+import { getPastExams } from 'src/redux/actions/exams';
+import { Link as RouterLink } from 'react-router-dom';
 
 const headCells = [
     { label: 'Exam ID' },
@@ -20,11 +21,10 @@ const ExamHistory = () => {
     const classes = useStyles();
     const { exams, loading } = useSelector((state) => state.exams);
     const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
-        if (user?.id) dispatch(getPastExamsByID(user?.id));
-    }, [user?.id]);
+        dispatch(getPastExams());
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -34,7 +34,7 @@ const ExamHistory = () => {
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
-    };
+    }
 
     return (
         <>
@@ -43,8 +43,8 @@ const ExamHistory = () => {
                     <Typography variant="h3">Exams History</Typography>
                 </Paper>
                 {(!exams.length && !loading) ?
-                    (<Typography className={classes.paperHead} variant="h3">No Past Exams Completed </Typography>)
-                    : (<TableContainer component={Paper} className={classes.tableContainer} >
+                    (<Typography className={classes.paperHead} variant="h3">No Past Exams Completed</Typography>)
+                    : (<TableContainer component={Paper} className={classes.tableContainer}>
                         {loading ?
                             <Skeleton variant="rectangular" width="100%">
                                 <div style={{ paddingTop: '50%' }} />
@@ -59,13 +59,15 @@ const ExamHistory = () => {
                                 </TableHead>
                                 <TableBody>
                                     {exams.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((exam) => (
-                                        <TableRow key={exam._id}>
+                                        <TableRow key={exam.testId._id}>
                                             <TableCell component="th" scope="row" className={classes.name}>
-                                                <Link href="#">{exam._id}</Link>
+                                                <Link component={RouterLink} to={`/user/dashboard/exam/${exam._id}`} variant="h6" underline="hover">
+                                                    {exam.testId._id}
+                                                </Link>
                                             </TableCell>
-                                            <TableCell>{exam.title}</TableCell>
-                                            <TableCell>{exam.contentType}</TableCell>
-                                            <TableCell>{exam.rating}</TableCell>
+                                            <TableCell>{exam.testId.title}</TableCell>
+                                            <TableCell>{exam.testId.contentType}</TableCell>
+                                            <TableCell>{exam.currentRating}</TableCell>
                                         </TableRow>))}
                                 </TableBody>
                                 <TableFooter>

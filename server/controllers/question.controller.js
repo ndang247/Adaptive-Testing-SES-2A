@@ -59,76 +59,56 @@ export const updateQuestion = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { category, content, rating, difficulty, correctAnswer, wrongAnswers } = req.body;
+    const {
+        category,
+        content,
+        rating,
+        difficulty,
+        correctAnswer,
+        answers
+    } = req.body;
 
-    const questionId = req.params.question_id;
+    const { question_id } = req.params;
 
     // Validate wrong answers
-    if (wrongAnswers.length != 3) {
-        return res.status(401).send('Three wrong answers required');
-    }
+    if (answers.length != 4) return res.status(401).send('Four answers required!');
+
+    if (!mongoose.Types.ObjectId.isValid(question_id)) return res.status(404).send(`No question existed with that id: ${question_id}`);
 
     try {
         // Update the current question
-        const found = await QuestionModel.findByIdAndUpdate(questionId, {
+        const found = await QuestionModel.findByIdAndUpdate(question_id, {
             "$set": {
                 "category": category,
                 "content": content,
                 "rating": rating,
                 "difficulty": difficulty,
                 "correctAnswer": correctAnswer,
-                "wrongAnswers": wrongAnswers
+                "answers": answers
             }
-        });
+        }, { new: true });
 
         // Validate question ID
-        if (!found) {
-            res.json({ msg: 'Question not found' });
-        }
-        else {
-            res.json({ msg: 'Question updated' });
-        }
-
-
+        if (!found) res.json({ msg: 'Question not found' });
+        else res.json({ msg: 'Question updated' });
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
     }
 }
 
-export const getQuestion = async (req, res) => {
+export const getQuestionById = async (req, res) => {
+    const { question_id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(question_id)) return res.status(404).send(`No question existed with that id: ${question_id}`);
+
     try {
         // Find one question based on ID in req parameters
-        const question = await QuestionModel.findOne({ test: req.params.question_id });
+        const question = await QuestionModel.findById(question_id);
 
-        if (!question) {
-            return res.status(400).json({ msg: 'Question not found' });
-        }
+        if (!question) return res.status(400).json({ msg: 'Question not found' });
 
         res.json(question);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Server Error');
-    }
-}
-
-export const getRandomAnswers = async (req, res) => {
-    try {
-        // Find one question based on ID in req parameters
-        const question = await QuestionModel.findOne({ test: req.params.question_id });
-
-        if (!question) {
-            return res.status(400).json({ msg: 'Question not found' });
-        }
-
-        // Create array containing answers
-        var answers = [question.correctAnswer, question.wrongAnswers[0], question.wrongAnswers[1], question.wrongAnswers[2]];
-
-        // Randomly arrange answers
-        await shuffle(answers);
-
-        res.json(answers);
-
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');

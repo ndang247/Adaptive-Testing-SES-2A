@@ -74,7 +74,7 @@ const Exams = () => {
                                     {exams.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((exam) => (
                                         <TableRow key={exam._id}>
                                             <TableCell component="th" scope="row" className={classes.name}>
-                                                <Link component={RouterLink} to="/host/dashboard/exam/history" variant="h6" underline="hover">
+                                                <Link component={RouterLink} to={`/host/dashboard/exam/${exam._id}`} variant="h6" underline="hover">
                                                     {exam._id}
                                                 </Link>
                                             </TableCell>

@@ -1,5 +1,5 @@
 import * as api from 'src/api';
-import { CREATE_EXAM, EXAM_ERROR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAMS_BY_CREATOR, GET_EXAM_BY_ID, GET_PAST_EXAMS_BY_ID } from 'src/constants/actionType';
+import { CREATE_EXAM, EXAM_ERROR, START_LOADING, END_LOADING, VALIDATE_EXAM_PIN, VALIDATION_ERROR, GET_EXAMS_BY_CREATOR, GET_EXAM_BY_ID, GET_PAST_EXAMS } from 'src/constants/actionType';
 
 export const getExamsByCreator = (creatorId) => async (dispatch) => {
     try {
@@ -51,12 +51,12 @@ export const validateExamPin = (form, router) => async (dispatch) => {
     }
 }
 
-export const getPastExamsByID = (id) => async (dispatch) => {
+export const getPastExams = () => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        const { data } = await api.getPastExamsByID(id);
+        const { data } = await api.getPastExams();
 
-        dispatch({ type: GET_PAST_EXAMS_BY_ID, data });
+        dispatch({ type: GET_PAST_EXAMS, data });
         dispatch({ type: END_LOADING });
     } catch (error) {
         dispatch({ type: EXAM_ERROR, errors: error.response.data });

@@ -59,10 +59,18 @@ const Question = () => {
                         </Grid>
                     </Container>
                     <Divider />
-                    <div className={classes.answer}>
-                        <Grid container>
+                    <Container>
+                        <Grid container sx={{ marginLeft: 5 }}>
                             {exam && choices.map((answer, index) => (
-                                <Grid key={index} item sx={{ marginTop: 1 }}>
+                                <Grid
+                                    key={index}
+                                    item
+                                    sx={{ marginTop: 2, marginBottom: 14 }}
+                                    xs={12}
+                                    sm={12}
+                                    md={6}
+                                    lg={6}
+                                >
                                     <FormControl component="fieldset">
                                         <RadioGroup value={value} onChange={handleChange}>
                                             <FormControlLabel value={answer} control={<Radio />} label={answer} />
@@ -71,7 +79,7 @@ const Question = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                    </div>
+                    </Container>
                 </Paper>
             </div>
             <Container align="center">

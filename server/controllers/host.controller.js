@@ -58,17 +58,17 @@ export const register = async (req, res) => {
             }
         }
 
-        // TODO: Shorten expiry time post production -> set 1h
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: "1h" },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.status(201).json({ 
-                    token, 
+                res.status(201).json({
+                    token,
                     id: user._id,
-                    firstName: user.firstName, 
-                    lastName: user.lastName, 
-                    email: user.email, 
-                    role: user.role });
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    role: user.role
+                });
             });
 
     } catch (error) {
@@ -108,17 +108,17 @@ export const login = async (req, res) => {
             }
         }
 
-        // TODO: Shorten expiry time post production -> set 1h
         jwt.sign(payload, process.env.JWT_SECRET_TOKEN, { expiresIn: "1h" },
             (err, token) => { // Either returns error or token
                 if (err) throw err;
-                res.status(201).json({ 
-                    token, 
+                res.status(201).json({
+                    token,
                     id: user._id,
-                    firstName: user.firstName, 
-                    lastName: user.lastName, 
-                    email: user.email, 
-                    role: user.role });
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    role: user.role
+                });
             });
 
     } catch (error) {
