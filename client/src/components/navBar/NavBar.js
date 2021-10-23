@@ -56,6 +56,15 @@ const NavBar = (props) => {
                                 </Button>
                             </Link>
                         </Grid>
+                        <Grid item xs={0} style={{ flex: 0.01 }}>
+                        </Grid>
+                        <Grid item xs={0}>
+                            <Link color="inherit" component={RouterLink} underline="none" to="/contact">
+                                <Button className={classes.button}>
+                                    Contact Us
+                                </Button>
+                            </Link>
+                        </Grid>
                     </Grid>
                 </Toolbar>
             </AppBar>
