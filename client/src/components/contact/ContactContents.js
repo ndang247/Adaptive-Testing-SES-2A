@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, Card, CardContent, Typography } from '@material-ui/core';
-import useStyles from './ContentStyles';
+import useStyles from './contactContentStyles';
 
 const ContactContents = () => {
     const classes = useStyles();
@@ -10,21 +10,21 @@ const ContactContents = () => {
             <Grid container item xs={8}>
                 <Card elevation={10} className={classes.card}>
                     <CardContent>
-                        <Typography className={classes.text}>
+                        <Typography variant="body1" className={classes.text}>
                             Phone Number: 0423 278 378
                         </Typography>
                     </CardContent>
                 </Card>
-                <Card elevation={10} className={classes.card}> 
+                <Card elevation={10} className={classes.card}>
                     <CardContent>
-                        <Typography className={classes.text}>
+                        <Typography variant="body1" className={classes.text}>
                             Email Address: support@adaptest.com
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card elevation={10} className={classes.card}>
                     <CardContent>
-                        <Typography className={classes.text} align="center">                            
+                        <Typography variant="body1" className={classes.text} align="center">
                             In case of emergencies, contact: <br /> <br />
                             Cormac.Hegarthy@student.uts.edu.au<br />
                             Ivan.N.David@student.uts.edu.au<br />
@@ -42,4 +42,4 @@ const ContactContents = () => {
     );
 }
 
-export default ContactContents
+export default ContactContents;

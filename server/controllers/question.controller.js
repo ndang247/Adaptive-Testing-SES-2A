@@ -21,7 +21,7 @@ export const createQuestion = async (questions) => {
 
         let difficulty = '';
 
-        if (inRange(rating, 0, 19)) difficulty = Easy;
+        if (inRange(rating, 1, 19)) difficulty = Easy;
         else if (inRange(rating, 20, 39)) difficulty = Intermediate;
         else if (inRange(rating, 40, 59)) difficulty = Hard;
         else if (inRange(rating, 60, 79)) difficulty = Expert;
@@ -131,6 +131,6 @@ export const shuffle = (array) => {
     }
 }
 
-function inRange(x, min, max) {
+export const inRange = (x, min, max) => {
     return ((x - min) * (x - max) <= 0);
 }

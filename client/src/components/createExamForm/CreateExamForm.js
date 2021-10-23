@@ -54,7 +54,7 @@ const CreateExamForm = () => {
     const handleFieldInput = (index, event) => {
         const values = [...inputFields];
 
-        if (event.target.name === 'rating' && (event.target.value < 0 || event.target.value > 100)) {
+        if (event.target.name === 'rating' && (event.target.value < 1 || event.target.value > 100)) {
             handleBlur(index, event, values);
             return;
         }
@@ -85,7 +85,7 @@ const CreateExamForm = () => {
     }
 
     const handleBlur = (index, event, values) => {
-        if (event.target.value < 0) values[index][event.target.name] = 0;
+        if (event.target.value < 1) values[index][event.target.name] = 1;
         else if (event.target.value > 100) values[index][event.target.name] = 100;
     };
 

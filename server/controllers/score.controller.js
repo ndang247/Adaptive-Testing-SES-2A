@@ -4,6 +4,8 @@ import ScoreModel from '../models/score.js';
 import QuestionModel from '../models/question.js';
 import { validationResult } from 'express-validator';
 import { DateTime } from 'luxon';
+import { inRange } from './question.controller.js';
+import { Easy, Expert, Hard, Intermediate, Master } from '../constants/difficulties.js';
 
 // Global variables for elo system
 // Scale factor indicates how drastically it will increase/decrease
@@ -11,14 +13,13 @@ const defaultRating = 2000;
 const userScaleFactor = 600;
 const questionScaleFactor = 32;
 
-// If variance in score drops below this value the test ends
-const varianceThreshold = 20;
+// If score drops below easyRatingThreshold or above masterRatingThreshold the test ends
+const easyRatingThreshold = 40;
+const masterRatingThreshold = 4000;
 
 export const createScore = async (req, res) => {
     const { _id } = req.user;
     const { test_id } = req.params;
-
-    console.log(req.user);
 
     try {
         const score = new ScoreModel({
@@ -67,30 +68,38 @@ export const updateScore = async (req, res) => {
 
         let userRating = score.currentRating;
         let questionRating = question.rating;
-        let response;
+        let response, difficulty = '';
 
         // Check if question is correct and adjust performance accordingly
         if (question.correctAnswer === answer) {
             [userRating, questionRating] = increasePerformance(userRating, questionRating);
             response = "That was correct";
+            console.log(response);
         }
         else {
             [userRating, questionRating] = decreasePerformance(userRating, questionRating);
             response = "That was incorrect";
+            console.log(response);
         }
 
+        if (inRange(Math.round(questionRating / 40), 1, 19)) difficulty = Easy;
+        else if (inRange(Math.round(questionRating / 40), 20, 39)) difficulty = Intermediate;
+        else if (inRange(Math.round(questionRating / 40), 40, 59)) difficulty = Hard;
+        else if (inRange(Math.round(questionRating / 40), 60, 79)) difficulty = Expert;
+        else if (inRange(Math.round(questionRating / 40), 80, 100)) difficulty = Master;
+
         // Update the current question's rating
-        await QuestionModel.findByIdAndUpdate(question._id, {
-            "$set": { "rating": questionRating }
+        await QuestionModel.findByIdAndUpdate(question_id, {
+            "$set": { "rating": questionRating, "difficulty": difficulty }
         });
 
         // Update current score with the question as answered and the new performance
         await ScoreModel.findByIdAndUpdate(score._id, {
             "$set": { "currentRating": userRating },
-            "$push": { "answeredQuestionIds": question._id, "progressiveRatings": userRating }
+            "$push": { "answeredQuestionIds": question_id, "progressiveRatings": userRating }
         });
 
-        const nextQuestion = getOptimalQuestion(_id, test_id);
+        const nextQuestion = await getOptimalQuestion(_id, test_id);
 
         res.json({ msg: response, nextQuestion });
     } catch (error) {
@@ -104,10 +113,11 @@ const getOptimalQuestion = async (userId, testId) => {
         const score = await ScoreModel.findOne({ testId, userId });
         const test = await TestModel.findById(testId);
 
+        const currentUserRating = score.currentRating;
         const ratings = score.progressiveRatings;
 
         // Check the variance threshold to see if a user's score can already be determined
-        if (Math.variance(ratings) < varianceThreshold || ratings.length > 8) {
+        if (currentUserRating < easyRatingThreshold || currentUserRating > masterRatingThreshold || ratings.length > 8) {
             // TODO: change response to something front-end can recognize
             return null;
             // res.json({ msg: 'Test has concluded' });
@@ -118,13 +128,13 @@ const getOptimalQuestion = async (userId, testId) => {
         // If this is the user's first question or they got the previous question wrong
         // Find the next easiest question closest to the user's rating
         if (ratings.length < 2 || ratings[ratings.length - 1] < ratings[ratings.length - 2]) {
-            nextQuestionId = retrieveQuestionId(score, test, true);
+            nextQuestionId = await retrieveQuestionId(score, test, true);
         }
         else { // If they got the previous question correct find the next hardest question
-            nextQuestionId = retrieveQuestionId(score, test, false);
+            nextQuestionId = await retrieveQuestionId(score, test, false);
         }
 
-        if (nextQuestionId = -1) {
+        if (nextQuestionId === -1) {
             // TODO: change response to something front-end can recognize
             return null;
             // res.json({ msg: 'Test has concluded' });
@@ -135,7 +145,7 @@ const getOptimalQuestion = async (userId, testId) => {
         return nextQuestion;
     } catch (error) {
         console.error(error);
-        return res.status(500).send('Server Error');
+        return null;
     }
 }
 
@@ -143,13 +153,13 @@ const getOptimalQuestion = async (userId, testId) => {
 // Cannot be a question they have previously answered
 // Question will be lower than user rating if user got previous question wrong
 async function retrieveQuestionId(score, test, makeEasier) {
-    var smallestDifference = MAX_SAFE_INTEGER;
-    var difference;
-    var optimalQuestionId;
+    let smallestDifference = Number.MAX_SAFE_INTEGER;
+    let difference;
+    let optimalQuestionId;
 
-    test.questionIds.forEach(questionId => async () => {
+    for (const questionId of test.questionIds) {
         // Make sure the question is not previously answered
-        const found = score.answeredQuestionIds.find(i => i === questionId);
+        const found = score.answeredQuestionIds.find(i => String(i) === String(questionId));
 
         if (!found) {
             const question = await QuestionModel.findById(questionId);
@@ -168,9 +178,13 @@ async function retrieveQuestionId(score, test, makeEasier) {
                 optimalQuestionId = questionId;
             }
         }
-    });
+    }
 
-    if (smallestDifference != MAX_SAFE_INTEGER) return optimalQuestionId;
+    // For each array function is not async friendly -> see ref below
+    // https://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript
+    // test.questionIds.forEach(questionId => async () => { });
+
+    if (smallestDifference !== Number.MAX_SAFE_INTEGER) return optimalQuestionId;
 
     // Return -1 if no question could be found -> indicates test should end prematurely
     return -1;
@@ -186,8 +200,8 @@ function increasePerformance(userRating, questionRating) {
 
     userRating = userRating + userScaleFactor * (1 - positiveScaleFactor);
     questionRating = questionRating + questionScaleFactor * (0 - negativeScaleFactor);
-    // TODO: Round the rating to whole number if needed
-    return [userRating, questionRating];
+
+    return [Math.round(userRating), Math.round(questionRating)];
 }
 
 // Decrease the performance of a user and decrease the difficulty of a question
@@ -200,6 +214,6 @@ function decreasePerformance(userRating, questionRating) {
 
     userRating = userRating + userScaleFactor * (0 - positiveScaleFactor);
     questionRating = questionRating + questionScaleFactor * (1 - negativeScaleFactor);
-    // TODO: Round the rating to whole number if needed
-    return [userRating, questionRating];
+
+    return [Math.round(userRating), Math.round(questionRating)];
 }

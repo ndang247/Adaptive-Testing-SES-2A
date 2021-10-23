@@ -1,6 +1,5 @@
 import React from 'react';
-import { CssBaseline } from '@material-ui/core';
-import { NavBar, ContactHeader, ContactContents,} from 'src/components'
+import { NavBar, ContactHeader, ContactContents } from 'src/components';
 import useStyles from './ContactStyles';
 
 const Contact = () => {
@@ -13,7 +12,7 @@ const Contact = () => {
                 <ContactContents />
             </div>
         </>
-    )
+    );
 }
 
-export default Contact
+export default Contact;

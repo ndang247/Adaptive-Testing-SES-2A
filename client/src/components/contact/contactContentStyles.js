@@ -18,6 +18,6 @@ export default makeStyles((theme) => ({
         backgroundColor: "#778da9",
     },
     text: {
-        fontSize: 25,
+        fontSize: 20,
     }
 }));
