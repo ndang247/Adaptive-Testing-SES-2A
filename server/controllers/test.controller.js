@@ -3,6 +3,7 @@ import ScoreModel from '../models/score.js';
 import { validationResult } from 'express-validator';
 import { createQuestion, shuffle } from './question.controller.js';
 import mongoose from 'mongoose';
+import { createScore } from './score.controller.js';
 
 export const getTestsByCreator = async (req, res) => {
     const { creatorId } = req.params;
@@ -83,6 +84,7 @@ export const validatePin = async (req, res) => {
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
     const { pin } = req.body;
+    const { _id } = req.user;
 
     try {
         if (!mongoose.Types.ObjectId.isValid(pin)) return res.status(400).json('Invalid pin');
@@ -93,16 +95,17 @@ export const validatePin = async (req, res) => {
             .populate({ path: "questionIds" })
             .populate({ path: "scoreIds" });
 
-
         if (!test) return res.status(400).json({ msg: 'Invalid pin' });
 
         // Optional as this condition is unnecessary 
         // If pin is not match return an error msg
         if (String(test?._id) !== pin) return res.status(400).json({ msg: 'Invalid pin' });
 
-        shuffle(test.questionIds);
+        const firstQuestion = await createScore(_id, pin);
+
+        // shuffle(test.questionIds);
         // Return test if valid
-        res.json(test);
+        res.json({ nextQuestion: firstQuestion, test });
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');

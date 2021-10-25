@@ -17,36 +17,38 @@ const questionScaleFactor = 32;
 const easyRatingThreshold = 40;
 const masterRatingThreshold = 4000;
 
-export const createScore = async (req, res) => {
-    const { _id } = req.user;
-    const { test_id } = req.params;
-
+export const createScore = async (_id, test_id) => {
     try {
-        const score = new ScoreModel({
-            testId: test_id,
-            userId: _id,
-            currentRating: defaultRating,
-            progressiveRatings: [defaultRating],
-            answeredQuestionIds: [],
-            dateCreated: DateTime.now()
-        });
+        const existingScore = await ScoreModel.findOne({ testId: test_id, userId: _id });
+        if (!existingScore) {
+            const score = new ScoreModel({
+                testId: test_id,
+                userId: _id,
+                currentRating: defaultRating,
+                progressiveRatings: [defaultRating],
+                answeredQuestionIds: [],
+                dateCreated: DateTime.now()
+            });
 
-        await score.save();
+            await score.save();
 
-        // Add the score id to it's corresponding user and test models
-        await UserModel.findByIdAndUpdate(_id, {
-            "$push": { "scoreIds": score._id }
-        });
+            // Add the score id to it's corresponding user and test models
+            await UserModel.findByIdAndUpdate(_id, {
+                "$push": { "scoreIds": score._id }
+            });
 
-        await TestModel.findByIdAndUpdate(test_id, {
-            "$push": { "scoreIds": score._id }
-        });
+            await TestModel.findByIdAndUpdate(test_id, {
+                "$push": { "scoreIds": score._id }
+            });
+        }
 
-        res.json({ msg: 'Score Created' });
+        const nextQuestion = await getOptimalQuestion(_id, test_id);
 
+        return nextQuestion;
+        // res.json(nextQuestion);
     } catch (error) {
         console.error(error);
-        return res.status(500).send('Server Error');
+        // return res.status(500).send('Server Error');
     }
 }
 
@@ -60,7 +62,7 @@ export const updateScore = async (req, res) => {
     const { answer } = req.body;
     const { _id } = req.user;
     const { test_id, question_id } = req.params;
-
+    // console.log(req.body);
     try {
         const question = await QuestionModel.findById(question_id);
         // Get the score based on test_id and user's id
@@ -154,7 +156,7 @@ const getOptimalQuestion = async (userId, testId) => {
 // Question will be lower than user rating if user got previous question wrong
 async function retrieveQuestionId(score, test, makeEasier) {
     let smallestDifference = Number.MAX_SAFE_INTEGER;
-    let difference;
+    let difference = 0;
     let optimalQuestionId;
 
     for (const questionId of test.questionIds) {
@@ -171,6 +173,7 @@ async function retrieveQuestionId(score, test, makeEasier) {
             else if (!makeEasier && question.rating > score.currentRating) {
                 difference = question.rating - score.currentRating;
             }
+            else if (question.rating === score.currentRating) optimalQuestionId = questionId;
 
             // Optimal question is one with the smallest absolute difference
             if (difference < smallestDifference) {

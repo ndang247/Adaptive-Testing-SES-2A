@@ -21,6 +21,7 @@ export const VALIDATE_EXAM_PIN = 'VALIDATE_EXAM_PIN';
 export const VALIDATION_ERROR = 'VALIDATION_ERROR';
 export const GET_EXAM_BY_ID = 'GET_EXAM_BY_ID';
 export const GET_PAST_EXAMS = 'GET_PAST_EXAMS';
+export const NEXT_QUESTION = 'NEXT_QUESTION';
 
 // Query
 export const CREATE_QUERY = 'CREATE_QUERY';

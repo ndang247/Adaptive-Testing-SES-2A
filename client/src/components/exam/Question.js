@@ -1,35 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Paper, Typography, Button, Grid,
     Container, Toolbar, Divider, FormControl,
     FormControlLabel, RadioGroup, Radio
 } from '@material-ui/core';
 import useStyles from './questionStyles';
-import { useSelector } from 'react-redux';
-import { shuffle } from './shuffle';
+import { useSelector, useDispatch } from 'react-redux';
+import { getNextQuestion } from 'src/redux/actions/exams';
+import { useParams, useHistory } from 'react-router-dom';
+
+const initialForm = {
+    answer: ''
+};
 
 const Question = () => {
-    const [value, setValue] = useState('');
-    const [num, setNum] = useState(0);
-    const [choices, setChoices] = useState([]);
+    const { pin, question_id } = useParams();
+    const [form, setForm] = useState(initialForm);
     const { exam } = useSelector((state) => state.exams);
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    useEffect(() => {
-        setValue('');
-        if (exam) setChoices(shuffle(exam?.questionIds[num].answers));
-    }, [num]);
+    const handleChange = (event) => setForm({ ...form, answer: event.target.value });
 
-    const handleChange = (event) => setValue(event.target.value);
-
-    const handleNext = () => {
-        if (num < exam?.questionIds.length - 1) setNum(prevState => prevState + 1);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(form);
+        dispatch(getNextQuestion(pin, question_id, form, history));
     }
 
-    // const handleUpdate = () => {
-    //     document.getElementById('nextButton').disabled = 0;
-    //     document.getElementById('updateButton').disabled = 1;
-    // }
     return (
         <>
             <div className={classes.paper}>
@@ -44,7 +43,7 @@ const Question = () => {
                     <Divider />
                     <div>
                         <Typography variant='h3' sx={{ marginLeft: 8, marginTop: 2, marginRight: 3 }}>
-                            {exam?.questionIds[num].content}
+                            {exam?.nextQuestion?.content}
                         </Typography>
                     </div>
                 </Paper>
@@ -61,7 +60,7 @@ const Question = () => {
                     <Divider />
                     <Container>
                         <Grid container sx={{ marginLeft: 5 }}>
-                            {exam && choices.map((answer, index) => (
+                            {exam && exam?.nextQuestion?.answers.map((answer, index) => (
                                 <Grid
                                     key={index}
                                     item
@@ -72,7 +71,7 @@ const Question = () => {
                                     lg={6}
                                 >
                                     <FormControl component="fieldset">
-                                        <RadioGroup value={value} onChange={handleChange}>
+                                        <RadioGroup value={form.answer} onChange={handleChange}>
                                             <FormControlLabel value={answer} control={<Radio />} label={answer} />
                                         </RadioGroup>
                                     </FormControl>
@@ -91,25 +90,25 @@ const Question = () => {
                 >
                     Update score
                 </Button> */}
-                {num === exam?.questionIds.length - 1 ? (
-                    <Button
+                {/* {num === exam?.questionIds.length - 1 ? ( */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    disabled={form.answer ? false : true}
+                >
+                    Submit
+                </Button>
+                {/* ) : ( */}
+                {/* <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleNext}
-                        disabled={value ? false : true}
-                    >
-                        Submit
-                    </Button>
-                ) : (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
+                        // onClick={handleNext}
                         disabled={value ? false : true}
                     >
                         Next
-                    </Button>
-                )}
+                    </Button> */}
+                {/* )} */}
             </Container>
         </>
     );

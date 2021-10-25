@@ -5,7 +5,7 @@ import {
     validatePin, createTest, getTestsByCreator, getTestById,
     getTestHistory
 } from '../controllers/test.controller.js';
-import { createScore, updateScore } from '../controllers/score.controller.js';
+import { updateScore } from '../controllers/score.controller.js';
 
 const router = express.Router();
 
@@ -13,11 +13,11 @@ router.get('/:creatorId', authHost, getTestsByCreator);
 
 router.get('/user/exam/:id', authUser, getTestById);
 
-// GET tests/history
+// GET api/tests/history
 // Route to get history of tests by user id
 router.get('/user/history', authUser, getTestHistory);
 
-// POST tests/
+// POST api/tests/
 // Route for host to create a new test
 router.post('/', authHost,
     // Validate test fields
@@ -28,7 +28,7 @@ router.post('/', authHost,
     createTest
 );
 
-// POST tests/validate
+// POST api/tests/validate
 // Route to validate user input exam's id/pin
 router.post('/validate', authUser,
     // Validate pin
@@ -37,9 +37,9 @@ router.post('/validate', authUser,
 );
 
 // Route to initialize a user's attempt at a test, creates a score entity
-router.post('/scores/:test_id/:question_id', authUser, createScore);
+// router.post('/scores/:test_id/:question_id', authUser, createScore);
 
-// PUT tests/scores/:test_id/:question_id
+// PUT api/tests/scores/:test_id/:question_id
 // Route to mark a question correct or incorrect then update the rating of the player & question
 router.put('/scores/:test_id/:question_id', authUser,
     // Validate answer field

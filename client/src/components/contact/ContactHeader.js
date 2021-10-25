@@ -10,9 +10,9 @@ const ContactHeader = () => {
         setChecked(true);
     }, []);
     return (
-        <Container main className={classes.root}>
+        <Container className={classes.root}>
             <Container className={classes.container}>
-                <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})} collapsedHeight={104}>
+                <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
                     <Typography variant="h1" className={classes.titleText}>
                         Contact Us
                     </Typography>
@@ -21,7 +21,6 @@ const ContactHeader = () => {
                     </IconButton>
                 </Collapse>
             </Container>
-
         </Container>
     );
 };

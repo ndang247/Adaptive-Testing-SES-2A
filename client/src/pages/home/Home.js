@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core';
 import useStyles from './homeStyles';
 import { Head, Body, Footer, NavBar } from 'src/components';
 import clsx from 'clsx';
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
 import { Box } from '@material-ui/system';
 
 const Home = () => {

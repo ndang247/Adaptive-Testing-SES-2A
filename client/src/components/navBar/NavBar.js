@@ -33,13 +33,13 @@ const NavBar = (props) => {
             <AppBar className={classes.appBar}>
                 <Toolbar>
                     <Grid container>
-                        <Grid item xs={0} >
+                        <Grid item>
                             <Link color="inherit" component={RouterLink} underline="none" to="/">
                                 <Grid container>
-                                    <Grid item xs={0}>
+                                    <Grid item>
                                         <img src={logo} alt="logo" className={classes.image} />
                                     </Grid>
-                                    <Grid item xs={0}>
+                                    <Grid item>
                                         <Typography color="white" variant="h3" className={classes.text}>
                                             AdapTest
                                         </Typography>
@@ -47,18 +47,18 @@ const NavBar = (props) => {
                                 </Grid>
                             </Link>
                         </Grid>
-                        <Grid item xs={0} style={{ flex: 1 }}>
+                        <Grid item style={{ flex: 1 }}>
                         </Grid>
-                        <Grid item xs={0}>
+                        <Grid item>
                             <Link color="inherit" component={RouterLink} underline="none" to="/about-us">
                                 <Button className={classes.button}>
                                     About Us
                                 </Button>
                             </Link>
                         </Grid>
-                        <Grid item xs={0} style={{ flex: 0.01 }}>
+                        <Grid item style={{ flex: 0.01 }}>
                         </Grid>
-                        <Grid item xs={0}>
+                        <Grid item>
                             <Link color="inherit" component={RouterLink} underline="none" to="/contact">
                                 <Button className={classes.button}>
                                     Contact Us
