@@ -16,7 +16,8 @@ const Exam = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if (!exam && window.confirm("Continue to your dashboard?")) {
+        if (!exam) {
+            window.alert("Page refreshed. The exam will now terminate.");
             history.push('/user/dashboard');
         }
         // if (!exam) dispatch(validateExamPin(form, history));
