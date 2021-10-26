@@ -44,7 +44,7 @@ const Exam = () => {
                                 fontFamily="fantasy"
                                 color="black"
                             >
-                                {`${exam?.test?.contentType} Test`}
+                                {`${exam?.test?.title} Test`}
                             </Typography>
                         </Container>
                         <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
