@@ -14,8 +14,8 @@ const userScaleFactor = 600;
 const questionScaleFactor = 32;
 
 // If score drops below easyRatingThreshold or above masterRatingThreshold the test ends
-const easyRatingThreshold = 40;
-const masterRatingThreshold = 4000;
+const easyRatingThreshold = 950;
+const masterRatingThreshold = 3150;
 
 export const createScore = async (_id, test_id) => {
     try {
@@ -64,6 +64,7 @@ export const updateScore = async (req, res) => {
     const { test_id, question_id } = req.params;
     // console.log(req.body);
     try {
+        const test = await TestModel.findById(test_id);
         const question = await QuestionModel.findById(question_id);
         // Get the score based on test_id and user's id
         const score = await ScoreModel.findOne({ testId: test_id, userId: _id });
@@ -103,7 +104,7 @@ export const updateScore = async (req, res) => {
 
         const nextQuestion = await getOptimalQuestion(_id, test_id);
 
-        res.json({ msg: response, nextQuestion });
+        res.json({ msg: response, nextQuestion, test });
     } catch (error) {
         console.error(error);
         return res.status(500).send('Server Error');
@@ -119,7 +120,7 @@ const getOptimalQuestion = async (userId, testId) => {
         const ratings = score.progressiveRatings;
 
         // Check the variance threshold to see if a user's score can already be determined
-        if (currentUserRating < easyRatingThreshold || currentUserRating > masterRatingThreshold || ratings.length > 8) {
+        if (currentUserRating < easyRatingThreshold || currentUserRating > masterRatingThreshold || ratings.length > 15) {
             // TODO: change response to something front-end can recognize
             return null;
             // res.json({ msg: 'Test has concluded' });
@@ -158,6 +159,7 @@ async function retrieveQuestionId(score, test, makeEasier) {
     let smallestDifference = Number.MAX_SAFE_INTEGER;
     let difference = 0;
     let optimalQuestionId;
+    let bool = false;
 
     for (const questionId of test.questionIds) {
         // Make sure the question is not previously answered
@@ -167,16 +169,20 @@ async function retrieveQuestionId(score, test, makeEasier) {
             const question = await QuestionModel.findById(questionId);
 
             // Calculate the difference between the proposed question and the user's current rating
-            if (makeEasier && question.rating < score.currentRating) {
+            if (makeEasier && question.rating <= score.currentRating) {
+                bool = true;
+                console.log(question.content + "at 172");
                 difference = score.currentRating - question.rating;
             }
-            else if (!makeEasier && question.rating > score.currentRating) {
+            else if (!makeEasier && question.rating >= score.currentRating) {
+                bool = true;
+                console.log(question.content + "at 176");
                 difference = question.rating - score.currentRating;
             }
-            else if (question.rating === score.currentRating) optimalQuestionId = questionId;
 
             // Optimal question is one with the smallest absolute difference
-            if (difference < smallestDifference) {
+            if (difference < smallestDifference && bool) {
+                console.log(question.content + "at 182");
                 smallestDifference = difference;
                 optimalQuestionId = questionId;
             }

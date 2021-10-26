@@ -12,12 +12,10 @@ import useStyles from './createExamFormStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { createExam } from 'src/redux/actions/exams';
 
-const user = JSON.parse(localStorage.getItem('profile'));
-
 const subjects = ['Math'];
 
 const initialForm = {
-    creatorId: user?.id,
+    creatorId: '',
     title: '',
     questions: [],
     expiryDate: new Date(),
@@ -29,6 +27,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const CreateExamForm = () => {
+    const user = JSON.parse(localStorage.getItem('profile'));
     const classes = useStyles();
     const [form, setForm] = useState(initialForm);
     const [open, setOpen] = useState(false);
@@ -39,6 +38,10 @@ const CreateExamForm = () => {
         if (newExam) setOpen(true);
         else setOpen(false);
     }, [newExam]);
+
+    useEffect(() => {
+        setForm({ ...form, creatorId: user?.id });
+    }, []);
 
     // Question Fields
     const [inputFields, setInputFields] = useState([{

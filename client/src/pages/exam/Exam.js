@@ -4,13 +4,12 @@ import {
     Toolbar, Divider, LinearProgress, Link
 } from '@material-ui/core';
 import { Question } from 'src/components';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // import { validateExamPin } from 'src/redux/actions/exams';
 import { Link as RouterLink } from 'react-router-dom';
 
 const Exam = () => {
-    const { pin } = useParams();
     // const [form] = useState({ pin });
     const { exam, loading } = useSelector((state) => state.exams);
     // const dispatch = useDispatch();
@@ -44,7 +43,7 @@ const Exam = () => {
                                 fontFamily="fantasy"
                                 color="black"
                             >
-                                {`${exam?.test?.title} Test`}
+                                {`${exam?.test?.title}`}
                             </Typography>
                         </Container>
                         <Divider sx={{ marginTop: 2, marginBottom: 1 }} />

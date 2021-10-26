@@ -59,14 +59,14 @@ const ExamHistory = () => {
                                 </TableHead>
                                 <TableBody>
                                     {exams.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((exam) => (
-                                        <TableRow key={exam.testId._id}>
+                                        <TableRow key={exam.testId?._id}>
                                             <TableCell component="th" scope="row" className={classes.name}>
                                                 <Link component={RouterLink} to={`/user/dashboard/exam/${exam._id}`} variant="h6" underline="hover">
-                                                    {exam.testId._id}
+                                                    {exam.testId?._id}
                                                 </Link>
                                             </TableCell>
-                                            <TableCell>{exam.testId.title}</TableCell>
-                                            <TableCell>{exam.testId.contentType}</TableCell>
+                                            <TableCell>{exam.testId?.title}</TableCell>
+                                            <TableCell>{exam.testId?.contentType}</TableCell>
                                             <TableCell>{exam.currentRating}</TableCell>
                                         </TableRow>))}
                                 </TableBody>
