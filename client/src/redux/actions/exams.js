@@ -49,7 +49,7 @@ export const validateExamPin = (form, router) => async (dispatch) => {
         dispatch({ type: VALIDATE_EXAM_PIN, data });
         dispatch({ type: END_LOADING });
 
-        router.push(`/user/exam/${form.pin}/${data.nextQuestion._id}`);
+        router.push(`/user/exam/${form.pin}/${data ? data?.nextQuestion?._id : 1}`);
     } catch (error) {
         dispatch({ type: VALIDATION_ERROR, errors: error.response.data });
         console.log(error);

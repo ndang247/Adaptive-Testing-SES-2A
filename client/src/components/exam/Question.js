@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Paper, Typography, Button, Grid,
     Container, Toolbar, Divider, FormControl,
@@ -8,6 +8,7 @@ import useStyles from './questionStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { getNextQuestion } from 'src/redux/actions/exams';
 import { useParams, useHistory } from 'react-router-dom';
+import { shuffle } from './shuffle';
 
 const initialForm = {
     answer: ''
@@ -16,10 +17,16 @@ const initialForm = {
 const Question = () => {
     const { pin, question_id } = useParams();
     const [form, setForm] = useState(initialForm);
+    const [choices, setChoices] = useState([]);
     const { exam } = useSelector((state) => state.exams);
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+        setForm(initialForm);
+        if (exam.nextQuestion) setChoices(shuffle(exam?.nextQuestion?.answers));
+    }, []);
 
     const handleChange = (event) => setForm({ ...form, answer: event.target.value });
 
@@ -60,7 +67,7 @@ const Question = () => {
                     <Divider />
                     <Container>
                         <Grid container sx={{ marginLeft: 5 }}>
-                            {exam && exam?.nextQuestion?.answers.map((answer, index) => (
+                            {exam && choices.map((answer, index) => (
                                 <Grid
                                     key={index}
                                     item
