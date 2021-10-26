@@ -171,18 +171,18 @@ async function retrieveQuestionId(score, test, makeEasier) {
             // Calculate the difference between the proposed question and the user's current rating
             if (makeEasier && question.rating <= score.currentRating) {
                 bool = true;
-                console.log(question.content + "at 172");
+                console.log(question.content + " at 174");
                 difference = score.currentRating - question.rating;
             }
             else if (!makeEasier && question.rating >= score.currentRating) {
                 bool = true;
-                console.log(question.content + "at 176");
+                console.log(question.content + " at 179");
                 difference = question.rating - score.currentRating;
             }
 
             // Optimal question is one with the smallest absolute difference
             if (difference < smallestDifference && bool) {
-                console.log(question.content + "at 182");
+                console.log(question.content + " at 185");
                 smallestDifference = difference;
                 optimalQuestionId = questionId;
             }
