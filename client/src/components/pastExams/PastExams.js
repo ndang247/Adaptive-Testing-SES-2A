@@ -14,7 +14,8 @@ const headCells = [
     { label: 'Exam ID' },
     { label: 'Exam Title' },
     { label: 'Subject' },
-    { label: 'Score' }
+    { label: 'Score' },
+    { label: 'Rank' }
 ];
 
 const ExamHistory = () => {
@@ -68,6 +69,7 @@ const ExamHistory = () => {
                                             <TableCell>{exam.testId?.title}</TableCell>
                                             <TableCell>{exam.testId?.contentType}</TableCell>
                                             <TableCell>{exam.currentRating}</TableCell>
+                                            <TableCell>{exam.title}</TableCell>
                                         </TableRow>))}
                                 </TableBody>
                                 <TableFooter>

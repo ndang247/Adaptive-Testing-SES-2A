@@ -6,6 +6,7 @@ import { validationResult } from 'express-validator';
 import { DateTime } from 'luxon';
 import { inRange } from './question.controller.js';
 import { Easy, Expert, Hard, Intermediate, Master } from '../constants/difficulties.js';
+import { Advanced, Beginner, Champion, Experienced, Skilled, Veteran } from '../constants/rank.js';
 
 // Global variables for elo system
 // Scale factor indicates how drastically it will increase/decrease
@@ -17,13 +18,38 @@ const questionScaleFactor = 32;
 const easyRatingThreshold = 950;
 const masterRatingThreshold = 3150;
 
+export const getScoreByExamId = async (req, res) => {
+    const { _id } = req.user;
+    const { test_id } = req.params;
+
+    try {
+        const score = await ScoreModel.findOne({ testId: test_id, userId: _id });
+
+        res.status(200).json(score);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send('Server Error');
+    }
+}
+
 export const createScore = async (_id, test_id) => {
     try {
+        let rankTitle = '';
+
         const existingScore = await ScoreModel.findOne({ testId: test_id, userId: _id });
+
         if (!existingScore) {
+            if (inRange(defaultRating, 1, 799)) rankTitle = Beginner;
+            else if (inRange(defaultRating, 800, 1399)) rankTitle = Experienced;
+            else if (inRange(defaultRating, 1400, 1999)) rankTitle = Advanced;
+            else if (inRange(defaultRating, 2000, 2599)) rankTitle = Veteran;
+            else if (inRange(defaultRating, 2600, 3199)) rankTitle = Skilled;
+            else if (inRange(defaultRating, 3200, 4000)) rankTitle = Champion;
+
             const score = new ScoreModel({
                 testId: test_id,
                 userId: _id,
+                title: rankTitle,
                 currentRating: defaultRating,
                 progressiveRatings: [defaultRating],
                 answeredQuestionIds: [],
@@ -71,7 +97,7 @@ export const updateScore = async (req, res) => {
 
         let userRating = score.currentRating;
         let questionRating = question.rating;
-        let response, difficulty = '';
+        let response, difficulty, rankTitle = '';
 
         // Check if question is correct and adjust performance accordingly
         if (question.correctAnswer === answer) {
@@ -96,9 +122,16 @@ export const updateScore = async (req, res) => {
             "$set": { "rating": questionRating, "difficulty": difficulty }
         });
 
+        if (inRange(userRating, 1, 799)) rankTitle = Beginner;
+        else if (inRange(userRating, 800, 1399)) rankTitle = Experienced;
+        else if (inRange(userRating, 1400, 1999)) rankTitle = Advanced;
+        else if (inRange(userRating, 2000, 2599)) rankTitle = Veteran;
+        else if (inRange(userRating, 2600, 3199)) rankTitle = Skilled;
+        else if (inRange(userRating, 3200, 4000)) rankTitle = Champion;
+
         // Update current score with the question as answered and the new performance
         await ScoreModel.findByIdAndUpdate(score._id, {
-            "$set": { "currentRating": userRating },
+            "$set": { "currentRating": userRating, "title": rankTitle },
             "$push": { "answeredQuestionIds": question_id, "progressiveRatings": userRating }
         });
 

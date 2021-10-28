@@ -27,5 +27,8 @@ export const getExamById = (id) => API.get(`api/tests/user/exam/${id}`);
 export const getPastExams = () => API.get('api/tests/user/history');
 export const updateScore = (testId, questionId, answer) => API.put(`api/tests/scores/${testId}/${questionId}`, answer);
 
+// Result
+export const getScoreByExamId = (testId) => API.get(`api/scores/${testId}`);
+
 // Query
 export const createQuery = (newQuery) => API.post('api/queries', newQuery);

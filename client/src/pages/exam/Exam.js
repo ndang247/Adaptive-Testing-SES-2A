@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 import {
     Typography, Container, CssBaseline, AppBar,
-    Toolbar, Divider, LinearProgress, Link
+    Toolbar, Divider, LinearProgress
 } from '@material-ui/core';
 import { Question } from 'src/components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import { validateExamPin } from 'src/redux/actions/exams';
-import { Link as RouterLink } from 'react-router-dom';
+import { Result } from 'src/components';
 
 const Exam = () => {
-    // const [form] = useState({ pin });
     const { exam, loading } = useSelector((state) => state.exams);
-    // const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -20,7 +17,6 @@ const Exam = () => {
             window.alert("Page refreshed. The exam will now terminate.");
             history.push('/user/dashboard');
         }
-        // if (!exam) dispatch(validateExamPin(form, history));
     }, []);
 
     return (
@@ -50,24 +46,7 @@ const Exam = () => {
                         <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
                         <Question />
                     </>
-                ) : (
-                    <>
-                        <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
-                        <Container sx={{ marginTop: 2, marginBottom: 2 }}>
-                            <Typography
-                                variant="h1"
-                                align="center"
-                                fontFamily="fantasy"
-                                color="black"
-                            >
-                                Congratulation, you can view your score in your dashboard!
-                                &nbsp;
-                                <Link color="inherit" component={RouterLink} to="/user/dashboard/exam/history">here</Link>
-                            </Typography>
-                        </Container>
-                        <Divider sx={{ marginTop: 2, marginBottom: 1 }} />
-                    </>
-                )}
+                ) : <Result />}
             </main>
         </>
     );

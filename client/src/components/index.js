@@ -18,8 +18,11 @@ export { default as NavItems } from 'src/components/dashboard/NavItems';
 // Exam
 export { default as Exams } from 'src/components/exams/Exams';
 export { default as PastExams } from 'src/components/pastExams/PastExams';
-export { default as ExamResult } from 'src/components/result/ExamResult';
 export { default as Question } from 'src/components/exam/Question';
+
+// Result
+export { default as Result } from 'src/components/exam/Result';
+
 // Account
 export { default as AccountDetails } from 'src/components/account/AccountDetails';
 
@@ -42,4 +45,3 @@ export { default as ExamsLayout } from 'src/components/exams/ExamsLayout';
 export { default as JoinExamFormLayout } from 'src/components/joinExamForm/JoinExamFormLayout';
 export { default as PastExamsLayout } from 'src/components/pastExams/PastExamsLayout';
 export { default as QueryFormLayout } from 'src/components/queryForm/QueryFormLayout';
-export { default as ExamResultLayout } from 'src/components/result/ExamResultLayout';

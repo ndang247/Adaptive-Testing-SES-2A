@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.js';
 import hostRouter from './routes/host.js';
 import testRouter from './routes/test.js';
-import questionRouter from './routes/question.js';
+import scoresRouter from './routes/score.js';
 import settingsRouter from './routes/setting.js';
 import queriesRouter from './routes/query.js';
 
@@ -31,6 +31,7 @@ app.use(cors());
 app.use('/api/users', userRouter);
 app.use('/api/hosts', hostRouter);
 app.use('/api/tests', testRouter);
+app.use('/api/scores', scoresRouter);
 app.use('/api/settings', settingsRouter);
 app.use('/api/queries', queriesRouter);
 
