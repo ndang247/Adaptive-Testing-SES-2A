@@ -13,6 +13,8 @@ router.post('/register',
     body('email', 'Valid email required').isEmail(),
     body('password', 'Please enter a password with 6 or more characters')
         .isLength({ min: 6, max: 128 }),
+    body('confirmPassword', 'Please confirm your password')
+        .isLength({ min: 6, max: 128 }),
     register);
 
 // POST hosts/login

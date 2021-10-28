@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useFormik, Form, FormikProvider } from "formik";
 import {
     Box, Checkbox, FormHelperText, Link,
-    TextField, Typography, InputAdornment, IconButton
+    TextField, Typography, InputAdornment, IconButton,
+    Alert
 } from '@material-ui/core';
 import * as Yup from 'yup';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
@@ -10,13 +11,14 @@ import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 import { LoadingButton } from "@material-ui/lab";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { hostRegister, register } from 'src/redux/actions/auth';
 
 const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const { authErrors } = useSelector((state) => state.auth);
 
     const RegisterSchema = Yup.object().shape({
         firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("First name required"),
@@ -46,11 +48,11 @@ const RegisterForm = () => {
         }
     });
 
-
     const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
     return (
         <>
+            {authErrors && (<><Alert variant="filled" severity="error">{authErrors.errors}</Alert>&nbsp;</>)}
             <FormikProvider value={formik}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                     <Box sx={{ mb: 3 }}>

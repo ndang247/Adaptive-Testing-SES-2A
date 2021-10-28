@@ -16,7 +16,7 @@ export const register = async (req, res) => {
     // If the result is not empty then there is something wrong
     if (!result.isEmpty()) return res.status(400).json({ errors: result.errors });
 
-    const { firstName, lastName, email, password, policy } = req.body;
+    const { firstName, lastName, email, password, confirmPassword, policy } = req.body;
 
     try {
         // Check to see if a user exists
@@ -24,6 +24,7 @@ export const register = async (req, res) => {
 
         // If a user was already found in the database by email throw error
         if (user) return res.status(400).json({ errors: 'That account already exists' });
+        if (password !== confirmPassword) return res.status(400).json({ errors: 'Password don\'t match' });
 
         // Get user avatar
         const avatar = gravatar.url(email, {
@@ -91,12 +92,12 @@ export const login = async (req, res) => {
         let user = await UserModel.findOne({ email });
 
         // If no user exists send error
-        if (!user) return res.status(400).json({ errors: 'Invalid credentials' });
+        if (!user) return res.status(400).json({ errors: 'Invalid credentials or account does not exist' });
 
         // Match user to password
         const isMatch = await validatePassword(password, user.password);
 
-        if (!isMatch) return res.status(401).json({ errors: 'Invalid credentials' });
+        if (!isMatch) return res.status(401).json({ errors: 'Invalid credentials or account does not exist' });
 
         if (user.role !== Host) return res.status(400).json({ errors: 'Unauthorized' });
 
