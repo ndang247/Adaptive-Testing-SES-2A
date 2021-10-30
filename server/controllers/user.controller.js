@@ -29,7 +29,7 @@ export const register = async (req, res) => {
         // Get user avatar
         const avatar = gravatar.url(email, {
             s: '200',
-            d: 'mm'
+            d: 'identicon'
         });
 
         // Encrypt user password

@@ -11,6 +11,8 @@ import {
 } from 'react-feather';
 import { NavItems } from 'src/components';
 import { Host } from 'src/constants/role';
+import { getUserById } from 'src/redux/actions/users';
+import { useDispatch, useSelector } from 'react-redux';
 
 const hostItems = [
     {
@@ -76,9 +78,12 @@ const userItems = [
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     const history = useHistory();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const { userData } = useSelector((state) => state.users);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (openMobile && onMobileClose) onMobileClose();
+        if (!userData) dispatch(getUserById(user.id));
     }, [history.location.pathname]);
 
     const Content = (
@@ -86,7 +91,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'column', p: 2 }}>
                 <Avatar
                     component={RouterLink}
-                    src={user.avatar ? user.avatar : ""}
+                    src={userData?.avatar ? userData?.avatar : ""}
                     sx={{ cursor: 'pointer', width: 64, height: 64 }}
                     to="/host/dashboard/account"
                 />

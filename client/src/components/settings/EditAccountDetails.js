@@ -33,7 +33,7 @@ const EditAccountDetails = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
-    const { userData, errors } = useSelector((state) => state.users);
+    const { settingData, errors } = useSelector((state) => state.users);
 
     const rows = [
         createRow('firstName', 'First Name'),
@@ -53,12 +53,15 @@ const EditAccountDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (form.newPassword !== form.confirmNewPassword) setError(true);
-        else dispatch(updateUser(user.id, form));
+        else {
+            setError(false);
+            dispatch(updateUser(user.id, form));
+        }
     };
 
     return (
         <div>
-            {userData && <Alert severity="success">Account Saved Successfully</Alert>}
+            {settingData && <Alert severity="success">Account Saved Successfully</Alert>}
             {(error || errors) && <Alert severity="error">{error ? 'Please enter matching new password' : errors.errors}</Alert>}
             <div className={classes.div}>
                 <Typography variant="h1" align="center">Edit Account Details</Typography>
