@@ -41,7 +41,7 @@ const SubmitQuery = () => {
             <Paper className={classes.paperBody} elevation={4}>
                 <Typography variant="h1">Submit A Query</Typography>
                 <Typography variant="h4" align="center" paddingTop="15px" marginBottom="20px">
-                    To submit a query, please enter your full name and email address.
+                    Please submit any questions or feedback.
                 </Typography>
                 <FormikProvider value={formik}>
                     <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
